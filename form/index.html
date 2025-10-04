@@ -1,25 +1,24 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Formulir Pemesanan dan Kerja Sama Laksana Handicraft - Kerajinan Wayang Kulit Sewon, Bantul.">
-  <meta property="og:title" content="Form Pemesanan & Kerja Sama | Laksana Handicraft" />
-  <meta property="og:image" content="https://laksanacraft.my.id/logo.png" />
-  <meta property="og:description" content="Pesan kerajinan wayang kulit atau ajukan kerja sama dengan Laksana Handicraft." />
-  <meta property="og:url" content="https://link.laksanacraft.my.id/form" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <title>Form Pemesanan & Kerja Sama | Laksana Handicraft</title>
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Form Pemesanan & Kerja Sama - Laksana Handicraft</title>
+  <meta name="description" content="Formulir Pemesanan dan Kerja Sama Laksana Handicraft - Kerajinan Wayang Kulit Sewon, Bantul." />
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hexandragroup/laksanacraft-assets/main/Favicon_Laksana_Handicraft.webp">
 
   <style>
-    body {
-      font-family: sans-serif;
-      background: linear-gradient(to bottom, #eeeeee, #cccccc);
-      padding: 30px;
+    html, body {
+      height: 100% !important;
       margin: 0;
+      font-family: sans-serif;
+      background: linear-gradient(to bottom, #eeeeee, #cccccc) !important;
+      background-attachment: fixed !important;
+      background-repeat: no-repeat !important;
+      background-size: cover !important;
     }
+    body { top: 0px !important; }
+
     .container {
       max-width: 500px;
       margin: auto;
@@ -29,47 +28,45 @@
       box-shadow: 0 8px 16px rgba(0,0,0,0.1);
       text-align: center;
     }
-    img.logo {
-      width: 100px;
-      border-radius: 50%;
-      margin-bottom: 15px;
-    }
+    img.logo { width: 100px; border-radius: 50%; margin-bottom: 15px; }
     h1 { font-size: 20px; margin-bottom: 10px; }
     h1 a { text-decoration: none; color: #222; }
     h1 a:hover { text-decoration: underline; }
     p { color: #444; margin-bottom: 16px; }
-    footer { margin-top: 30px; font-size: 12px; color: #666; }
-
-    html, body { height: 100% !important; }
+    .sublead { font-size: 15px; font-weight: bold; margin-bottom: 18px; }
 
     .btn, select, button {
-      display: block; margin: 10px auto; padding: 12px 14px;
-      background: #fff; color: #222; text-decoration: none;
-      border-radius: 8px; border: 1px solid #bbb; cursor: pointer;
-      transition: 0.2s; max-width: 420px;
+      display: block;
+      margin: 10px auto;
+      padding: 12px 14px;
+      background: #fff;
+      color: #222;
+      border-radius: 8px;
+      border: 1px solid #bbb;
+      cursor: pointer;
+      transition: 0.2s;
+      max-width: 420px;
+      text-align: center;
+      text-decoration: none;
     }
     .btn:hover, select:hover, button:hover { background: #e6e6e6; }
+    button[type="submit"] { background: #333; color: #fff; border: none; padding: 12px; width: 100%; }
+    button[type="submit"]:hover { background: #555; }
 
     form { text-align: left; margin-top: 15px; }
     label { display: block; margin-bottom: 5px; color: #333; }
-    input, textarea {
-      width: 100%; padding: 10px; margin-bottom: 15px;
-      border-radius: 8px; border: 1px solid #bbb; box-sizing: border-box;
-    }
-    button[type="submit"] {
-      background: #333; color: #fff; border: none; padding: 12px; cursor: pointer;
-      width: 100%;
-    }
-    button[type="submit"]:hover { background: #555; }
+    input, textarea { width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #bbb; box-sizing: border-box; }
 
-    /* form aktif */
+    /* Form Sections */
     .form-section { display: block; margin-bottom: 20px; }
     .form-section.inactive { display: none; }
 
     /* Google Translate */
     .goog-te-banner-frame.skiptranslate { display: none !important; }
-    body { top: 0px !important; }
     .goog-te-gadget-icon { display: none !important; }
+
+    footer { margin-top: 30px; font-size: 12px; color: #666; }
+
   </style>
 </head>
 <body>
@@ -78,7 +75,6 @@
     <h1><a href="https://link.laksanacraft.my.id/">Formulir Laksana Handicraft</a></h1>
     <p><em>Pilih jenis formulir yang ingin Anda isi</em></p>
 
-    <!-- Dropdown Translate -->
     <div class="translate-box">
       <select class="btn" onchange="doGTranslate(this);">
         <option value="">🌏 Pilih Bahasa</option>
@@ -151,61 +147,52 @@
       </form>
     </div>
 
-    <!-- Tombol Google Form -->
-    <a href="https://url.laksanacraft.my.id/form/google" target="_blank" class="btn">
-      📄 Isi Versi Google Form
-    </a>
-
     <footer>
       &copy; <span id="year"></span> Laksana Handicraft · Bantul, D.I.Yogyakarta, Indonesia
     </footer>
   </div>
 
+  <div id="google_translate_element" style="display:none;"></div>
   <script>
     const startYear = 1990;
     const currentYear = new Date().getFullYear();
-    document.getElementById("year").textContent =
-      currentYear > startYear ? startYear + "–" + currentYear : startYear;
+    document.getElementById("year").textContent = currentYear > startYear ? startYear+"–"+currentYear : startYear;
 
     function showForm() {
       const type = document.getElementById('formType').value;
       document.getElementById('orderSection').classList.add('inactive');
       document.getElementById('kerjasamaSection').classList.add('inactive');
-      if (type === 'order') document.getElementById('orderSection').classList.remove('inactive');
-      if (type === 'kerjasama') document.getElementById('kerjasamaSection').classList.remove('inactive');
+      if (type==='order') document.getElementById('orderSection').classList.remove('inactive');
+      if (type==='kerjasama') document.getElementById('kerjasamaSection').classList.remove('inactive');
     }
 
-    function sendToWhatsApp(event) {
+    function sendToWhatsApp(event){
       event.preventDefault();
       const nama = document.getElementById('nama').value.trim();
       const produk = document.getElementById('produk').value.trim();
       const pesan = document.getElementById('pesan').value.trim();
       const noTujuan = "6285608564084";
-      const text = `Halo, saya ${nama} ingin memesan:\n\n🛍️ Produk: ${produk}\n📝 Keterangan: ${pesan || "-"}`;
+      const text = `Halo, saya ${nama} ingin memesan:\n\n🛍️ Produk: ${produk}\n📝 Keterangan: ${pesan||"-"}`;
       const url = `https://wa.me/${noTujuan}?text=${encodeURIComponent(text)}`;
-      window.open(url, "_blank");
+      window.open(url,"_blank");
       event.target.submit();
     }
 
     // Google Translate
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({pageLanguage: 'id'}, 'google_translate_element');
+    function googleTranslateElementInit(){
+      new google.translate.TranslateElement({pageLanguage:'id'}, 'google_translate_element');
     }
-    function doGTranslate(el) {
-      if (el.value === '') return;
-      var langPair = el.value.split('|');
-      var lang = langPair[1];
-      if (lang === 'id') {
-        document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-        document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + window.location.hostname + ';';
+    function doGTranslate(el){
+      if(el.value==='')return;
+      var langPair = el.value.split('|'); var lang = langPair[1];
+      if(lang==='id'){
+        document.cookie='googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        document.cookie='googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain='+window.location.hostname+';';
         window.location.href = window.location.origin + window.location.pathname;
         return;
       }
-      var select = document.querySelector('.goog-te-combo');
-      if (select) {
-        select.value = lang;
-        select.dispatchEvent(new Event('change'));
-      }
+      var select=document.querySelector('.goog-te-combo');
+      if(select){ select.value=lang; select.dispatchEvent(new Event('change')); }
     }
   </script>
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
