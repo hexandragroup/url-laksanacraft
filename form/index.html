@@ -2,10 +2,10 @@
 <html lang="id">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Form Pemesanan & Kerja Sama - Laksana Handicraft</title>
   <meta name="description" content="Formulir Pemesanan dan Kerja Sama Laksana Handicraft - Kerajinan Wayang Kulit Sewon, Bantul." />
-  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hexandragroup/laksanacraft-assets/main/Favicon_Laksana_Handicraft.webp">
+  <link rel="icon" href="https://raw.githubusercontent.com/hexandragroup/laksanacraft-assets/main/Favicon_Laksana_Handicraft.webp" type="image/png" />
 
   <style>
     html, body {
@@ -17,7 +17,7 @@
       background-repeat: no-repeat !important;
       background-size: cover !important;
     }
-    body { top: 0px !important; }
+    body { top: 0 !important; }
 
     .container {
       max-width: 500px;
@@ -33,7 +33,7 @@
     h1 a { text-decoration: none; color: #222; }
     h1 a:hover { text-decoration: underline; }
     p { color: #444; margin-bottom: 16px; }
-    .sublead { font-size: 15px; font-weight: bold; margin-bottom: 18px; }
+    p.sublead { font-size: 15px; font-weight: bold; margin-bottom: 18px; }
 
     .btn, select, button {
       display: block;
@@ -56,17 +56,17 @@
     form { text-align: left; margin-top: 15px; }
     label { display: block; margin-bottom: 5px; color: #333; }
     input, textarea { width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #bbb; box-sizing: border-box; }
-
-    /* Form Sections */
+    
     .form-section { display: block; margin-bottom: 20px; }
     .form-section.inactive { display: none; }
 
-    /* Google Translate */
-    .goog-te-banner-frame.skiptranslate { display: none !important; }
-    .goog-te-gadget-icon { display: none !important; }
+    .translate-box { margin-bottom: 20px; }
 
     footer { margin-top: 30px; font-size: 12px; color: #666; }
 
+    /* Google Translate fix */
+    .goog-te-banner-frame.skiptranslate { display: none !important; }
+    .goog-te-gadget-icon { display: none !important; }
   </style>
 </head>
 <body>
@@ -75,6 +75,7 @@
     <h1><a href="https://link.laksanacraft.my.id/">Formulir Laksana Handicraft</a></h1>
     <p><em>Pilih jenis formulir yang ingin Anda isi</em></p>
 
+    <!-- Google Translate -->
     <div class="translate-box">
       <select class="btn" onchange="doGTranslate(this);">
         <option value="">🌏 Pilih Bahasa</option>
@@ -90,10 +91,10 @@
       </select>
     </div>
 
-    <!-- Pilihan Jenis Form -->
+    <!-- Pilihan Form -->
     <div style="margin-bottom:20px;">
       <label><strong>Pilih Jenis Formulir:</strong></label>
-      <select id="formType" class="btn" onchange="showForm()" required>
+      <select id="formType" class="btn" onchange="showForm()">
         <option value="order">🛍️ Order Produk</option>
         <option value="kerjasama">🤝 Kerja Sama</option>
       </select>
@@ -147,6 +148,9 @@
       </form>
     </div>
 
+    <!-- Tombol Google Form -->
+    <a href="https://url.laksanacraft.my.id/form/google" target="_blank" class="btn">📄 Isi Versi Google Form</a>
+
     <footer>
       &copy; <span id="year"></span> Laksana Handicraft · Bantul, D.I.Yogyakarta, Indonesia
     </footer>
@@ -156,14 +160,14 @@
   <script>
     const startYear = 1990;
     const currentYear = new Date().getFullYear();
-    document.getElementById("year").textContent = currentYear > startYear ? startYear+"–"+currentYear : startYear;
+    document.getElementById("year").textContent = currentYear > startYear ? startYear + "–" + currentYear : startYear;
 
     function showForm() {
       const type = document.getElementById('formType').value;
       document.getElementById('orderSection').classList.add('inactive');
       document.getElementById('kerjasamaSection').classList.add('inactive');
-      if (type==='order') document.getElementById('orderSection').classList.remove('inactive');
-      if (type==='kerjasama') document.getElementById('kerjasamaSection').classList.remove('inactive');
+      if(type==='order') document.getElementById('orderSection').classList.remove('inactive');
+      if(type==='kerjasama') document.getElementById('kerjasamaSection').classList.remove('inactive');
     }
 
     function sendToWhatsApp(event){
