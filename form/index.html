@@ -34,95 +34,37 @@
       border-radius: 50%;
       margin-bottom: 15px;
     }
-    h1 {
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-    h1 a {
-      text-decoration: none;
-      color: #222;
-    }
-    p {
-      color: #444;
-      margin-bottom: 20px;
-    }
-    footer {
-      margin-top: 30px;
-      font-size: 12px;
-      color: #666;
-    }
+    h1 { font-size: 20px; margin-bottom: 10px; }
+    h1 a { text-decoration: none; color: #222; }
+    p { color: #444; margin-bottom: 20px; }
+    footer { margin-top: 30px; font-size: 12px; color: #666; }
 
-    html, body {
-      height: 100% !important;
-      background: linear-gradient(to bottom, #eeeeee, #cccccc) !important;
-      background-attachment: fixed !important;
-      background-repeat: no-repeat !important;
-      background-size: cover !important;
-    }
+    html, body { height: 100% !important; }
     .btn, select, button {
-      display: inline-block;
-      margin: 10px auto;
-      padding: 14px 20px;
-      background: #fff;
-      color: #222;
-      text-decoration: none;
-      border-radius: 8px;
-      border: 1px solid #bbb;
-      transition: all 0.3s ease;
-      cursor: pointer;
+      display: inline-block; margin: 10px auto; padding: 14px 20px;
+      background: #fff; color: #222; text-decoration: none; border-radius: 8px;
+      border: 1px solid #bbb; transition: all 0.3s ease; cursor: pointer;
     }
-    .btn:hover, select:hover, button:hover {
-      background: #e6e6e6;
-      transform: scale(1.03);
-    }
+    .btn:hover, select:hover, button:hover { background: #e6e6e6; transform: scale(1.03); }
 
-    form {
-      text-align: left;
-      margin-top: 20px;
-    }
-    label {
-      display: block;
-      margin-bottom: 5px;
-      color: #333;
-    }
+    form { text-align: left; margin-top: 20px; }
+    label { display: block; margin-bottom: 5px; color: #333; }
     input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border-radius: 8px;
-      border: 1px solid #bbb;
-      box-sizing: border-box;
+      width: 100%; padding: 10px; margin-bottom: 15px;
+      border-radius: 8px; border: 1px solid #bbb; box-sizing: border-box;
     }
     button {
-      background: #333;
-      color: #fff;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      width: 100%;
+      background: #333; color: #fff; border: none; padding: 12px 20px;
+      border-radius: 8px; cursor: pointer; transition: all 0.3s ease; width: 100%;
     }
-    button:hover {
-      background: #555;
-    }
+    button:hover { background: #555; }
 
     .google-form-btn {
-      display: block;
-      margin-top: 15px;
-      padding: 12px 20px;
-      background: #4285f4;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 8px;
-      border: none;
-      font-weight: bold;
-      transition: all 0.3s ease;
+      display: block; margin-top: 15px; padding: 12px 20px;
+      background: #4285f4; color: #fff; text-decoration: none; border-radius: 8px;
+      border: none; font-weight: bold; transition: all 0.3s ease;
     }
-    .google-form-btn:hover {
-      background: #357ae8;
-      transform: scale(1.03);
-    }
+    .google-form-btn:hover { background: #357ae8; transform: scale(1.03); }
 
     .form-section { display: none; }
   </style>
@@ -133,7 +75,7 @@
     <h1><a href="https://link.laksanacraft.my.id/">Formulir Laksana Handicraft</a></h1>
     <p><em>Pilih jenis formulir yang ingin Anda isi</em></p>
 
-    <!-- 🌍 Dropdown Translate -->
+    <!-- Dropdown Translate -->
     <div class="translate-box">
       <select class="btn" onchange="doGTranslate(this);">
         <option value="">🌏 Pilih Bahasa</option>
@@ -149,7 +91,7 @@
       </select>
     </div>
 
-    <!-- 🔘 Pilihan Jenis Form -->
+    <!-- Pilihan Jenis Form -->
     <div style="margin-bottom:20px;">
       <label><strong>Pilih Jenis Formulir:</strong></label>
       <select id="formType" onchange="showForm()" required>
@@ -159,7 +101,7 @@
       </select>
     </div>
 
-    <!-- 📦 FORM ORDER -->
+    <!-- Form Order -->
     <div id="orderSection" class="form-section">
       <form id="orderForm" action="https://formsubmit.co/0626a499baae1c2d834c9ed21f036696" method="POST" onsubmit="return sendToWhatsApp(event)">
         <input type="hidden" name="_captcha" value="false">
@@ -170,24 +112,19 @@
 
         <label>Nama Lengkap</label>
         <input type="text" name="nama" id="nama" required>
-
         <label>Alamat Email</label>
         <input type="email" name="email" id="email" required>
-
         <label>Nomor WhatsApp</label>
         <input type="text" name="whatsapp" id="whatsapp" required>
-
         <label>Produk yang Dipesan</label>
         <input type="text" name="produk" id="produk" required placeholder="Misal: Wayang Arjuna 30cm Alusan">
-
         <label>Jumlah / Keterangan Tambahan</label>
         <textarea name="pesan" id="pesan" rows="4" placeholder="Contoh: 2 buah, kirim ke Jakarta, finishing halus."></textarea>
-
         <button type="submit">Kirim Pesanan</button>
       </form>
     </div>
 
-    <!-- 🤝 FORM KERJA SAMA -->
+    <!-- Form Kerja Sama -->
     <div id="kerjasamaSection" class="form-section">
       <form id="partnerForm" action="https://formsubmit.co/0626a499baae1c2d834c9ed21f036696" method="POST">
         <input type="hidden" name="_captcha" value="false">
@@ -198,27 +135,21 @@
 
         <label>Nama Lengkap</label>
         <input type="text" name="nama" required>
-
         <label>Nama Perusahaan / Organisasi</label>
         <input type="text" name="perusahaan" required>
-
         <label>Alamat Email</label>
         <input type="email" name="email" required>
-
         <label>Nomor WhatsApp / Telepon</label>
         <input type="text" name="kontak" required>
-
         <label>Jenis Kerja Sama</label>
         <input type="text" name="jenis" placeholder="Misal: reseller, event, produksi bersama, dll" required>
-
         <label>Pesan / Detail Kerja Sama</label>
         <textarea name="pesan" rows="4" placeholder="Jelaskan secara singkat bentuk kerja sama yang diinginkan"></textarea>
-
         <button type="submit">Kirim Pengajuan Kerja Sama</button>
       </form>
     </div>
 
-    <!-- 🔗 Tombol ke Google Form -->
+    <!-- Tombol Google Form -->
     <a href="https://forms.gle/your-google-form-link" target="_blank" class="google-form-btn">
       📄 Isi Versi Google Form
     </a>
@@ -228,16 +159,12 @@
     </footer>
   </div>
 
-  <!-- Tahun Otomatis -->
   <script>
     const startYear = 1990;
     const currentYear = new Date().getFullYear();
     document.getElementById("year").textContent =
       currentYear > startYear ? startYear + "–" + currentYear : startYear;
-  </script>
 
-  <!-- 🔁 Tampilkan Form Sesuai Pilihan -->
-  <script>
     function showForm() {
       const type = document.getElementById('formType').value;
       document.getElementById('orderSection').style.display = 'none';
@@ -248,29 +175,17 @@
 
     function sendToWhatsApp(event) {
       event.preventDefault();
-
       const nama = document.getElementById('nama').value.trim();
       const produk = document.getElementById('produk').value.trim();
       const pesan = document.getElementById('pesan').value.trim();
-
       const noTujuan = "6285608564084"; // Nomor admin tanpa tanda +
-
-      const text = 
-`Halo, saya ${nama} ingin memesan:
-
-🛍️ *Produk:* ${produk}
-📝 *Keterangan:* ${pesan || "-"}`;
-
+      const text = `Halo, saya ${nama} ingin memesan:\n\n🛍️ Produk: ${produk}\n📝 Keterangan: ${pesan || "-"}`;
       const url = `https://wa.me/${noTujuan}?text=${encodeURIComponent(text)}`;
-
       window.open(url, "_blank");
       event.target.submit();
     }
-  </script>
 
-  <!-- Google Translate -->
-  <div id="google_translate_element" style="display:none;"></div>
-  <script type="text/javascript">
+    // Google Translate
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({pageLanguage: 'id'}, 'google_translate_element');
     }
@@ -284,12 +199,10 @@
         return;
       }
       var select = document.querySelector('.goog-te-combo');
-      if (select) {
-        select.value = lang;
-        select.dispatchEvent(new Event('change'));
-      }
+      if (select) { select.value = lang; select.dispatchEvent(new Event('change')); }
     }
   </script>
+  <div id="google_translate_element" style="display:none;"></div>
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
