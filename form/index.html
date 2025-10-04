@@ -1,11 +1,231 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="refresh" content="0; url=https://docs.google.com/forms/d/e/1FAIpQLSfi8KVMGvkUovxsRPFChsfqW6nr083t58VhexU6mCCKZL2-BA/viewform">
-  <title>Redirect ke Formulir Pemesanan</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Formulir Pemesanan Laksana Handicraft - Kerajinan Wayang Kulit Sewon, Bantul.">
+  <meta property="og:title" content="Form Pemesanan | Laksana Handicraft" />
+  <meta property="og:image" content="https://laksanacraft.my.id/logo.png" />
+  <meta property="og:description" content="Pesan kerajinan wayang kulit langsung dari pengrajin. Form resmi Laksana Handicraft." />
+  <meta property="og:url" content="https://link.laksanacraft.my.id/form" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>Form Pemesanan | Laksana Handicraft</title>
+
+  <!-- ✅ Favicon -->
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hexandragroup/laksanacraft-assets/main/Favicon_Laksana_Handicraft.webp">
+
+  <style>
+    body {
+      font-family: sans-serif;
+      background: linear-gradient(to bottom, #eeeeee, #cccccc);
+      padding: 30px;
+      margin: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #f2f2f2;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    img.logo {
+      width: 100px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    h1 a {
+      text-decoration: none;
+      color: #222;
+    }
+    p {
+      color: #444;
+      margin-bottom: 20px;
+    }
+    footer {
+      margin-top: 30px;
+      font-size: 12px;
+      color: #666;
+    }
+
+    html, body {
+      height: 100% !important;
+      background: linear-gradient(to bottom, #eeeeee, #cccccc) !important;
+      background-attachment: fixed !important;
+      background-repeat: no-repeat !important;
+      background-size: cover !important;
+    }
+    .goog-te-banner-frame.skiptranslate {
+      display: none !important;
+    }
+    body { top: 0px !important; }
+    .goog-te-gadget-icon { display: none !important; }
+
+    .translate-box {
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin: 10px auto;
+      padding: 14px 20px;
+      background: #fff;
+      color: #222;
+      text-decoration: none;
+      border-radius: 8px;
+      border: 1px solid #bbb;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #e6e6e6;
+      transform: scale(1.03);
+    }
+
+    /* ✅ Form Styling */
+    form {
+      text-align: left;
+      margin-top: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #bbb;
+      box-sizing: border-box;
+    }
+    button {
+      background: #333;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+    button:hover {
+      background: #555;
+    }
+  </style>
+
+  <!-- ✅ Google Tag (opsional, boleh dihapus kalau tidak dipakai) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V1JWDFFYK2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V1JWDFFYK2');
+  </script>
 </head>
 <body>
-  <p>Jika tidak dialihkan otomatis, <a href="https://docs.google.com/forms/d/e/1FAIpQLSfi8KVMGvkUovxsRPFChsfqW6nr083t58VhexU6mCCKZL2-BA/viewform">klik di sini</a>.</p>
+  <div class="container">
+    <img src="https://raw.githubusercontent.com/hexandragroup/laksanacraft-assets/main/Logo_Laksana_Handicraft.png" alt="Logo" class="logo" />
+    <h1><a href="https://laksanacraft.my.id/">Form Pemesanan Laksana Handicraft</a></h1>
+    <p><em>Kerajinan Nusantara, Warisan Dunia</em></p>
+
+    <!-- 🌍 Dropdown Translate -->
+    <div class="translate-box">
+      <select class="btn" onchange="doGTranslate(this);">
+        <option value="">🌏 Pilih Bahasa</option>
+        <option value="id|id">🇮🇩 Indonesia</option>
+        <option value="id|en">🇬🇧 English</option>
+        <option value="id|ms">🇲🇾 Melayu</option>
+        <option value="id|ja">🇯🇵 日本語</option>
+        <option value="id|zh-CN">🇨🇳 中文</option>
+        <option value="id|ar">🇸🇦 العربية</option>
+        <option value="id|fr">🇫🇷 Français</option>
+        <option value="id|de">🇩🇪 Deutsch</option>
+        <option value="id|es">🇪🇸 Español</option>
+      </select>
+    </div>
+
+    <!-- 📦 FORM PEMESANAN -->
+    <form id="orderForm" action="https://formsubmit.co/EMAILKAMU@domain.com" method="POST" onsubmit="return sendToWhatsApp(event)">
+      <!-- Ganti EMAILKAMU@domain.com dengan alamat email tujuan -->
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://link.laksanacraft.my.id/terkirim.html">
+
+      <label>Nama Lengkap</label>
+      <input type="text" name="nama" id="nama" required>
+
+      <label>Nomor WhatsApp</label>
+      <input type="text" name="whatsapp" id="whatsapp" required>
+
+      <label>Produk yang Dipesan</label>
+      <input type="text" name="produk" id="produk" required placeholder="Misal: Wayang Arjuna 30cm Alusan">
+
+      <label>Jumlah / Keterangan Tambahan</label>
+      <textarea name="pesan" id="pesan" rows="4" placeholder="Contoh: 2 buah, kirim ke Jakarta, finishing halus."></textarea>
+
+      <button type="submit">Kirim Pesanan</button>
+    </form>
+
+    <footer>
+      &copy; <span id="year"></span> Laksana Handicraft · Bantul, D.I.Yogyakarta, Indonesia
+    </footer>
+  </div>
+
+  <!-- 🕓 Tahun Otomatis -->
+  <script>
+    const startYear = 1990;
+    const currentYear = new Date().getFullYear();
+    document.getElementById("year").textContent =
+      currentYear > startYear ? startYear + "–" + currentYear : startYear;
+  </script>
+
+  <!-- 💬 Kirim ke WhatsApp juga -->
+  <script>
+    function sendToWhatsApp(event) {
+      event.preventDefault();
+      const nama = document.getElementById('nama').value;
+      const whatsapp = document.getElementById('whatsapp').value;
+      const produk = document.getElementById('produk').value;
+      const pesan = document.getElementById('pesan').value;
+
+      const noTujuan = "6281234567890"; // ganti dengan nomor WA tujuan tanpa +
+      const text = `Halo, saya ${nama} (%2B${whatsapp}) ingin memesan:\n\nProduk: ${produk}\nKeterangan: ${pesan}`;
+      const url = `https://wa.me/${noTujuan}?text=${text}`;
+
+      window.open(url, "_blank"); // buka WA
+      event.target.submit(); // kirim juga ke FormSubmit (email)
+    }
+  </script>
+
+  <!-- 🌍 Google Translate Hidden -->
+  <div id="google_translate_element" style="display:none;"></div>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'id'}, 'google_translate_element');
+    }
+    function doGTranslate(el) {
+      if (el.value === '') return;
+      var langPair = el.value.split('|');
+      var lang = langPair[1];
+      if (lang === 'id') {
+        document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + window.location.hostname + ';';
+        window.location.href = "/";
+        return;
+      }
+      var select = document.querySelector('.goog-te-combo');
+      if (select) {
+        select.value = lang;
+        select.dispatchEvent(new Event('change'));
+      }
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
-</
+</html>
