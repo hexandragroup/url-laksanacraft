@@ -1,14 +1,32 @@
 <form action="https://formsubmit.co/info@laksanacraft.my.id" method="POST">
+  
+  <!-- Input Email -->
   <input type="email" name="email" placeholder="Email Anda" required>
+
+  <!-- Nonaktifkan CAPTCHA -->
   <input type="hidden" name="_captcha" value="false">
+
+  <!-- Redirect setelah submit -->
   <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
-<input type="email" name="email" placeholder="Email Address">
-<input type="hidden" name="_subject" value="New submission!">
-<input type="hidden" name="_cc" value="another@email.com,yetanother@email.com">
-<input type="hidden" name="_blacklist" value="spammy pattern, banned term, phrase">
-<input type="hidden" name="_autoresponse" value="your custom message">
-<input type="email" name="email" placeholder="Email Address">
-<input type="hidden" name="_template" value="table">
-<input type="hidden" name="_webhook" value="https://yourdomain.co/your-webhook">
+
+  <!-- Subjek email -->
+  <input type="hidden" name="_subject" value="New submission!">
+
+  <!-- CC email (salinan ke orang lain) -->
+  <input type="hidden" name="_cc" value="hendraslaksono@gmail.com">
+
+  <!-- Blacklist kata-kata yang dilarang -->
+  <input type="hidden" name="_blacklist" value="spammy pattern, banned term, phrase">
+
+  <!-- Autoresponse untuk user -->
+  <input type="hidden" name="_autoresponse" value="Terima kasih telah mengirimkan form. Kami akan segera menghubungi Anda.">
+
+  <!-- Template email -->
+  <input type="hidden" name="_template" value="table">
+
+  <!-- Webhook untuk integrasi pihak ketiga -->
+  <input type="hidden" name="_webhook" value="https://yourdomain.co/your-webhook">
+
+  <!-- Tombol submit -->
   <button type="submit">Kirim</button>
 </form>
