@@ -21,7 +21,7 @@
       margin: 0;
     }
     .container {
-      max-width: 600px;
+      max-width: 500px;
       margin: auto;
       background: #f2f2f2;
       padding: 25px;
@@ -36,37 +36,40 @@
     }
     h1 { font-size: 20px; margin-bottom: 10px; }
     h1 a { text-decoration: none; color: #222; }
-    p { color: #444; margin-bottom: 20px; }
+    h1 a:hover { text-decoration: underline; }
+    p { color: #444; margin-bottom: 16px; }
     footer { margin-top: 30px; font-size: 12px; color: #666; }
 
     html, body { height: 100% !important; }
-    .btn, select, button {
-      display: inline-block; margin: 10px auto; padding: 14px 20px;
-      background: #fff; color: #222; text-decoration: none; border-radius: 8px;
-      border: 1px solid #bbb; transition: all 0.3s ease; cursor: pointer;
-    }
-    .btn:hover, select:hover, button:hover { background: #e6e6e6; transform: scale(1.03); }
 
-    form { text-align: left; margin-top: 20px; }
+    .btn, select, button {
+      display: block; margin: 10px auto; padding: 12px 14px;
+      background: #fff; color: #222; text-decoration: none;
+      border-radius: 8px; border: 1px solid #bbb; cursor: pointer;
+      transition: 0.2s; max-width: 420px;
+    }
+    .btn:hover, select:hover, button:hover { background: #e6e6e6; }
+
+    form { text-align: left; margin-top: 15px; }
     label { display: block; margin-bottom: 5px; color: #333; }
     input, textarea {
       width: 100%; padding: 10px; margin-bottom: 15px;
       border-radius: 8px; border: 1px solid #bbb; box-sizing: border-box;
     }
-    button {
-      background: #333; color: #fff; border: none; padding: 12px 20px;
-      border-radius: 8px; cursor: pointer; transition: all 0.3s ease; width: 100%;
+    button[type="submit"] {
+      background: #333; color: #fff; border: none; padding: 12px; cursor: pointer;
+      width: 100%;
     }
-    button:hover { background: #555; }
+    button[type="submit"]:hover { background: #555; }
 
-    .google-form-btn {
-      display: block; margin-top: 15px; padding: 12px 20px;
-      background: #4285f4; color: #fff; text-decoration: none; border-radius: 8px;
-      border: none; font-weight: bold; transition: all 0.3s ease;
-    }
-    .google-form-btn:hover { background: #357ae8; transform: scale(1.03); }
+    /* form aktif */
+    .form-section { display: block; margin-bottom: 20px; }
+    .form-section.inactive { display: none; }
 
-    .form-section { display: none; }
+    /* Google Translate */
+    .goog-te-banner-frame.skiptranslate { display: none !important; }
+    body { top: 0px !important; }
+    .goog-te-gadget-icon { display: none !important; }
   </style>
 </head>
 <body>
@@ -94,8 +97,7 @@
     <!-- Pilihan Jenis Form -->
     <div style="margin-bottom:20px;">
       <label><strong>Pilih Jenis Formulir:</strong></label>
-      <select id="formType" onchange="showForm()" required>
-        <option value="">-- Pilih --</option>
+      <select id="formType" class="btn" onchange="showForm()" required>
         <option value="order">🛍️ Order Produk</option>
         <option value="kerjasama">🤝 Kerja Sama</option>
       </select>
@@ -125,7 +127,7 @@
     </div>
 
     <!-- Form Kerja Sama -->
-    <div id="kerjasamaSection" class="form-section">
+    <div id="kerjasamaSection" class="form-section inactive">
       <form id="partnerForm" action="https://formsubmit.co/0626a499baae1c2d834c9ed21f036696" method="POST">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
@@ -150,7 +152,7 @@
     </div>
 
     <!-- Tombol Google Form -->
-    <a href="https://url.laksanacraft.my.id/form/google" target="_blank" class="google-form-btn">
+    <a href="https://url.laksanacraft.my.id/form/google" target="_blank" class="btn">
       📄 Isi Versi Google Form
     </a>
 
@@ -167,10 +169,10 @@
 
     function showForm() {
       const type = document.getElementById('formType').value;
-      document.getElementById('orderSection').style.display = 'none';
-      document.getElementById('kerjasamaSection').style.display = 'none';
-      if (type === 'order') document.getElementById('orderSection').style.display = 'block';
-      if (type === 'kerjasama') document.getElementById('kerjasamaSection').style.display = 'block';
+      document.getElementById('orderSection').classList.add('inactive');
+      document.getElementById('kerjasamaSection').classList.add('inactive');
+      if (type === 'order') document.getElementById('orderSection').classList.remove('inactive');
+      if (type === 'kerjasama') document.getElementById('kerjasamaSection').classList.remove('inactive');
     }
 
     function sendToWhatsApp(event) {
@@ -178,7 +180,7 @@
       const nama = document.getElementById('nama').value.trim();
       const produk = document.getElementById('produk').value.trim();
       const pesan = document.getElementById('pesan').value.trim();
-      const noTujuan = "6285608564084"; // Nomor admin tanpa tanda +
+      const noTujuan = "6285608564084";
       const text = `Halo, saya ${nama} ingin memesan:\n\n🛍️ Produk: ${produk}\n📝 Keterangan: ${pesan || "-"}`;
       const url = `https://wa.me/${noTujuan}?text=${encodeURIComponent(text)}`;
       window.open(url, "_blank");
@@ -186,8 +188,6 @@
     }
 
     // Google Translate
-  <div id="google_translate_element" style="display:none;"></div>
-  <script>
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({pageLanguage: 'id'}, 'google_translate_element');
     }
