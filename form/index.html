@@ -152,7 +152,7 @@
     </div>
 
     <!-- 📦 FORM PEMESANAN -->
-    <form id="orderForm" action="https://formsubmit.co/EMAILKAMU@domain.com" method="POST" onsubmit="return sendToWhatsApp(event)">
+    <form id="orderForm" action="https://formsubmit.co/info@laksanacraft.my.id" method="POST" onsubmit="return sendToWhatsApp(event)">
       <!-- Ganti EMAILKAMU@domain.com dengan alamat email tujuan -->
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_next" value="https://link.laksanacraft.my.id/terkirim.html">
@@ -194,7 +194,7 @@
       const produk = document.getElementById('produk').value;
       const pesan = document.getElementById('pesan').value;
 
-      const noTujuan = "6281234567890"; // ganti dengan nomor WA tujuan tanpa +
+      const noTujuan = "6285608564084"; // ganti dengan nomor WA tujuan tanpa +
       const text = `Halo, saya ${nama} (%2B${whatsapp}) ingin memesan:\n\nProduk: ${produk}\nKeterangan: ${pesan}`;
       const url = `https://wa.me/${noTujuan}?text=${text}`;
 
