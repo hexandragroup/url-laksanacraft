@@ -11,7 +11,6 @@
   <meta name="twitter:card" content="summary_large_image" />
   <title>Form Pemesanan | Laksana Handicraft</title>
 
-  <!-- ✅ Favicon -->
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hexandragroup/laksanacraft-assets/main/Favicon_Laksana_Handicraft.webp">
 
   <style>
@@ -60,15 +59,11 @@
       background-repeat: no-repeat !important;
       background-size: cover !important;
     }
-    .goog-te-banner-frame.skiptranslate {
-      display: none !important;
-    }
+    .goog-te-banner-frame.skiptranslate { display: none !important; }
     body { top: 0px !important; }
     .goog-te-gadget-icon { display: none !important; }
 
-    .translate-box {
-      margin-bottom: 20px;
-    }
+    .translate-box { margin-bottom: 20px; }
 
     .btn {
       display: inline-block;
@@ -87,7 +82,7 @@
       transform: scale(1.03);
     }
 
-    /* ✅ Form Styling */
+    /* Form Styling */
     form {
       text-align: left;
       margin-top: 20px;
@@ -97,7 +92,7 @@
       margin-bottom: 5px;
       color: #333;
     }
-    input, textarea, select {
+    input, textarea {
       width: 100%;
       padding: 10px;
       margin-bottom: 15px;
@@ -119,15 +114,6 @@
       background: #555;
     }
   </style>
-
-  <!-- ✅ Google Tag (opsional, boleh dihapus kalau tidak dipakai) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V1JWDFFYK2"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-V1JWDFFYK2');
-  </script>
 </head>
 <body>
   <div class="container">
@@ -153,12 +139,19 @@
 
     <!-- 📦 FORM PEMESANAN -->
     <form id="orderForm" action="https://formsubmit.co/info@laksanacraft.my.id" method="POST" onsubmit="return sendToWhatsApp(event)">
-      <!-- Ganti EMAILKAMU@domain.com dengan alamat email tujuan -->
+      <!-- Hidden pengaturan FormSubmit -->
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_next" value="https://link.laksanacraft.my.id/terkirim.html">
+      <input type="hidden" name="_subject" value="Pesanan Baru dari Website Laksana Handicraft">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_replyto" value="email">
+      <input type="hidden" name="_autoresponse" value="Terima kasih telah memesan di Laksana Handicraft! Kami akan segera menghubungi Anda.">
 
       <label>Nama Lengkap</label>
       <input type="text" name="nama" id="nama" required>
+
+      <label>Alamat Email</label>
+      <input type="email" name="email" id="email" required>
 
       <label>Nomor WhatsApp</label>
       <input type="text" name="whatsapp" id="whatsapp" required>
@@ -177,7 +170,7 @@
     </footer>
   </div>
 
-  <!-- 🕓 Tahun Otomatis -->
+  <!-- Tahun Otomatis -->
   <script>
     const startYear = 1990;
     const currentYear = new Date().getFullYear();
@@ -185,7 +178,7 @@
       currentYear > startYear ? startYear + "–" + currentYear : startYear;
   </script>
 
-  <!-- 💬 Kirim ke WhatsApp juga -->
+  <!-- Kirim ke WhatsApp + Email -->
   <script>
     function sendToWhatsApp(event) {
       event.preventDefault();
@@ -194,16 +187,16 @@
       const produk = document.getElementById('produk').value;
       const pesan = document.getElementById('pesan').value;
 
-      const noTujuan = "6285608564084"; // ganti dengan nomor WA tujuan tanpa +
+      const noTujuan = "6285608564084"; // nomor WA admin tanpa +
       const text = `Halo, saya ${nama} (%2B${whatsapp}) ingin memesan:\n\nProduk: ${produk}\nKeterangan: ${pesan}`;
       const url = `https://wa.me/${noTujuan}?text=${text}`;
 
-      window.open(url, "_blank"); // buka WA
-      event.target.submit(); // kirim juga ke FormSubmit (email)
+      window.open(url, "_blank");
+      event.target.submit();
     }
   </script>
 
-  <!-- 🌍 Google Translate Hidden -->
+  <!-- Google Translate -->
   <div id="google_translate_element" style="display:none;"></div>
   <script type="text/javascript">
     function googleTranslateElementInit() {
@@ -215,7 +208,6 @@
       var lang = langPair[1];
       if (lang === 'id') {
         document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-        document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + window.location.hostname + ';';
         window.location.href = "/";
         return;
       }
