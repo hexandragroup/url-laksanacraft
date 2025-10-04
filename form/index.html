@@ -56,7 +56,7 @@
     form { text-align: left; margin-top: 15px; }
     label { display: block; margin-bottom: 5px; color: #333; }
     input, textarea { width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #bbb; box-sizing: border-box; }
-    
+
     .form-section { display: block; margin-bottom: 20px; }
     .form-section.inactive { display: none; }
 
@@ -94,14 +94,15 @@
     <!-- Pilihan Form -->
     <div style="margin-bottom:20px;">
       <label><strong>Pilih Jenis Formulir:</strong></label>
-      <select id="formType" class="btn" onchange="showForm()">
+      <select id="formType" class="btn" onchange="showForm()" required>
+        <option value="">-- Pilih --</option>
         <option value="order">🛍️ Order Produk</option>
         <option value="kerjasama">🤝 Kerja Sama</option>
       </select>
     </div>
 
     <!-- Form Order -->
-    <div id="orderSection" class="form-section">
+    <div id="orderSection" class="form-section inactive">
       <form id="orderForm" action="https://formsubmit.co/0626a499baae1c2d834c9ed21f036696" method="POST" onsubmit="return sendToWhatsApp(event)">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
@@ -182,7 +183,6 @@
       event.target.submit();
     }
 
-    // Google Translate
     function googleTranslateElementInit(){
       new google.translate.TranslateElement({pageLanguage:'id'}, 'google_translate_element');
     }
