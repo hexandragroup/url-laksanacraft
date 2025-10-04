@@ -24,6 +24,7 @@ body {
   box-shadow: 0 6px 16px rgba(0,0,0,0.1);
   text-align: center;
 }
+h1 { font-size: 22px; margin-bottom: 15px; color: #333; }
 .tabs {
   display: flex;
   margin-bottom: 20px;
@@ -111,16 +112,20 @@ button:hover { background: #555; }
 </div>
 
 <script>
-// Tab switch
-const tabs = document.querySelectorAll('.tab-btn');
-tabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    tabs.forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
+// Pastikan JS dijalankan setelah DOM siap
+document.addEventListener("DOMContentLoaded", function() {
+  const tabs = document.querySelectorAll('.tab-btn');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Aktifkan tombol
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
 
-    const target = tab.getAttribute('data-target');
-    document.querySelectorAll('form').forEach(f => f.classList.remove('active'));
-    document.getElementById(target).classList.add('active');
+      // Tampilkan form sesuai target
+      const target = tab.getAttribute('data-target');
+      document.querySelectorAll('form').forEach(f => f.classList.remove('active'));
+      document.getElementById(target).classList.add('active');
+    });
   });
 });
 </script>
