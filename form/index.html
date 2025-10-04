@@ -72,8 +72,8 @@ footer { margin-top: 20px; font-size: 12px; color: #666; text-align: center; }
 
   <!-- Tabs -->
   <div class="tabs">
-    <button class="tab-btn active" onclick="showForm('orderForm')">🛍️ Order Produk</button>
-    <button class="tab-btn" onclick="showForm('partnerForm')">🤝 Kerja Sama</button>
+    <button class="tab-btn active" data-target="orderForm">🛍️ Order Produk</button>
+    <button class="tab-btn" data-target="partnerForm">🤝 Kerja Sama</button>
   </div>
 
   <!-- Form Order -->
@@ -131,14 +131,18 @@ const startYear = 1990;
 const currentYear = new Date().getFullYear();
 document.getElementById("year").textContent = currentYear > startYear ? startYear + "–" + currentYear : startYear;
 
-// Fungsi switch tab
-function showForm(formId) {
-  document.querySelectorAll('form').forEach(f => f.classList.remove('active'));
-  document.getElementById(formId).classList.add('active');
-  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-  if(formId === 'orderForm') document.querySelector('.tab-btn:nth-child(1)').classList.add('active');
-  if(formId === 'partnerForm') document.querySelector('.tab-btn:nth-child(2)').classList.add('active');
-}
+// Switch tab
+const tabs = document.querySelectorAll('.tab-btn');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const targetId = tab.getAttribute('data-target');
+    document.querySelectorAll('form').forEach(f => f.classList.remove('active'));
+    document.getElementById(targetId).classList.add('active');
+
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+  });
+});
 </script>
 
 </body>
