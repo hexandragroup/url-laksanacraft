@@ -3,9 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Form Pemesanan & Kerja Sama | Laksana Handicraft</title>
-<link rel="icon" href="https://raw.githubusercontent.com/hexandragroup/laksanacraft-assets/main/Favicon_Laksana_Handicraft.webp" type="image/png">
-
+<title>Formulir Laksana Handicraft</title>
 <style>
 body {
   font-family: sans-serif;
@@ -26,24 +24,23 @@ body {
   box-shadow: 0 6px 16px rgba(0,0,0,0.1);
   text-align: center;
 }
-img.logo { width: 80px; margin-bottom: 15px; }
-h1 { font-size: 22px; margin-bottom: 15px; color: #333; }
-.tabs { display: flex; justify-content: space-between; margin-bottom: 20px; }
+.tabs {
+  display: flex;
+  margin-bottom: 20px;
+}
 .tab-btn {
   flex: 1;
   padding: 10px 0;
   background: #eee;
   border: none;
   cursor: pointer;
-  border-radius: 8px;
-  margin: 0 5px;
   transition: 0.3s;
 }
 .tab-btn.active { background: #333; color: #fff; }
-form { text-align: left; margin-top: 10px; display: none; }
+form { display: none; text-align: left; }
 form.active { display: block; }
-label { display: block; margin-bottom: 5px; color: #555; }
-input, textarea {
+label { display: block; margin-bottom: 5px; }
+input, textarea, button {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
@@ -51,96 +48,79 @@ input, textarea {
   border: 1px solid #bbb;
   box-sizing: border-box;
 }
-button.submit-btn {
-  width: 100%;
-  padding: 12px;
-  background: #333;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-button.submit-btn:hover { background: #555; }
-footer { margin-top: 20px; font-size: 12px; color: #666; text-align: center; }
+button { background: #333; color: #fff; border: none; cursor: pointer; }
+button:hover { background: #555; }
 </style>
 </head>
 <body>
 
 <div class="container">
-  <img src="https://raw.githubusercontent.com/hexandragroup/laksanacraft-assets/main/Logo_Laksana_Handicraft.png" alt="Logo" class="logo">
   <h1>Formulir Laksana Handicraft</h1>
 
   <!-- Tabs -->
   <div class="tabs">
-    <button class="tab-btn active" data-target="orderForm">🛍️ Order Produk</button>
-    <button class="tab-btn" data-target="partnerForm">🤝 Kerja Sama</button>
+    <button class="tab-btn active" data-target="orderForm">Order Produk</button>
+    <button class="tab-btn" data-target="partnerForm">Kerja Sama</button>
   </div>
 
   <!-- Form Order -->
   <form id="orderForm" class="active" action="https://formsubmit.co/0626a499baae1c2d834c9ed21f036696" method="POST">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
-    <input type="hidden" name="_subject" value="Pesanan Baru dari Website Laksana Handicraft">
+    <input type="hidden" name="_subject" value="Pesanan Baru">
     <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_autoresponse" value="Terima kasih telah memesan di Laksana Handicraft! Kami akan segera menghubungi Anda.">
+    <input type="hidden" name="_autoresponse" value="Terima kasih!">
 
     <label>Nama Lengkap</label>
     <input type="text" name="nama" required>
-    <label>Alamat Email</label>
+    <label>Email</label>
     <input type="email" name="email" required>
     <label>Nomor WhatsApp</label>
     <input type="text" name="whatsapp" required>
-    <label>Produk yang Dipesan</label>
-    <input type="text" name="produk" placeholder="Misal: Wayang Arjuna 30cm Alusan" required>
-    <label>Jumlah / Keterangan Tambahan</label>
-    <textarea name="pesan" rows="4" placeholder="Contoh: 2 buah, kirim ke Jakarta, finishing halus."></textarea>
+    <label>Produk</label>
+    <input type="text" name="produk" required>
+    <label>Keterangan Tambahan</label>
+    <textarea name="pesan" rows="3"></textarea>
 
-    <button type="submit" class="submit-btn">Kirim Pesanan</button>
+    <button type="submit">Kirim Pesanan</button>
   </form>
 
   <!-- Form Kerja Sama -->
   <form id="partnerForm" action="https://formsubmit.co/0626a499baae1c2d834c9ed21f036696" method="POST">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
-    <input type="hidden" name="_subject" value="Permintaan Kerja Sama Baru - Laksana Handicraft">
+    <input type="hidden" name="_subject" value="Kerja Sama Baru">
     <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_autoresponse" value="Terima kasih atas minat kerja samanya dengan Laksana Handicraft! Kami akan segera menindaklanjuti.">
+    <input type="hidden" name="_autoresponse" value="Terima kasih atas minat kerja samanya!">
 
     <label>Nama Lengkap</label>
     <input type="text" name="nama" required>
-    <label>Nama Perusahaan / Organisasi</label>
+    <label>Perusahaan / Organisasi</label>
     <input type="text" name="perusahaan" required>
-    <label>Alamat Email</label>
+    <label>Email</label>
     <input type="email" name="email" required>
-    <label>Nomor WhatsApp / Telepon</label>
+    <label>Kontak</label>
     <input type="text" name="kontak" required>
     <label>Jenis Kerja Sama</label>
-    <input type="text" name="jenis" placeholder="Misal: reseller, event, produksi bersama, dll" required>
-    <label>Pesan / Detail Kerja Sama</label>
-    <textarea name="pesan" rows="4" placeholder="Jelaskan secara singkat bentuk kerja sama yang diinginkan"></textarea>
+    <input type="text" name="jenis" required>
+    <label>Pesan</label>
+    <textarea name="pesan" rows="3"></textarea>
 
-    <button type="submit" class="submit-btn">Kirim Pengajuan Kerja Sama</button>
+    <button type="submit">Kirim Kerja Sama</button>
   </form>
-
-  <footer>&copy; <span id="year"></span> Laksana Handicraft</footer>
 </div>
 
 <script>
-// Tahun otomatis
-const startYear = 1990;
-const currentYear = new Date().getFullYear();
-document.getElementById("year").textContent = currentYear > startYear ? startYear + "–" + currentYear : startYear;
-
-// Switch tab
+// Tab switch
 const tabs = document.querySelectorAll('.tab-btn');
 tabs.forEach(tab => {
   tab.addEventListener('click', () => {
-    const targetId = tab.getAttribute('data-target');
-    document.querySelectorAll('form').forEach(f => f.classList.remove('active'));
-    document.getElementById(targetId).classList.add('active');
-
     tabs.forEach(t => t.classList.remove('active'));
     tab.classList.add('active');
+
+    const target = tab.getAttribute('data-target');
+    document.querySelectorAll('form').forEach(f => f.classList.remove('active'));
+    document.getElementById(target).classList.add('active');
   });
 });
 </script>
