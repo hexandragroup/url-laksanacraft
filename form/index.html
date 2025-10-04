@@ -178,20 +178,29 @@
       currentYear > startYear ? startYear + "–" + currentYear : startYear;
   </script>
 
-  <!-- Kirim ke WhatsApp + Email -->
+  <!-- ✅ Kirim ke WhatsApp + Email (versi rapi & tanpa nomor di pesan) -->
   <script>
     function sendToWhatsApp(event) {
       event.preventDefault();
-      const nama = document.getElementById('nama').value;
-      const whatsapp = document.getElementById('whatsapp').value;
-      const produk = document.getElementById('produk').value;
-      const pesan = document.getElementById('pesan').value;
 
-      const noTujuan = "6285608564084"; // nomor WA admin tanpa +
-      const text = `Halo, saya ${nama} (%2B${whatsapp}) ingin memesan:\n\nProduk: ${produk}\nKeterangan: ${pesan}`;
-      const url = `https://wa.me/${noTujuan}?text=${text}`;
+      const nama = document.getElementById('nama').value.trim();
+      const produk = document.getElementById('produk').value.trim();
+      const pesan = document.getElementById('pesan').value.trim();
 
+      const noTujuan = "6285608564084"; // Nomor admin tanpa tanda +
+      
+      const text = 
+`Halo, saya ${nama} ingin memesan:
+
+🛍️ *Produk:* ${produk}
+📝 *Keterangan:* ${pesan || "-"}`;
+
+      const url = `https://wa.me/${noTujuan}?text=${encodeURIComponent(text)}`;
+
+      // Buka WhatsApp
       window.open(url, "_blank");
+
+      // Lanjut kirim form ke FormSubmit
       event.target.submit();
     }
   </script>
