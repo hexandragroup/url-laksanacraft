@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Formulir Pemesanan Laksana Handicraft - Kerajinan Wayang Kulit Sewon, Bantul.">
-  <meta property="og:title" content="Form Pemesanan | Laksana Handicraft" />
+  <meta name="description" content="Formulir Pemesanan dan Kerja Sama Laksana Handicraft - Kerajinan Wayang Kulit Sewon, Bantul.">
+  <meta property="og:title" content="Form Pemesanan & Kerja Sama | Laksana Handicraft" />
   <meta property="og:image" content="https://laksanacraft.my.id/logo.png" />
-  <meta property="og:description" content="Pesan kerajinan wayang kulit langsung dari pengrajin. Form resmi Laksana Handicraft." />
+  <meta property="og:description" content="Pesan kerajinan wayang kulit atau ajukan kerja sama dengan Laksana Handicraft." />
   <meta property="og:url" content="https://link.laksanacraft.my.id/form" />
   <meta name="twitter:card" content="summary_large_image" />
-  <title>Form Pemesanan | Laksana Handicraft</title>
+  <title>Form Pemesanan & Kerja Sama | Laksana Handicraft</title>
 
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hexandragroup/laksanacraft-assets/main/Favicon_Laksana_Handicraft.webp">
 
@@ -59,13 +59,7 @@
       background-repeat: no-repeat !important;
       background-size: cover !important;
     }
-    .goog-te-banner-frame.skiptranslate { display: none !important; }
-    body { top: 0px !important; }
-    .goog-te-gadget-icon { display: none !important; }
-
-    .translate-box { margin-bottom: 20px; }
-
-    .btn {
+    .btn, select, button {
       display: inline-block;
       margin: 10px auto;
       padding: 14px 20px;
@@ -77,12 +71,11 @@
       transition: all 0.3s ease;
       cursor: pointer;
     }
-    .btn:hover {
+    .btn:hover, select:hover, button:hover {
       background: #e6e6e6;
       transform: scale(1.03);
     }
 
-    /* Form Styling */
     form {
       text-align: left;
       margin-top: 20px;
@@ -113,13 +106,32 @@
     button:hover {
       background: #555;
     }
+
+    .google-form-btn {
+      display: block;
+      margin-top: 15px;
+      padding: 12px 20px;
+      background: #4285f4;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      border: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .google-form-btn:hover {
+      background: #357ae8;
+      transform: scale(1.03);
+    }
+
+    .form-section { display: none; }
   </style>
 </head>
 <body>
   <div class="container">
     <img src="https://raw.githubusercontent.com/hexandragroup/laksanacraft-assets/main/Logo_Laksana_Handicraft.png" alt="Logo" class="logo" />
-    <h1><a href="https://link.laksanacraft.my.id/">Form Pemesanan Laksana Handicraft</a></h1>
-    <p><em>Kerajinan Nusantara, Warisan Dunia</em></p>
+    <h1><a href="https://link.laksanacraft.my.id/">Formulir Laksana Handicraft</a></h1>
+    <p><em>Pilih jenis formulir yang ingin Anda isi</em></p>
 
     <!-- 🌍 Dropdown Translate -->
     <div class="translate-box">
@@ -137,33 +149,79 @@
       </select>
     </div>
 
-    <!-- 📦 FORM PEMESANAN -->
-    <form id="orderForm" action="https://formsubmit.co/0626a499baae1c2d834c9ed21f036696" method="POST" onsubmit="return sendToWhatsApp(event)">
-      <!-- Hidden pengaturan FormSubmit -->
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
-      <input type="hidden" name="_subject" value="Pesanan Baru dari Website Laksana Handicraft">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_replyto" value="email">
-      <input type="hidden" name="_autoresponse" value="Terima kasih telah memesan di Laksana Handicraft! Kami akan segera menghubungi Anda.">
+    <!-- 🔘 Pilihan Jenis Form -->
+    <div style="margin-bottom:20px;">
+      <label><strong>Pilih Jenis Formulir:</strong></label>
+      <select id="formType" onchange="showForm()" required>
+        <option value="">-- Pilih --</option>
+        <option value="order">🛍️ Order Produk</option>
+        <option value="kerjasama">🤝 Kerja Sama</option>
+      </select>
+    </div>
 
-      <label>Nama Lengkap</label>
-      <input type="text" name="nama" id="nama" required>
+    <!-- 📦 FORM ORDER -->
+    <div id="orderSection" class="form-section">
+      <form id="orderForm" action="https://formsubmit.co/0626a499baae1c2d834c9ed21f036696" method="POST" onsubmit="return sendToWhatsApp(event)">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
+        <input type="hidden" name="_subject" value="Pesanan Baru dari Website Laksana Handicraft">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_autoresponse" value="Terima kasih telah memesan di Laksana Handicraft! Kami akan segera menghubungi Anda.">
 
-      <label>Alamat Email</label>
-      <input type="email" name="email" id="email" required>
+        <label>Nama Lengkap</label>
+        <input type="text" name="nama" id="nama" required>
 
-      <label>Nomor WhatsApp</label>
-      <input type="text" name="whatsapp" id="whatsapp" required>
+        <label>Alamat Email</label>
+        <input type="email" name="email" id="email" required>
 
-      <label>Produk yang Dipesan</label>
-      <input type="text" name="produk" id="produk" required placeholder="Misal: Wayang Arjuna 30cm Alusan">
+        <label>Nomor WhatsApp</label>
+        <input type="text" name="whatsapp" id="whatsapp" required>
 
-      <label>Jumlah / Keterangan Tambahan</label>
-      <textarea name="pesan" id="pesan" rows="4" placeholder="Contoh: 2 buah, kirim ke Jakarta, finishing halus."></textarea>
+        <label>Produk yang Dipesan</label>
+        <input type="text" name="produk" id="produk" required placeholder="Misal: Wayang Arjuna 30cm Alusan">
 
-      <button type="submit">Kirim Pesanan</button>
-    </form>
+        <label>Jumlah / Keterangan Tambahan</label>
+        <textarea name="pesan" id="pesan" rows="4" placeholder="Contoh: 2 buah, kirim ke Jakarta, finishing halus."></textarea>
+
+        <button type="submit">Kirim Pesanan</button>
+      </form>
+    </div>
+
+    <!-- 🤝 FORM KERJA SAMA -->
+    <div id="kerjasamaSection" class="form-section">
+      <form id="partnerForm" action="https://formsubmit.co/0626a499baae1c2d834c9ed21f036696" method="POST">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
+        <input type="hidden" name="_subject" value="Permintaan Kerja Sama Baru - Laksana Handicraft">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_autoresponse" value="Terima kasih atas minat kerja samanya dengan Laksana Handicraft! Kami akan segera menindaklanjuti.">
+
+        <label>Nama Lengkap</label>
+        <input type="text" name="nama" required>
+
+        <label>Nama Perusahaan / Organisasi</label>
+        <input type="text" name="perusahaan" required>
+
+        <label>Alamat Email</label>
+        <input type="email" name="email" required>
+
+        <label>Nomor WhatsApp / Telepon</label>
+        <input type="text" name="kontak" required>
+
+        <label>Jenis Kerja Sama</label>
+        <input type="text" name="jenis" placeholder="Misal: reseller, event, produksi bersama, dll" required>
+
+        <label>Pesan / Detail Kerja Sama</label>
+        <textarea name="pesan" rows="4" placeholder="Jelaskan secara singkat bentuk kerja sama yang diinginkan"></textarea>
+
+        <button type="submit">Kirim Pengajuan Kerja Sama</button>
+      </form>
+    </div>
+
+    <!-- 🔗 Tombol ke Google Form -->
+    <a href="https://forms.gle/your-google-form-link" target="_blank" class="google-form-btn">
+      📄 Isi Versi Google Form
+    </a>
 
     <footer>
       &copy; <span id="year"></span> Laksana Handicraft · Bantul, D.I.Yogyakarta, Indonesia
@@ -178,8 +236,16 @@
       currentYear > startYear ? startYear + "–" + currentYear : startYear;
   </script>
 
-  <!-- ✅ Kirim ke WhatsApp + Email -->
+  <!-- 🔁 Tampilkan Form Sesuai Pilihan -->
   <script>
+    function showForm() {
+      const type = document.getElementById('formType').value;
+      document.getElementById('orderSection').style.display = 'none';
+      document.getElementById('kerjasamaSection').style.display = 'none';
+      if (type === 'order') document.getElementById('orderSection').style.display = 'block';
+      if (type === 'kerjasama') document.getElementById('kerjasamaSection').style.display = 'block';
+    }
+
     function sendToWhatsApp(event) {
       event.preventDefault();
 
@@ -197,10 +263,7 @@
 
       const url = `https://wa.me/${noTujuan}?text=${encodeURIComponent(text)}`;
 
-      // Buka WhatsApp
       window.open(url, "_blank");
-
-      // Lanjut kirim form ke FormSubmit
       event.target.submit();
     }
   </script>
