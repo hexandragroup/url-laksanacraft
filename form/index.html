@@ -70,14 +70,18 @@ button:hover { background: #555; }
     <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
     <input type="hidden" name="_subject" value="Tes Form 1">
 
-    <label>Nama</label>
-    <input type="text" name="nama_form1" required>
-
-    <label>Email</label>
-    <input type="email" name="email_form1" required>
-
-    <button type="submit">Kirim</button>
-  </form>
+        <label>Nama Lengkap</label>
+        <input type="text" name="nama" id="nama" required>
+        <label>Alamat Email</label>
+        <input type="email" name="email" id="email" required>
+        <label>Nomor WhatsApp</label>
+        <input type="text" name="whatsapp" id="whatsapp" required>
+        <label>Produk yang Dipesan</label>
+        <input type="text" name="produk" id="produk" required placeholder="Misal: Wayang Arjuna 30cm Alusan">
+        <label>Jumlah / Keterangan Tambahan</label>
+        <textarea name="pesan" id="pesan" rows="4" placeholder="Contoh: 2 buah, kirim ke Jakarta, finishing halus."></textarea>
+        <button type="submit">Kirim Pesanan</button>
+      </form>
 
   <!-- Form 2 -->
   <form id="form2" action="https://formsubmit.co/0626a499baae1c2d834c9ed21f036696" method="POST">
