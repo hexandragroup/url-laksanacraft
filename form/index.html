@@ -102,13 +102,12 @@
 
     <!-- Tabs untuk Form -->
     <div class="tabs">
-      <button class="tab-btn active" data-target="orderSection">🛍️ Order Produk</button>
-      <button class="tab-btn" data-target="kerjasamaSection">🤝 Kerja Sama</button>
+      <button class="tab-btn active" data-target="orderForm">🛍️ Order Produk</button>
+      <button class="tab-btn" data-target="partnerForm">🤝 Kerja Sama</button>
     </div>
 
     <!-- Form Order -->
-    <div id="orderSection" class="form-section active">
-      <form id="orderForm" action="https://formsubmit.co/0626a499baae1c2d834c9ed21f036696" method="POST" onsubmit="return sendToWhatsApp(event)">
+      <form id="orderForm" class="active" action="https://formsubmit.co/0626a499baae1c2d834c9ed21f036696" method="POST" onsubmit="return sendToWhatsApp(event)">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
         <input type="hidden" name="_subject" value="Pesanan Baru dari Website Laksana Handicraft">
@@ -127,10 +126,8 @@
         <textarea name="pesan" id="pesan" rows="4" placeholder="Contoh: 2 buah, kirim ke Jakarta, finishing halus."></textarea>
         <button type="submit">Kirim Pesanan</button>
       </form>
-    </div>
 
     <!-- Form Kerja Sama -->
-    <div id="kerjasamaSection" class="form-section">
       <form id="partnerForm" action="https://formsubmit.co/0626a499baae1c2d834c9ed21f036696" method="POST">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
@@ -150,7 +147,6 @@
         <textarea name="pesan" rows="4" placeholder="Jelaskan secara singkat bentuk kerja sama yang diinginkan"></textarea>
         <button type="submit">Kirim Pengajuan Kerja Sama</button>
       </form>
-    </div>
 
     <!-- Tombol Google Form -->
     <a href="https://url.laksanacraft.my.id/form/google" target="_blank" class="google-form-btn">
