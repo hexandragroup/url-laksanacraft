@@ -73,15 +73,15 @@ button:hover { background: #555; }
     <input type="hidden" name="_autoresponse" value="Terima kasih!">
 
     <label>Nama Lengkap</label>
-    <input type="text" name="nama" required>
+    <input type="text" name="nama_order" required>
     <label>Email</label>
-    <input type="email" name="email" required>
+    <input type="email" name="email_order" required>
     <label>Nomor WhatsApp</label>
-    <input type="text" name="whatsapp" required>
+    <input type="text" name="whatsapp_order" required>
     <label>Produk</label>
-    <input type="text" name="produk" required>
+    <input type="text" name="produk_order" required>
     <label>Keterangan Tambahan</label>
-    <textarea name="pesan" rows="3"></textarea>
+    <textarea name="pesan_order" rows="3"></textarea>
 
     <button type="submit">Kirim Pesanan</button>
   </form>
@@ -95,24 +95,24 @@ button:hover { background: #555; }
     <input type="hidden" name="_autoresponse" value="Terima kasih atas minat kerja samanya!">
 
     <label>Nama Lengkap</label>
-    <input type="text" name="nama" required>
+    <input type="text" name="nama_kerjasama" required>
     <label>Perusahaan / Organisasi</label>
     <input type="text" name="perusahaan" required>
     <label>Email</label>
-    <input type="email" name="email" required>
+    <input type="email" name="email_kerjasama" required>
     <label>Kontak</label>
-    <input type="text" name="kontak" required>
+    <input type="text" name="kontak_kerjasama" required>
     <label>Jenis Kerja Sama</label>
-    <input type="text" name="jenis" required>
+    <input type="text" name="jenis_kerjasama" required>
     <label>Pesan</label>
-    <textarea name="pesan" rows="3"></textarea>
+    <textarea name="pesan_kerjasama" rows="3"></textarea>
 
     <button type="submit">Kirim Kerja Sama</button>
   </form>
 </div>
 
 <script>
-// Pastikan JS dijalankan setelah DOM siap
+// Tab switching
 document.addEventListener("DOMContentLoaded", function() {
   const tabs = document.querySelectorAll('.tab-btn');
   tabs.forEach(tab => {
