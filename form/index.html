@@ -1,27 +1,100 @@
-<form action="https://formsubmit.co/info@laksanacraft.my.id" method="POST">
-  <input type="hidden" name="_captcha" value="false">
-  <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
-  <input type="hidden" name="_subject" value="Tes Form">
-  
-  <label>Nama</label>
-  <input type="text" name="nama" required>
-  
-  <label>Email</label>
-  <input type="email" name="email" required>
-  
-  <button type="submit">Kirim</button>
-</form>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulir Laksana Handicraft</title>
+<style>
+body {
+  font-family: sans-serif;
+  background: #f0f0f0;
+  margin: 0;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.container {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  text-align: center;
+}
+h1 { font-size: 22px; margin-bottom: 15px; color: #333; }
+.tabs {
+  display: flex;
+  margin-bottom: 20px;
+}
+.tab-btn {
+  flex: 1;
+  padding: 10px 0;
+  background: #eee;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.tab-btn.active { background: #333; color: #fff; }
+form { display: none; text-align: left; }
+form.active { display: block; }
+label { display: block; margin-bottom: 5px; }
+input, button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+}
+button { background: #333; color: #fff; border: none; cursor: pointer; }
+button:hover { background: #555; }
+</style>
+</head>
+<body>
 
-<form action="https://formsubmit.co/info@laksanacraft.my.id" method="POST">
-  <input type="hidden" name="_captcha" value="false">
-  <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
-  <input type="hidden" name="_subject" value="Tes Form">
-  
-  <label>Nama</label>
-  <input type="text" name="nama" required>
-  
-  <label>Email</label>
-  <input type="email" name="email" required>
-  
-  <button type="submit">Kirim</button>
-</form>
+<div class="container">
+  <h1>Formulir Laksana Handicraft</h1>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab-btn active" data-target="form1">Form 1</button>
+    <button class="tab-btn" data-target="form2">Form 2</button>
+  </div>
+
+  <!-- Form 1 -->
+  <form id="form1" class="active" action="https://formsubmit.co/info@laksanacraft.my.id" method="POST">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
+    <input type="hidden" name="_subject" value="Tes Form 1">
+
+    <label>Nama</label>
+    <input type="text" name="nama" required>
+
+    <label>Email</label>
+    <input type="email" name="email" required>
+
+    <button type="submit">Kirim</button>
+  </form>
+
+  <!-- Form 2 -->
+  <form id="form2" action="https://formsubmit.co/info@laksanacraft.my.id" method="POST">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
+    <input type="hidden" name="_subject" value="Tes Form 2">
+
+    <label>Nama</label>
+    <input type="text" name="nama" required>
+
+    <label>Email</label>
+    <input type="email" name="email" required>
+
+    <button type="submit">Kirim</button>
+  </form>
+</div>
+
+<script>
+// Tab switching
+document.addEventListener("DOMContentLoaded", function()
