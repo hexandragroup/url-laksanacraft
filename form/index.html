@@ -1,101 +1,132 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Formulir Laksana Handicraft</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Formulir Pemesanan dan Kerja Sama Laksana Handicraft - Kerajinan Wayang Kulit Sewon, Bantul.">
+<meta property="og:title" content="Form Pemesanan & Kerja Sama | Laksana Handicraft" />
+<meta property="og:image" content="https://laksanacraft.my.id/logo.png" />
+<meta property="og:description" content="Pesan kerajinan wayang kulit atau ajukan kerja sama dengan Laksana Handicraft." />
+<meta property="og:url" content="https://link.laksanacraft.my.id/form" />
+<meta name="twitter:card" content="summary_large_image" />
+<title>Form Pemesanan & Kerja Sama | Laksana Handicraft</title>
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hexandragroup/laksanacraft-assets/main/Favicon_Laksana_Handicraft.webp">
+
 <style>
-body {
-  font-family: sans-serif;
-  background: #f0f0f0;
+html, body {
+  height: 100% !important;
   margin: 0;
-  padding: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  font-family: sans-serif;
+  background: linear-gradient(to bottom, #eeeeee, #cccccc) !important;
+  background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
 }
+body { padding: 30px; }
 .container {
-  background: #fff;
+  max-width: 600px;
+  margin: auto;
+  background: #f2f2f2;
   padding: 25px;
-  border-radius: 12px;
-  max-width: 500px;
-  width: 100%;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
   text-align: center;
 }
-h1 { font-size: 22px; margin-bottom: 15px; color: #333; }
-.tabs {
-  display: flex;
-  margin-bottom: 20px;
-}
-.tab-btn {
-  flex: 1;
-  padding: 10px 0;
-  background: #eee;
-  border: none;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.tab-btn.active { background: #333; color: #fff; }
-form { display: none; text-align: left; }
+img.logo { width: 100px; border-radius: 50%; margin-bottom: 15px; }
+h1 { font-size: 20px; margin-bottom: 10px; }
+p { color: #444; margin-bottom: 20px; }
+.tabs { display: flex; margin-bottom: 20px; }
+.tab-btn { flex:1; padding:10px 0; background:#eee; border:none; cursor:pointer; transition:0.3s; }
+.tab-btn.active { background:#333; color:#fff; }
+form { display: none; text-align: left; margin-top: 20px; }
 form.active { display: block; }
-label { display: block; margin-bottom: 5px; }
-input, button {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border-radius: 6px;
-  border: 1px solid #bbb;
-  box-sizing: border-box;
-}
-button { background: #333; color: #fff; border: none; cursor: pointer; }
-button:hover { background: #555; }
+label { display:block; margin-bottom:5px; color:#333; }
+input, textarea { width:100%; padding:10px; margin-bottom:15px; border-radius:8px; border:1px solid #bbb; box-sizing:border-box; }
+button { background:#333; color:#fff; border:none; padding:12px 20px; border-radius:8px; cursor:pointer; transition:all 0.3s ease; width:100%; }
+button:hover { background:#555; }
+.google-form-btn { display:block; margin-top:15px; padding:12px 20px; background:#4285f4; color:#fff; border-radius:8px; text-decoration:none; font-weight:bold; }
+.google-form-btn:hover { background:#357ae8; }
+footer { margin-top:30px; font-size:12px; color:#666; }
+/* Google Translate fix */
+.goog-te-banner-frame.skiptranslate { display: none !important; }
+.goog-te-gadget-icon { display: none !important; }
+body { top:0px !important; }
 </style>
 </head>
 <body>
 
 <div class="container">
+  <img src="https://raw.githubusercontent.com/hexandragroup/laksanacraft-assets/main/Logo_Laksana_Handicraft.png" alt="Logo" class="logo" />
   <h1>Formulir Laksana Handicraft</h1>
+  <p><em>Pilih tab untuk mengisi formulir</em></p>
 
   <!-- Tabs -->
   <div class="tabs">
-    <button class="tab-btn active" data-target="form1">Form 1</button>
-    <button class="tab-btn" data-target="form2">Form 2</button>
+    <button class="tab-btn active" data-target="orderSection">🛍️ Order Produk</button>
+    <button class="tab-btn" data-target="kerjasamaSection">🤝 Kerja Sama</button>
   </div>
 
-  <!-- Form 1 -->
-  <form id="form1" class="active" action="https://formsubmit.co/info@laksanacraft.my.id" method="POST">
+  <!-- Form Order -->
+  <form id="orderSection" class="active" action="https://formsubmit.co/0626a499baae1c2d834c9ed21f036696" method="POST" onsubmit="return sendToWhatsApp(event)">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
-    <input type="hidden" name="_subject" value="Tes Form 1">
+    <input type="hidden" name="_subject" value="Pesanan Baru dari Website Laksana Handicraft">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_autoresponse" value="Terima kasih telah memesan di Laksana Handicraft! Kami akan segera menghubungi Anda.">
 
-    <label>Nama</label>
-    <input type="text" name="nama_form1" required>
-
+    <label>Nama Lengkap</label>
+    <input type="text" name="nama_order" id="nama" required>
     <label>Email</label>
-    <input type="email" name="email_form1" required>
-
-    <button type="submit">Kirim</button>
+    <input type="email" name="email_order" id="email" required>
+    <label>Nomor WhatsApp</label>
+    <input type="text" name="whatsapp_order" id="whatsapp" required>
+    <label>Produk yang Dipesan</label>
+    <input type="text" name="produk_order" id="produk" required placeholder="Misal: Wayang Arjuna 30cm Alusan">
+    <label>Jumlah / Keterangan Tambahan</label>
+    <textarea name="pesan_order" id="pesan" rows="4" placeholder="Contoh: 2 buah, kirim ke Jakarta, finishing halus."></textarea>
+    <button type="submit">Kirim Pesanan</button>
   </form>
 
-  <!-- Form 2 -->
-  <form id="form2" action="https://formsubmit.co/info@laksanacraft.my.id" method="POST">
+  <!-- Form Kerja Sama -->
+  <form id="kerjasamaSection" action="https://formsubmit.co/0626a499baae1c2d834c9ed21f036696" method="POST">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
-    <input type="hidden" name="_subject" value="Tes Form 2">
+    <input type="hidden" name="_subject" value="Permintaan Kerja Sama Baru - Laksana Handicraft">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_autoresponse" value="Terima kasih atas minat kerja samanya dengan Laksana Handicraft! Kami akan segera menindaklanjuti.">
 
-    <label>Nama</label>
-    <input type="text" name="nama_form2" required>
-
+    <label>Nama Lengkap</label>
+    <input type="text" name="nama_kerjasama" required>
+    <label>Nama Perusahaan / Organisasi</label>
+    <input type="text" name="perusahaan" required>
     <label>Email</label>
-    <input type="email" name="email_form2" required>
-
-    <button type="submit">Kirim</button>
+    <input type="email" name="email_kerjasama" required>
+    <label>Nomor WhatsApp / Telepon</label>
+    <input type="text" name="kontak_kerjasama" required>
+    <label>Jenis Kerja Sama</label>
+    <input type="text" name="jenis_kerjasama" placeholder="Misal: reseller, event, produksi bersama, dll" required>
+    <label>Pesan / Detail Kerja Sama</label>
+    <textarea name="pesan_kerjasama" rows="4" placeholder="Jelaskan secara singkat bentuk kerja sama yang diinginkan"></textarea>
+    <button type="submit">Kirim Pengajuan Kerja Sama</button>
   </form>
+
+  <!-- Tombol Google Form -->
+  <a href="https://url.laksanacraft.my.id/form/google" target="_blank" class="google-form-btn">
+    📄 Isi Versi Google Form
+  </a>
+
+  <footer>
+    &copy; <span id="year"></span> Laksana Handicraft · Bantul, D.I.Yogyakarta, Indonesia
+  </footer>
 </div>
 
 <script>
+// Tahun otomatis
+const startYear = 1990;
+const currentYear = new Date().getFullYear();
+document.getElementById("year").textContent =
+  currentYear > startYear ? startYear + "–" + currentYear : startYear;
+
 // Tab switching
 document.addEventListener("DOMContentLoaded", function() {
   const tabs = document.querySelectorAll('.tab-btn');
@@ -103,17 +134,28 @@ document.addEventListener("DOMContentLoaded", function() {
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      // Aktifkan tab
       tabs.forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
 
-      // Tampilkan form sesuai tab
       forms.forEach(f => f.classList.remove('active'));
       const target = tab.getAttribute('data-target');
       document.getElementById(target).classList.add('active');
     });
   });
 });
+
+// WhatsApp auto-send
+function sendToWhatsApp(event) {
+  event.preventDefault();
+  const nama = document.getElementById('nama').value.trim();
+  const produk = document.getElementById('produk').value.trim();
+  const pesan = document.getElementById('pesan').value.trim();
+  const noTujuan = "6285608564084"; 
+  const text = `Halo, saya ${nama} ingin memesan:\n\n🛍️ Produk: ${produk}\n📝 Keterangan: ${pesan || "-"}`;
+  const url = `https://wa.me/${noTujuan}?text=${encodeURIComponent(text)}`;
+  window.open(url, "_blank");
+  event.target.submit();
+}
 </script>
 
 </body>
