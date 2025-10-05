@@ -23,6 +23,7 @@
       background-repeat: no-repeat !important;
       background-size: cover !important;
     }
+
     body { padding: 30px; }
 
     .container {
@@ -74,6 +75,7 @@
     .goog-te-banner-frame.skiptranslate { display: none !important; }
     .goog-te-gadget-icon { display: none !important; }
     body { top: 0px !important; }
+    .translate-box { margin-bottom: 20px; text-align: center; }
   </style>
 </head>
 <body>
@@ -81,6 +83,22 @@
     <img src="https://raw.githubusercontent.com/hexandragroup/laksanacraft-assets/main/Logo_Laksana_Handicraft.png" alt="Logo" class="logo" />
     <h1><a href="https://link.laksanacraft.my.id/">Formulir Laksana Handicraft</a></h1>
     <p><em>Pilih jenis formulir yang ingin Anda isi</em></p>
+
+    <!-- Dropdown Translate -->
+    <div class="translate-box">
+      <select class="btn" onchange="doGTranslate(this);">
+        <option value="">🌏 Pilih Bahasa</option>
+        <option value="id|id">🇮🇩 Indonesia</option>
+        <option value="id|en">🇬🇧 English</option>
+        <option value="id|ms">🇲🇾 Melayu</option>
+        <option value="id|ja">🇯🇵 日本語</option>
+        <option value="id|zh-CN">🇨🇳 中文</option>
+        <option value="id|ar">🇸🇦 العربية</option>
+        <option value="id|fr">🇫🇷 Français</option>
+        <option value="id|de">🇩🇪 Deutsch</option>
+        <option value="id|es">🇪🇸 Español</option>
+      </select>
+    </div>
 
     <!-- Tabs untuk Form -->
     <div class="tabs">
@@ -144,8 +162,33 @@
     </footer>
   </div>
 
+  <!-- Google Translate Hidden -->
+  <div id="google_translate_element" style="display:none;"></div>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'id'}, 'google_translate_element');
+    }
+    function doGTranslate(el) {
+      if (el.value === '') return;
+      var langPair = el.value.split('|');
+      var lang = langPair[1];
+      if (lang === 'id') {
+        document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + window.location.hostname + ';';
+        window.location.href = window.location.origin + window.location.pathname;
+        return;
+      }
+      var select = document.querySelector('.goog-te-combo');
+      if (select) {
+        select.value = lang;
+        select.dispatchEvent(new Event('change'));
+      }
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 <script>
-// Tab switching
+// Tab switching & tahun otomatis
 document.addEventListener("DOMContentLoaded", function() {
   const tabs = document.querySelectorAll('.tab-btn');
   const sections = document.querySelectorAll('.form-section');
@@ -154,20 +197,18 @@ document.addEventListener("DOMContentLoaded", function() {
     tab.addEventListener('click', () => {
       tabs.forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
-
       sections.forEach(sec => sec.classList.remove('active'));
       const target = tab.getAttribute('data-target');
       document.getElementById(target).classList.add('active');
     });
   });
 
-  // Tahun otomatis
   const startYear = 1990;
   const currentYear = new Date().getFullYear();
   document.getElementById("year").textContent = currentYear > startYear ? startYear + "–" + currentYear : startYear;
 });
 
-// Fungsi kirim ke WhatsApp
+// WhatsApp
 function sendToWhatsApp(event) {
   event.preventDefault();
   const nama = document.getElementById('nama').value.trim();
@@ -175,11 +216,9 @@ function sendToWhatsApp(event) {
   const pesan = document.getElementById('pesan').value.trim();
   const noTujuan = "6285608564084"; 
   const text = `Halo, saya ${nama} ingin memesan:\n\n🛍️ Produk: ${produk}\n📝 Keterangan: ${pesan || "-"}`;
-  const url = `https://wa.me/${noTujuan}?text=${encodeURIComponent(text)}`;
-  window.open(url, "_blank");
+  window.open(`https://wa.me/${noTujuan}?text=${encodeURIComponent(text)}`, "_blank");
   event.target.submit();
 }
 </script>
-
 </body>
 </html>
