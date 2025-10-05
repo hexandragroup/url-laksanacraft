@@ -100,53 +100,53 @@
       </select>
     </div>
 
-    <!-- Tabs untuk Form -->
+    <!-- Tabs -->
     <div class="tabs">
       <button class="tab-btn active" data-target="orderForm">🛍️ Order Produk</button>
       <button class="tab-btn" data-target="partnerForm">🤝 Kerja Sama</button>
     </div>
 
     <!-- Form Order -->
-      <form id="orderForm" class="active" action="https://formsubmit.co/0626a499baae1c2d834c9ed21f036696" method="POST" onsubmit="return sendToWhatsApp(event)">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
-        <input type="hidden" name="_subject" value="Pesanan Baru dari Website Laksana Handicraft">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_autoresponse" value="Terima kasih telah memesan di Laksana Handicraft! Kami akan segera menghubungi Anda.">
+    <form id="orderForm" class="active" action="https://formsubmit.co/0626a499baae1c2d834c9ed21f036696" method="POST" onsubmit="return sendToWhatsApp(event)">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
+      <input type="hidden" name="_subject" value="Pesanan Baru dari Website Laksana Handicraft">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_autoresponse" value="Terima kasih telah memesan di Laksana Handicraft! Kami akan segera menghubungi Anda.">
 
-        <label>Nama Lengkap</label>
-        <input type="text" name="nama" id="nama" required>
-        <label>Alamat Email</label>
-        <input type="email" name="email" id="email" required>
-        <label>Nomor WhatsApp</label>
-        <input type="text" name="whatsapp" id="whatsapp" required>
-        <label>Produk yang Dipesan</label>
-        <input type="text" name="produk" id="produk" required placeholder="Misal: Wayang Arjuna 30cm Alusan">
-        <label>Jumlah / Keterangan Tambahan</label>
-        <textarea name="pesan" id="pesan" rows="4" placeholder="Contoh: 2 buah, kirim ke Jakarta, finishing halus."></textarea>
-        <button type="submit">Kirim Pesanan</button>
-      </form>
+      <label>Nama Lengkap</label>
+      <input type="text" name="nama" id="nama" required>
+      <label>Alamat Email</label>
+      <input type="email" name="email" id="email" required>
+      <label>Nomor WhatsApp</label>
+      <input type="text" name="whatsapp" id="whatsapp" required>
+      <label>Produk yang Dipesan</label>
+      <input type="text" name="produk" id="produk" required placeholder="Misal: Wayang Arjuna 30cm Alusan">
+      <label>Jumlah / Keterangan Tambahan</label>
+      <textarea name="pesan" id="pesan" rows="4" placeholder="Contoh: 2 buah, kirim ke Jakarta, finishing halus."></textarea>
+      <button type="submit">Kirim Pesanan</button>
+    </form>
 
     <!-- Form Kerja Sama -->
-      <form id="partnerForm" action="https://formsubmit.co/0626a499baae1c2d834c9ed21f036696" method="POST">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
-        <input type="hidden" name="_subject" value="Permintaan Kerja Sama Baru - Laksana Handicraft">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_autoresponse" value="Terima kasih atas minat kerja samanya dengan Laksana Handicraft! Kami akan segera menindaklanjuti.">
+    <form id="partnerForm" action="https://formsubmit.co/0626a499baae1c2d834c9ed21f036696" method="POST">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
+      <input type="hidden" name="_subject" value="Permintaan Kerja Sama Baru - Laksana Handicraft">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_autoresponse" value="Terima kasih atas minat kerja samanya dengan Laksana Handicraft! Kami akan segera menindaklanjuti.">
 
-        <label>Nama Lengkap</label>
-        <input type="text" name="nama" required>
-        <label>Nama Perusahaan / Organisasi</label>
-        <input type="text" name="perusahaan" required>
-        <label>Alamat Email</label>
-        <input type="email" name="email" required>
-        <label>Nomor WhatsApp / Telepon</label>
-        <input type="text" name="kontak" required>
-        <label>Pesan / Detail Kerja Sama</label>
-        <textarea name="pesan" rows="4" placeholder="Jelaskan secara singkat bentuk kerja sama yang diinginkan"></textarea>
-        <button type="submit">Kirim Pengajuan Kerja Sama</button>
-      </form>
+      <label>Nama Lengkap</label>
+      <input type="text" name="nama" required>
+      <label>Nama Perusahaan / Organisasi</label>
+      <input type="text" name="perusahaan" required>
+      <label>Alamat Email</label>
+      <input type="email" name="email" required>
+      <label>Nomor WhatsApp / Telepon</label>
+      <input type="text" name="kontak" required>
+      <label>Pesan / Detail Kerja Sama</label>
+      <textarea name="pesan" rows="4" placeholder="Jelaskan secara singkat bentuk kerja sama yang diinginkan"></textarea>
+      <button type="submit">Kirim Pengajuan Kerja Sama</button>
+    </form>
 
     <!-- Tombol Google Form -->
     <a href="https://url.laksanacraft.my.id/form/google" target="_blank" class="google-form-btn">
@@ -184,25 +184,22 @@
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <script>
-// Tab switching & tahun otomatis
 document.addEventListener("DOMContentLoaded", function() {
+  // Tab switching
   const tabs = document.querySelectorAll('.tab-btn');
   const forms = document.querySelectorAll('form');
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      // Aktifkan tab
       tabs.forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
-
-      // Tampilkan form sesuai tab
       forms.forEach(f => f.classList.remove('active'));
       const target = tab.getAttribute('data-target');
       document.getElementById(target).classList.add('active');
     });
   });
-});
 
+  // Tahun otomatis
   const startYear = 1990;
   const currentYear = new Date().getFullYear();
   document.getElementById("year").textContent = currentYear > startYear ? startYear + "–" + currentYear : startYear;
