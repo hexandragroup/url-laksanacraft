@@ -70,11 +70,11 @@ button:hover { background: #555; }
     <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
     <input type="hidden" name="_subject" value="Tes Form 1">
 
-    <label>Nama 1</label>
-    <input type="text" name="nama" required>
+    <label>Nama</label>
+    <input type="text" name="nama_form1" required>
 
-    <label>Email 1</label>
-    <input type="email" name="email" required>
+    <label>Email</label>
+    <input type="email" name="email_form1" required>
 
     <button type="submit">Kirim</button>
   </form>
@@ -85,11 +85,11 @@ button:hover { background: #555; }
     <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
     <input type="hidden" name="_subject" value="Tes Form 2">
 
-    <label>Nama 2</label>
-    <input type="text" name="nama" required>
+    <label>Nama</label>
+    <input type="text" name="nama_form2" required>
 
-    <label>Email 2</label>
-    <input type="email" name="email" required>
+    <label>Email</label>
+    <input type="email" name="email_form2" required>
 
     <button type="submit">Kirim</button>
   </form>
@@ -97,4 +97,24 @@ button:hover { background: #555; }
 
 <script>
 // Tab switching
-document.addEventListener("DOMContentLoaded", function()
+document.addEventListener("DOMContentLoaded", function() {
+  const tabs = document.querySelectorAll('.tab-btn');
+  const forms = document.querySelectorAll('form');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Aktifkan tab
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      // Tampilkan form sesuai tab
+      forms.forEach(f => f.classList.remove('active'));
+      const target = tab.getAttribute('data-target');
+      document.getElementById(target).classList.add('active');
+    });
+  });
+});
+</script>
+
+</body>
+</html>
