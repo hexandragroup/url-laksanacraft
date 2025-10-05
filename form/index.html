@@ -119,7 +119,9 @@
       <label>Alamat Email</label>
       <input type="email" name="email" id="email" required>
       <label>Nomor WhatsApp</label>
-      <input type="number" name="whatsapp" id="whatsapp" required>
+      <input type="tel" name="whatsapp" id="whatsapp" placeholder="+6281234567890" 
+       pattern="^\+?\d{10,15}$" 
+       title="Masukkan nomor telepon yang valid, misal +6281234567890" required>
       <label>Produk yang Dipesan</label>
       <input type="text" name="produk" id="produk" required placeholder="Misal: Wayang Arjuna 30cm Alusan">
       <label>Jumlah / Keterangan Tambahan</label>
@@ -142,7 +144,9 @@
       <label>Alamat Email</label>
       <input type="email" name="email" required>
       <label>Nomor WhatsApp / Telepon</label>
-      <input type="number" name="kontak" required>
+      <input type="tel" name="kontak" placeholder="+6281234567890" 
+       pattern="^\+?\d{10,15}$" 
+       title="Masukkan nomor telepon yang valid, misal +6281234567890" required>
       <label>Pesan / Detail Kerja Sama</label>
       <textarea name="pesan" rows="4" placeholder="Jelaskan secara singkat bentuk kerja sama yang diinginkan"></textarea>
       <button type="submit">Kirim Pengajuan Kerja Sama</button>
