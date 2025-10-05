@@ -39,18 +39,23 @@ h1 { font-size: 22px; margin-bottom: 15px; color: #333; }
 }
 .tab-btn.active { background: #333; color: #fff; }
 
-/* Form visibility tanpa display:none */
+/* CSS aman untuk form tersembunyi */
 form {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  visibility: hidden;
+  pointer-events: none;
   opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-  transition: all 0.3s ease;
+  transition: opacity 0.3s ease;
   text-align: left;
 }
 form.active {
+  position: static;
+  visibility: visible;
+  pointer-events: auto;
   opacity: 1;
-  max-height: 2000px; /* cukup untuk semua field */
-  margin-bottom: 20px;
 }
 
 label { display: block; margin-bottom: 5px; }
