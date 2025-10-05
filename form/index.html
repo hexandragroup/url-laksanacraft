@@ -12,7 +12,7 @@ body {
   padding: 30px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   min-height: 100vh;
 }
 .container {
@@ -22,24 +22,9 @@ body {
   max-width: 500px;
   width: 100%;
   box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-  text-align: center;
 }
-h1 { font-size: 22px; margin-bottom: 15px; color: #333; }
-.tabs {
-  display: flex;
-  margin-bottom: 20px;
-}
-.tab-btn {
-  flex: 1;
-  padding: 10px 0;
-  background: #eee;
-  border: none;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.tab-btn.active { background: #333; color: #fff; }
-form { display: none; text-align: left; }
-form.active { display: block; }
+h1 { font-size: 22px; margin-bottom: 20px; color: #333; text-align: center; }
+h2 { font-size: 18px; margin-bottom: 15px; color: #333; }
 label { display: block; margin-bottom: 5px; }
 input, textarea, button {
   width: 100%;
@@ -51,6 +36,7 @@ input, textarea, button {
 }
 button { background: #333; color: #fff; border: none; cursor: pointer; }
 button:hover { background: #555; }
+form { margin-bottom: 40px; }
 </style>
 </head>
 <body>
@@ -58,14 +44,9 @@ button:hover { background: #555; }
 <div class="container">
   <h1>Formulir Laksana Handicraft</h1>
 
-  <!-- Tabs -->
-  <div class="tabs">
-    <button class="tab-btn active" data-target="orderForm">Order Produk</button>
-    <button class="tab-btn" data-target="partnerForm">Kerja Sama</button>
-  </div>
-
-  <!-- Form Order -->
-  <form id="orderForm" class="active" action="https://formsubmit.co/0626a499baae1c2d834c9ed21f036696" method="POST">
+  <!-- Form Order Produk -->
+  <h2>Order Produk</h2>
+  <form action="https://formsubmit.co/0626a499baae1c2d834c9ed21f036696" method="POST">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
     <input type="hidden" name="_subject" value="Pesanan Baru">
@@ -87,7 +68,8 @@ button:hover { background: #555; }
   </form>
 
   <!-- Form Kerja Sama -->
-  <form id="partnerForm" action="https://formsubmit.co/0626a499baae1c2d834c9ed21f036696" method="POST">
+  <h2>Kerja Sama</h2>
+  <form action="https://formsubmit.co/0626a499baae1c2d834c9ed21f036696" method="POST">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
     <input type="hidden" name="_subject" value="Kerja Sama Baru">
@@ -110,25 +92,6 @@ button:hover { background: #555; }
     <button type="submit">Kirim Kerja Sama</button>
   </form>
 </div>
-
-<script>
-// Tab switching
-document.addEventListener("DOMContentLoaded", function() {
-  const tabs = document.querySelectorAll('.tab-btn');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      // Aktifkan tombol
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-
-      // Tampilkan form sesuai target
-      const target = tab.getAttribute('data-target');
-      document.querySelectorAll('form').forEach(f => f.classList.remove('active'));
-      document.getElementById(target).classList.add('active');
-    });
-  });
-});
-</script>
 
 </body>
 </html>
