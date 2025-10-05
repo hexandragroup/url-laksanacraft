@@ -64,12 +64,46 @@
     .tab-btn { flex: 1; padding: 10px 0; background: #eee; border: none; cursor: pointer; transition: 0.3s; border-radius: 8px; }
     .tab-btn.active { background: #333; color: #fff; }
 
+    /* Google Form button (warna ungu khas) */
     .google-form-btn {
       display: block; margin-top: 15px; padding: 12px 20px;
-      background: #4285f4; color: #fff; text-decoration: none; border-radius: 8px;
+      background: #673ab7; color: #fff; text-decoration: none; border-radius: 8px;
       border: none; font-weight: bold; transition: all 0.3s ease;
     }
-    .google-form-btn:hover { background: #357ae8; transform: scale(1.03); }
+    .google-form-btn:hover { background: #5a2ca0; transform: scale(1.03); }
+
+    /* 🔗 Link Alternatif */
+    .alt-section {
+      margin-top: 15px;
+      text-align: center;
+    }
+    .alt-section p {
+      font-style: italic;
+      color: #444;
+      margin-bottom: 8px;
+    }
+
+    .alt-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .alt-btn {
+      display: block;
+      border-radius: 8px;
+      padding: 12px 20px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .alt-btn.wa { background: #25d366; }
+    .alt-btn.wa:hover { background: #1ebe5d; transform: scale(1.03); }
+
+    .alt-btn.email { background: #fbbc05; color: #222; }
+    .alt-btn.email:hover { background: #e0a904; transform: scale(1.03); }
 
     /* Google Translate fix */
     .goog-te-banner-frame.skiptranslate { display: none !important; }
@@ -127,6 +161,15 @@
       <label>Jumlah / Keterangan Tambahan</label>
       <textarea name="pesan" id="pesan" rows="4" placeholder="Contoh: 2 buah, kirim ke Jakarta, finishing halus."></textarea>
       <button type="submit">Kirim Pesanan</button>
+
+      <!-- 🔗 Link Alternatif -->
+      <div class="alt-section">
+        <p>🔗 <em>Link Alternatif:</em></p>
+        <div class="alt-links">
+          <a href="https://url.laksanacraft.my.id/wa/order" target="_blank" class="alt-btn wa">💬 Kirim via WhatsApp</a>
+          <a href="https://url.laksanacraft.my.id/email/order" target="_blank" class="alt-btn email">✉️ Kirim via Email</a>
+        </div>
+      </div>
     </form>
 
     <!-- Form Kerja Sama -->
@@ -150,6 +193,15 @@
       <label>Pesan / Detail Kerja Sama</label>
       <textarea name="pesan" rows="4" placeholder="Jelaskan secara singkat bentuk kerja sama yang diinginkan"></textarea>
       <button type="submit">Kirim Pengajuan Kerja Sama</button>
+
+      <!-- 🔗 Link Alternatif -->
+      <div class="alt-section">
+        <p>🔗 <em>Link Alternatif:</em></p>
+        <div class="alt-links">
+          <a href="https://url.laksanacraft.my.id/wa/kerjasama" target="_blank" class="alt-btn wa">💬 Kirim via WhatsApp</a>
+          <a href="https://url.laksanacraft.my.id/email/kerjasama" target="_blank" class="alt-btn email">✉️ Kirim via Email</a>
+        </div>
+      </div>
     </form>
 
     <!-- Tombol Google Form -->
