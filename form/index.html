@@ -38,28 +38,10 @@ h1 { font-size: 22px; margin-bottom: 15px; color: #333; }
   transition: 0.3s;
 }
 .tab-btn.active { background: #333; color: #fff; }
-
-/* CSS aman untuk form tersembunyi */
-form {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  visibility: hidden;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  text-align: left;
-}
-form.active {
-  position: static;
-  visibility: visible;
-  pointer-events: auto;
-  opacity: 1;
-}
-
+form { display: none; text-align: left; }
+form.active { display: block; }
 label { display: block; margin-bottom: 5px; }
-input, textarea, button {
+input, button {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
@@ -78,59 +60,38 @@ button:hover { background: #555; }
 
   <!-- Tabs -->
   <div class="tabs">
-    <button class="tab-btn active" data-target="orderForm">🛍️ Order Produk</button>
-    <button class="tab-btn" data-target="partnerForm">🤝 Kerja Sama</button>
+    <button class="tab-btn active" data-target="form1">🛍️ Order Form</button>
+    <button class="tab-btn" data-target="form2">🤝 Kerja Sama</button>
   </div>
 
-  <!-- Form Order Produk -->
-  <form id="orderForm" class="active" action="https://formsubmit.co/info@laksanacraft.my.id" method="POST">
+  <!-- Form 1 -->
+  <form id="form1" class="active" action="https://formsubmit.co/info@laksanacraft.my.id" method="POST">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
-    <input type="hidden" name="_subject" value="Pesanan Baru">
+    <input type="hidden" name="_subject" value="Tes Form 1">
 
-    <label>Nama Lengkap</label>
-    <input type="text" name="nama_order" required>
+    <label>Nama</label>
+    <input type="text" name="nama_form1" required>
 
     <label>Email</label>
-    <input type="email" name="email_order" required>
+    <input type="email" name="email_form1" required>
 
-    <label>Nomor WhatsApp</label>
-    <input type="text" name="whatsapp_order" required>
-
-    <label>Produk yang Dipesan</label>
-    <input type="text" name="produk_order" required>
-
-    <label>Keterangan Tambahan</label>
-    <textarea name="pesan_order" rows="3"></textarea>
-
-    <button type="submit">Kirim Pesanan</button>
+    <button type="submit">Kirim</button>
   </form>
 
-  <!-- Form Kerja Sama -->
-  <form id="partnerForm" action="https://formsubmit.co/info@laksanacraft.my.id" method="POST">
+  <!-- Form 2 -->
+  <form id="form2" action="https://formsubmit.co/info@laksanacraft.my.id" method="POST">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_next" value="https://url.laksanacraft.my.id/form/terkirim.html">
-    <input type="hidden" name="_subject" value="Permintaan Kerja Sama Baru">
+    <input type="hidden" name="_subject" value="Tes Form 2">
 
-    <label>Nama Lengkap</label>
-    <input type="text" name="nama_partner" required>
-
-    <label>Perusahaan / Organisasi</label>
-    <input type="text" name="perusahaan_partner" required>
+    <label>Nama</label>
+    <input type="text" name="nama_form2" required>
 
     <label>Email</label>
-    <input type="email" name="email_partner" required>
+    <input type="email" name="email_form2" required>
 
-    <label>Kontak</label>
-    <input type="text" name="kontak_partner" required>
-
-    <label>Jenis Kerja Sama</label>
-    <input type="text" name="jenis_partner" required>
-
-    <label>Pesan</label>
-    <textarea name="pesan_partner" rows="3"></textarea>
-
-    <button type="submit">Kirim Pengajuan</button>
+    <button type="submit">Kirim</button>
   </form>
 </div>
 
