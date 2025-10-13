@@ -46,7 +46,14 @@
     h1 a:hover {
       text-decoration: underline;
     }
-    h2 {
+    input[type="text"] {
+      width: 90%;
+      padding: 10px;
+      border: 1px solid #bbb;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+    .category-title {
       font-size: 16px;
       color: #333;
       margin-top: 25px;
@@ -54,10 +61,6 @@
       border-bottom: 1px solid #ddd;
       display: inline-block;
       padding-bottom: 3px;
-    }
-    p {
-      color: #444;
-      margin-bottom: 20px;
     }
     .btn {
       display: block;
@@ -100,48 +103,9 @@
     <h1><a href="https://link.laksanacraft.my.id/">Laksana Link</a></h1>
     <p><em>"Satu Tempat untuk Banyak Manfaat"</em></p>
 
-    <!-- 🌐 Umum -->
-    <h2>🌐 Umum & Informasi</h2>
-    <a class="btn" href="https://www.kompas.com">📰 Kompas – Berita Nasional</a>
-    <a class="btn" href="https://www.bmkg.go.id/gempabumi/gempabumi-terkini.bmkg">🌋 Cek Gempa Terkini (BMKG)</a>
-    <a class="btn" href="https://www.indonesia.go.id">🏛️ Portal Resmi Pemerintah RI</a>
-
-    <!-- 💼 Keuangan -->
-    <h2>💼 Keuangan & Bisnis</h2>
-    <a class="btn" href="https://url.laksanacraft.my.id/link/investasi">💰 Kalkulator Investasi</a>
-    <a class="btn" href="https://feliciaputritjiasaka.com">🧮 Kalkulator Hitung Mimpi</a>
-    <a class="btn" href="https://finance.yahoo.com/quote/^JKSE">📈 IHSG Live (Yahoo Finance)</a>
-    <a class="btn" href="https://www.bi.go.id">🏦 Bank Indonesia</a>
-
-    <!-- 🧠 Edukasi -->
-    <h2>🧠 Edukasi & Pengetahuan</h2>
-    <a class="btn" href="https://id.wikipedia.org">📘 Wikipedia Bahasa Indonesia</a>
-    <a class="btn" href="https://kbbi.kemdikbud.go.id">📖 KBBI Daring</a>
-    <a class="btn" href="https://kampusmerdeka.kemdikbud.go.id">🎓 Kampus Merdeka</a>
-
-    <!-- 🎨 Kreativitas -->
-    <h2>🎨 Kreativitas & Inspirasi</h2>
-    <a class="btn" href="https://www.canva.com">🎨 Canva – Desain Gratis</a>
-    <a class="btn" href="https://pixabay.com/id/">📸 Pixabay – Gambar Bebas</a>
-    <a class="btn" href="https://artsandculture.google.com/">🖼️ Google Arts & Culture</a>
-
-    <!-- 📡 Teknologi -->
-    <h2>📡 Teknologi & Alat Digital</h2>
-    <a class="btn" href="https://www.qr-code-generator.com">🔳 Pembuat QR Code</a>
-    <a class="btn" href="https://bitly.com">🔗 Pemendek Link (Bitly)</a>
-    <a class="btn" href="https://passwordsgenerator.net">🔐 Password Generator</a>
-
-    <!-- ❤️ Kesehatan -->
-    <h2>❤️ Kesehatan & Gaya Hidup</h2>
-    <a class="btn" href="https://www.alodokter.com">🏥 Alodokter</a>
-    <a class="btn" href="https://www.halodoc.com">💊 Halodoc</a>
-    <a class="btn" href="https://time.is">⏰ Cek Waktu Dunia</a>
-
-    <!-- 🧾 Layanan Publik -->
-    <h2>🧾 Layanan Publik</h2>
-    <a class="btn" href="https://www.lapor.go.id">📬 Lapor.go.id</a>
-    <a class="btn" href="https://cekresi.com">📦 Cek Resi Pengiriman</a>
-    <a class="btn" href="https://cekpajak.co.id">🚗 Cek Pajak Kendaraan</a>
+    <!-- 🔍 Pencarian -->
+    <input type="text" id="search" placeholder="Ketik kata kunci atau kategori...">
+    <div id="results"></div>
 
     <footer>
       &copy; <span id="year"></span> Laksana Link · Yogyakarta, Indonesia
@@ -149,10 +113,66 @@
   </div>
 
   <script>
+    // Tahun otomatis
     const startYear = 2020;
     const currentYear = new Date().getFullYear();
     document.getElementById("year").textContent =
       currentYear > startYear ? startYear + "–" + currentYear : startYear;
+
+    // Ambil data link dari file JSON eksternal
+    let links = [];
+    fetch("data.json")
+      .then(res => res.json())
+      .then(data => {
+        links = data;
+      });
+
+    // Fungsi pencarian
+    document.getElementById("search").addEventListener("input", function() {
+      const keyword = this.value.toLowerCase();
+      const results = document.getElementById("results");
+      results.innerHTML = "";
+
+      if (keyword.length < 2) {
+        results.innerHTML = "<p>Ketik minimal 2 huruf untuk mencari.</p>";
+        return;
+      }
+
+      // Filter berdasarkan judul atau kategori
+      const filtered = links.filter(link =>
+        link.title.toLowerCase().includes(keyword) ||
+        link.category.toLowerCase().includes(keyword)
+      );
+
+      if (filtered.length === 0) {
+        results.innerHTML = "<p>Tidak ada hasil ditemukan.</p>";
+        return;
+      }
+
+      // Kelompokkan hasil berdasarkan kategori
+      const grouped = {};
+      filtered.forEach(link => {
+        if (!grouped[link.category]) grouped[link.category] = [];
+        grouped[link.category].push(link);
+      });
+
+      // Tampilkan hasil per kategori
+      for (const category in grouped) {
+        const catTitle = document.createElement("h2");
+        catTitle.className = "category-title";
+        catTitle.textContent = category;
+        results.appendChild(catTitle);
+
+        grouped[category].forEach(link => {
+          const a = document.createElement("a");
+          a.href = link.url;
+          a.className = "btn";
+          a.target = "_blank";
+          a.textContent = `${link.icon} ${link.title}`;
+          results.appendChild(a);
+        });
+      }
+    });
   </script>
 </body>
 </html>
