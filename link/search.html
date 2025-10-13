@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hasil Pencarian – Laksana Link</title>
-
+  <title>Hasil – Laksana Link</title>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hexandragroup/laksanacraft-assets/main/Favicon_Laksana_Handicraft.webp">
 
   <style>
@@ -76,54 +75,52 @@
     document.getElementById("year").textContent =
       currentYear > startYear ? startYear + "–" + currentYear : startYear;
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const category = urlParams.get("cat");
+    const params = new URLSearchParams(window.location.search);
+    const category = params.get("cat");
     const titleEl = document.getElementById("categoryTitle");
     const resultsEl = document.getElementById("results");
     const searchBox = document.getElementById("searchBox");
-
     let allLinks = [];
 
-    // Judul awal
     titleEl.textContent = category ? category : "Semua Kategori";
 
-    // Ambil data
     fetch("data.json")
-      .then(r => r.json())
+      .then(res => res.json())
       .then(data => {
         allLinks = data;
-        // Tampilkan hasil global tapi sorot kategori
-        renderList(data, category);
+        renderCategory(category);
       });
 
-    // Render list global
-    function renderList(data, highlightCategory = null) {
+    function renderCategory(cat) {
+      const list = allLinks.filter(l => l.category === cat);
+      renderList(list);
+    }
+
+    function renderList(data) {
       resultsEl.innerHTML = "";
       if (data.length === 0) {
         resultsEl.innerHTML = "<p>Tidak ada hasil.</p>";
         return;
       }
+
       data.forEach(link => {
         const a = document.createElement("a");
         a.href = link.url;
         a.className = "btn";
         a.textContent = `${link.icon} ${link.title}`;
         a.target = "_blank";
-        if (link.category === highlightCategory) {
-          a.style.border = "2px solid #0077cc";
-        }
         resultsEl.appendChild(a);
       });
     }
 
-    // Pencarian global
+    // pencarian global (tidak dibatasi kategori)
     searchBox.addEventListener("input", e => {
       const keyword = e.target.value.toLowerCase();
       const filtered = allLinks.filter(link =>
         link.title.toLowerCase().includes(keyword) ||
         link.category.toLowerCase().includes(keyword)
       );
-      renderList(filtered, category);
+      renderList(filtered);
     });
   </script>
 </body>
