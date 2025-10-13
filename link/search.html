@@ -61,11 +61,8 @@
 <body>
   <div class="container">
     <h1 id="categoryTitle">Kategori</h1>
-
-    <input type="text" id="searchBox" placeholder="Cari tautan..." />
-
+    <input type="text" id="searchBox" placeholder="Cari tautan di semua kategori..." />
     <div id="results"></div>
-
     <a href="index.html" style="display:block;margin-top:20px;text-decoration:none;color:#0077cc;">← Kembali ke Kategori</a>
 
     <footer>
@@ -74,68 +71,59 @@
   </div>
 
   <script>
-    // Tahun otomatis
     const startYear = 2020;
     const currentYear = new Date().getFullYear();
     document.getElementById("year").textContent =
       currentYear > startYear ? startYear + "–" + currentYear : startYear;
 
-    // Ambil parameter kategori dari URL
     const urlParams = new URLSearchParams(window.location.search);
     const category = urlParams.get("cat");
     const titleEl = document.getElementById("categoryTitle");
     const resultsEl = document.getElementById("results");
     const searchBox = document.getElementById("searchBox");
 
-    // Tampilkan judul kategori
-    titleEl.textContent = category ? category : "Semua Link";
-
-    // Ambil data dan tampilkan hasil
     let allLinks = [];
+
+    // Judul awal
+    titleEl.textContent = category ? category : "Semua Kategori";
+
+    // Ambil data
     fetch("data.json")
-      .then(response => response.json())
+      .then(r => r.json())
       .then(data => {
         allLinks = data;
-        showResults(data);
-      })
-      .catch(err => {
-        resultsEl.innerHTML = "<p>Gagal memuat data link.</p>";
-        console.error(err);
+        // Tampilkan hasil global tapi sorot kategori
+        renderList(data, category);
       });
 
-    // Fungsi menampilkan hasil
-    function showResults(data) {
-      const filtered = data.filter(item =>
-        (!category || item.category === category)
-      );
-      renderList(filtered);
-    }
-
-    // Fungsi render daftar link
-    function renderList(list) {
+    // Render list global
+    function renderList(data, highlightCategory = null) {
       resultsEl.innerHTML = "";
-      if (list.length === 0) {
+      if (data.length === 0) {
         resultsEl.innerHTML = "<p>Tidak ada hasil.</p>";
         return;
       }
-      list.forEach(link => {
+      data.forEach(link => {
         const a = document.createElement("a");
         a.href = link.url;
         a.className = "btn";
         a.textContent = `${link.icon} ${link.title}`;
         a.target = "_blank";
+        if (link.category === highlightCategory) {
+          a.style.border = "2px solid #0077cc";
+        }
         resultsEl.appendChild(a);
       });
     }
 
-    // Fitur pencarian
+    // Pencarian global
     searchBox.addEventListener("input", e => {
       const keyword = e.target.value.toLowerCase();
-      const filtered = allLinks.filter(item =>
-        (!category || item.category === category) &&
-        (item.title.toLowerCase().includes(keyword))
+      const filtered = allLinks.filter(link =>
+        link.title.toLowerCase().includes(keyword) ||
+        link.category.toLowerCase().includes(keyword)
       );
-      renderList(filtered);
+      renderList(filtered, category);
     });
   </script>
 </body>
