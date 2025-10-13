@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Kumpulan tautan resmi dan penting dari Laksana Link — akses mudah ke layanan, informasi, dan sumber daya kami.">
   <title>Laksana Link</title>
-
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hexandragroup/laksanacraft-assets/main/Favicon_Laksana_Handicraft.webp">
 
   <style>
@@ -41,28 +40,10 @@
       color: #444;
       margin-bottom: 20px;
     }
-    .category-btn {
-      display: block;
-      margin: 10px auto;
-      padding: 12px 20px;
-      background: #fff;
-      color: #222;
-      border-radius: 8px;
-      border: 1px solid #bbb;
-      cursor: pointer;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      max-width: 420px;
-    }
-    .category-btn:hover {
-      background: #e6e6e6;
-      transform: scale(1.03);
-    }
     input {
       width: 90%;
       padding: 10px;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
       border-radius: 8px;
       border: 1px solid #aaa;
     }
@@ -83,6 +64,9 @@
       background: #e6e6e6;
       transform: scale(1.03);
     }
+    .category-btn {
+      font-weight: bold;
+    }
     footer {
       margin-top: 30px;
       font-size: 12px;
@@ -99,11 +83,11 @@
     <!-- 🔍 Pencarian Global -->
     <input type="text" id="searchBox" placeholder="Cari tautan di semua kategori..." />
 
-    <!-- 📂 Daftar kategori -->
-    <div id="categories"></div>
-
     <!-- 🔎 Hasil pencarian -->
     <div id="results"></div>
+
+    <!-- 📂 Daftar kategori -->
+    <div id="categories"></div>
 
     <footer>
       &copy; <span id="year"></span> Laksana Link · Yogyakarta, Indonesia
@@ -119,31 +103,30 @@
     const categoriesEl = document.getElementById("categories");
     const resultsEl = document.getElementById("results");
     const searchBox = document.getElementById("searchBox");
-
     let allLinks = [];
 
-    // 🔄 Ambil data dari JSON
     fetch("data.json")
       .then(res => res.json())
       .then(data => {
         allLinks = data;
-        // Ambil kategori unik
+
+        // tampilkan kategori unik
         const categories = [...new Set(data.map(item => item.category))];
         categories.forEach(cat => {
           const btn = document.createElement("a");
-          btn.className = "category-btn";
+          btn.className = "btn category-btn";
           btn.textContent = cat;
           btn.href = `search.html?cat=${encodeURIComponent(cat)}`;
           categoriesEl.appendChild(btn);
         });
       });
 
-    // 🔍 Fungsi pencarian global
+    // pencarian global
     searchBox.addEventListener("input", e => {
       const keyword = e.target.value.toLowerCase();
       resultsEl.innerHTML = "";
 
-      if (keyword.trim() === "") return; // Kosong = tidak tampilkan apa-apa
+      if (keyword.trim() === "") return;
 
       const filtered = allLinks.filter(link =>
         link.title.toLowerCase().includes(keyword) ||
