@@ -4,14 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Kumpulan tautan resmi dan penting dari Laksana Link — akses mudah ke layanan, informasi, dan sumber daya kami.">
-  <meta property="og:title" content="Link Penting Laksana Link" />
-  <meta property="og:image" content="https://laksanacraft.my.id/logo.png" />
-  <meta property="og:description" content="Temukan semua tautan penting dari Laksana Link — layanan, katalog, kalkulator, dan informasi resmi lainnya." />
-  <meta property="og:url" content="https://link.laksanacraft.my.id/" />
-  <meta name="twitter:card" content="summary_large_image" />
   <title>Laksana Link</title>
 
-  <!-- ✅ Favicon -->
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hexandragroup/laksanacraft-assets/main/Favicon_Laksana_Handicraft.webp">
 
   <style>
@@ -43,91 +37,42 @@
       text-decoration: none;
       color: #222;
     }
-    h1 a:hover {
-      text-decoration: underline;
-    }
     p {
       color: #444;
       margin-bottom: 20px;
     }
-
-    /* Kategori */
-    .category {
-      background: #fff;
-      border: 1px solid #bbb;
-      border-radius: 8px;
-      padding: 12px 20px;
-      margin: 8px auto;
-      cursor: default;
-      max-width: 420px;
-      text-align: left;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
-    .category:hover {
-      background: #e6e6e6;
-      transform: scale(1.02);
-    }
-
-    /* Input pencarian */
-    #search {
-      width: 90%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border-radius: 6px;
-      border: 1px solid #aaa;
-      font-size: 14px;
-    }
-
-    /* Hasil pencarian */
-    .search-results a {
+    .category-btn {
       display: block;
-      margin: 6px auto;
-      padding: 10px 16px;
+      margin: 10px auto;
+      padding: 12px 20px;
       background: #fff;
       color: #222;
-      text-decoration: none;
       border-radius: 8px;
       border: 1px solid #bbb;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: bold;
       transition: all 0.3s ease;
       max-width: 420px;
     }
-    .search-results a:hover {
+    .category-btn:hover {
       background: #e6e6e6;
       transform: scale(1.03);
     }
-
     footer {
       margin-top: 30px;
       font-size: 12px;
       color: #666;
     }
   </style>
-
-  <!-- Google tag -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V1JWDFFYK2"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-V1JWDFFYK2');
-  </script>
 </head>
 <body>
   <div class="container">
     <img src="https://raw.githubusercontent.com/hexandragroup/laksanacraft-assets/main/Logo_Laksana_Handicraft.png" alt="Logo" class="logo" />
-
     <h1><a href="https://link.laksanacraft.my.id/">Laksana Link</a></h1>
     <p><em>"Satu Tempat untuk Banyak Manfaat"</em></p>
 
-    <!-- 🔍 Input Pencarian -->
-    <input type="text" id="search" placeholder="Cari link apa saja...">
-
-    <!-- 📚 Daftar Kategori -->
-    <div id="category-list"></div>
-
-    <!-- 🔍 Hasil Pencarian -->
-    <div id="search-results" class="search-results"></div>
+    <div id="categories"></div>
 
     <footer>
       &copy; <span id="year"></span> Laksana Link · Yogyakarta, Indonesia
@@ -141,58 +86,21 @@
     document.getElementById("year").textContent =
       currentYear > startYear ? startYear + "–" + currentYear : startYear;
 
-    let allLinks = [];
-
-    // Ambil data dari JSON
+    // Ambil kategori dari JSON
     fetch("data.json")
-      .then(res => res.json())
+      .then(response => response.json())
       .then(data => {
-        allLinks = data;
-        tampilkanKategori(data);
-      });
-
-    function tampilkanKategori(data) {
-      const container = document.getElementById("category-list");
-      const grouped = {};
-
-      data.forEach(item => {
-        if (!grouped[item.category]) grouped[item.category] = [];
-      });
-
-      for (const category in grouped) {
-        const div = document.createElement("div");
-        div.className = "category";
-        div.textContent = category;
-        container.appendChild(div);
-      }
-    }
-
-    // Fungsi pencarian
-    document.getElementById("search").addEventListener("input", function() {
-      const keyword = this.value.toLowerCase();
-      const resultsDiv = document.getElementById("search-results");
-      resultsDiv.innerHTML = "";
-
-      if (keyword.length < 2) return;
-
-      const hasil = allLinks.filter(link =>
-        link.title.toLowerCase().includes(keyword) ||
-        link.category.toLowerCase().includes(keyword)
-      );
-
-      if (hasil.length === 0) {
-        resultsDiv.innerHTML = "<p>Tidak ada hasil ditemukan.</p>";
-        return;
-      }
-
-      hasil.forEach(link => {
-        const a = document.createElement("a");
-        a.href = link.url;
-        a.textContent = `${link.icon} ${link.title}`;
-        a.target = "_blank";
-        resultsDiv.appendChild(a);
-      });
-    });
+        const categories = [...new Set(data.map(item => item.category))];
+        const container = document.getElementById("categories");
+        categories.forEach(cat => {
+          const btn = document.createElement("a");
+          btn.className = "category-btn";
+          btn.textContent = cat;
+          btn.href = `search.html?cat=${encodeURIComponent(cat)}`;
+          container.appendChild(btn);
+        });
+      })
+      .catch(error => console.error("Gagal memuat data.json:", error));
   </script>
 </body>
 </html>
