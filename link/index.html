@@ -46,14 +46,7 @@
     h1 a:hover {
       text-decoration: underline;
     }
-    input[type="text"] {
-      width: 90%;
-      padding: 10px;
-      border: 1px solid #bbb;
-      border-radius: 8px;
-      margin-bottom: 15px;
-    }
-    .category-title {
+    h2 {
       font-size: 16px;
       color: #333;
       margin-top: 25px;
@@ -61,6 +54,17 @@
       border-bottom: 1px solid #ddd;
       display: inline-block;
       padding-bottom: 3px;
+    }
+    input[type="text"] {
+      width: 90%;
+      padding: 10px;
+      border: 1px solid #bbb;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    p {
+      color: #444;
+      margin-bottom: 20px;
     }
     .btn {
       display: block;
@@ -86,7 +90,7 @@
     }
   </style>
 
-  <!-- Google tag (gtag.js) -->
+  <!-- Google Tag -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-V1JWDFFYK2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -94,7 +98,6 @@
     gtag('js', new Date());
     gtag('config', 'G-V1JWDFFYK2');
   </script>
-  <meta name="google-site-verification" content="oJLnR6iLjAKSSTZ_9MwIqFop7H1rp7MPhVSOAV_TVGo" />
 </head>
 <body>
   <div class="container">
@@ -104,8 +107,10 @@
     <p><em>"Satu Tempat untuk Banyak Manfaat"</em></p>
 
     <!-- 🔍 Pencarian -->
-    <input type="text" id="search" placeholder="Ketik kata kunci atau kategori...">
-    <div id="results"></div>
+    <input type="text" id="search" placeholder="Cari tautan atau kategori...">
+
+    <!-- 📚 Semua Kategori & Link -->
+    <div id="link-list"></div>
 
     <footer>
       &copy; <span id="year"></span> Laksana Link · Yogyakarta, Indonesia
@@ -125,53 +130,52 @@
       .then(res => res.json())
       .then(data => {
         links = data;
+        tampilkanSemuaKategori(data);
       });
+
+    // Fungsi menampilkan semua kategori
+    function tampilkanSemuaKategori(data) {
+      const container = document.getElementById("link-list");
+      container.innerHTML = "";
+      const grouped = {};
+
+      // Kelompokkan berdasarkan kategori
+      data.forEach(link => {
+        if (!grouped[link.category]) grouped[link.category] = [];
+        grouped[link.category].push(link);
+      });
+
+      // Render tiap kategori
+      for (const category in grouped) {
+        const h2 = document.createElement("h2");
+        h2.textContent = category;
+        container.appendChild(h2);
+
+        grouped[category].forEach(link => {
+          const a = document.createElement("a");
+          a.href = link.url;
+          a.textContent = `${link.icon} ${link.title}`;
+          a.className = "btn";
+          a.target = "_blank";
+          container.appendChild(a);
+        });
+      }
+    }
 
     // Fungsi pencarian
     document.getElementById("search").addEventListener("input", function() {
       const keyword = this.value.toLowerCase();
-      const results = document.getElementById("results");
-      results.innerHTML = "";
-
       if (keyword.length < 2) {
-        results.innerHTML = "<p>Ketik minimal 2 huruf untuk mencari.</p>";
+        tampilkanSemuaKategori(links);
         return;
       }
 
-      // Filter berdasarkan judul atau kategori
       const filtered = links.filter(link =>
         link.title.toLowerCase().includes(keyword) ||
         link.category.toLowerCase().includes(keyword)
       );
 
-      if (filtered.length === 0) {
-        results.innerHTML = "<p>Tidak ada hasil ditemukan.</p>";
-        return;
-      }
-
-      // Kelompokkan hasil berdasarkan kategori
-      const grouped = {};
-      filtered.forEach(link => {
-        if (!grouped[link.category]) grouped[link.category] = [];
-        grouped[link.category].push(link);
-      });
-
-      // Tampilkan hasil per kategori
-      for (const category in grouped) {
-        const catTitle = document.createElement("h2");
-        catTitle.className = "category-title";
-        catTitle.textContent = category;
-        results.appendChild(catTitle);
-
-        grouped[category].forEach(link => {
-          const a = document.createElement("a");
-          a.href = link.url;
-          a.className = "btn";
-          a.target = "_blank";
-          a.textContent = `${link.icon} ${link.title}`;
-          results.appendChild(a);
-        });
-      }
+      tampilkanSemuaKategori(filtered);
     });
   </script>
 </body>
