@@ -1,0 +1,26 @@
+[
+  {
+    "category": "Umum & Informasi",
+    "title": "Kompas – Berita Nasional",
+    "url": "https://www.kompas.com",
+    "icon": "📰"
+  },
+  {
+    "category": "Keuangan & Bisnis",
+    "title": "Kalkulator Investasi",
+    "url": "https://url.laksanacraft.my.id/link/investasi",
+    "icon": "💰"
+  },
+  {
+    "category": "Edukasi & Pengetahuan",
+    "title": "Wikipedia Bahasa Indonesia",
+    "url": "https://id.wikipedia.org",
+    "icon": "📘"
+  },
+  {
+    "category": "Teknologi & Alat Digital",
+    "title": "Pembuat QR Code",
+    "url": "https://www.qr-code-generator.com",
+    "icon": "🔳"
+  }
+]
