@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Temukan kalkulator interaktif dari Laksana Handicraft: Kalkulator Hitung Mimpi dan Kalkulator Investasi.">
+  <meta property="og:title" content="Kalkulator Laksana Handicraft" />
+  <meta property="og:image" content="https://laksanacraft.my.id/logo.png" />
+  <meta property="og:description" content="Kalkulator interaktif dari Laksana Handicraft untuk hitung mimpi dan investasi." />
+  <meta property="og:url" content="https://link.laksanacraft.my.id/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>Kalkulator Laksana Handicraft</title>
+
+  <!-- ✅ Favicon -->
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hexandragroup/laksanacraft-assets/main/Favicon_Laksana_Handicraft.webp">
+
+  <style>
+    body {
+      font-family: sans-serif;
+      background: linear-gradient(to bottom, #eeeeee, #cccccc);
+      padding: 30px;
+      margin: 0;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: #f2f2f2;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    img.logo {
+      width: 100px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    h1 a {
+      text-decoration: none;
+      color: #222;
+    }
+    h1 a:hover {
+      text-decoration: underline;
+    }
+    p {
+      color: #444;
+      margin-bottom: 20px;
+    }
+    .btn {
+      display: block;
+      margin: 10px auto;
+      padding: 14px 20px;
+      background: #fff;
+      color: #222;
+      text-decoration: none;
+      border-radius: 8px;
+      border: 1px solid #bbb;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #e6e6e6;
+      transform: scale(1.03);
+    }
+    footer {
+      margin-top: 30px;
+      font-size: 12px;
+      color: #666;
+    }
+
+    form.search-box {
+      margin: 20px 0;
+      position: relative;
+    }
+    form.search-box input {
+      width: 100%;
+      max-width: 420px;
+      padding: 12px;
+      border: 1px solid #bbb;
+      border-radius: 8px;
+      margin-bottom: 0;
+      box-sizing: border-box;
+    }
+    form.search-box button {
+      width: 100%;
+      max-width: 420px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    form.search-box button:hover {
+      background: #555;
+    }
+
+    .suggestions {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 420px;
+      background: #fff;
+      border: 1px solid #bbb;
+      border-top: none;
+      z-index: 1000;
+      text-align: left;
+    }
+    .suggestions div {
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+    .suggestions div:hover {
+      background: #eee;
+    }
+  </style>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V1JWDFFYK2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V1JWDFFYK2');
+  </script>
+  <meta name="google-site-verification" content="oJLnR6iLjAKSSTZ_9MwIqFop7H1rp7MPhVSOAV_TVGo" />
+</head>
+<body>
+  <div class="container">
+    <img src="https://raw.githubusercontent.com/hexandragroup/laksanacraft-assets/main/Logo_Laksana_Handicraft.png" alt="Logo" class="logo" />
+
+    <h1><a href="https://link.laksanacraft.my.id/">Kalkulator Laksana Handicraft</a></h1>
+    <p><em>"Kerajinan Nusantara, Warisan Dunia"</em></p>
+
+    <!-- 🔍 Pencarian Bebas -->
+    <form class="search-box" onsubmit="goSearch(event)">
+      <input type="text" id="query" placeholder="Cari kalkulator (contoh: mimpi, investasi)" autocomplete="off" />
+      <div id="suggestions" class="suggestions"></div>
+      <button type="submit">Cari Kalkulator</button>
+    </form>
+
+    <!-- 🔗 Dua Link Saja -->
+    <a class="btn" href="https://feliciaputritjiasaka.com">🧮 Kalkulator Hitung Mimpi</a>
+    <a class="btn" href="https://url.laksanacraft.my.id/investasi">💰 Kalkulator Investasi</a>
+
+    <footer>
+      &copy; <span id="year"></span> Laksana Handicraft · Bantul, D.I.Yogyakarta, Indonesia
+    </footer>
+  </div>
+
+  <script>
+    const startYear = 1990;
+    const currentYear = new Date().getFullYear();
+    document.getElementById("year").textContent =
+      currentYear > startYear ? startYear + "–" + currentYear : startYear;
+
+    function goSearch(e) {
+      e.preventDefault();
+      const q = document.getElementById("query").value.trim().toLowerCase();
+      if (!q) {
+        alert("Masukkan kata kunci pencarian!");
+        return;
+      }
+      if (q.includes("mimpi")) {
+        window.location.href = "https://feliciaputritjiasaka.com";
+      } else if (q.includes("investasi")) {
+        window.location.href = "https://url.laksanacraft.my.id/investasi";
+      } else {
+        alert("Kalkulator tidak ditemukan. Coba 'mimpi' atau 'investasi'.");
+      }
+    }
+  </script>
+</body>
+</html>
