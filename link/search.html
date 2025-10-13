@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hasil Pencarian – Laksana Link</title>
+
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hexandragroup/laksanacraft-assets/main/Favicon_Laksana_Handicraft.webp">
+
+  <style>
+    body {
+      font-family: sans-serif;
+      background: linear-gradient(to bottom, #eeeeee, #cccccc);
+      padding: 30px;
+      margin: 0;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: #f2f2f2;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 15px 0;
+      border-radius: 8px;
+      border: 1px solid #aaa;
+    }
+    .btn {
+      display: block;
+      margin: 8px auto;
+      padding: 12px 20px;
+      background: #fff;
+      color: #222;
+      text-decoration: none;
+      border-radius: 8px;
+      border: 1px solid #bbb;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      max-width: 420px;
+    }
+    .btn:hover {
+      background: #e6e6e6;
+      transform: scale(1.03);
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    footer {
+      margin-top: 30px;
+      font-size: 12px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="categoryTitle">Kategori</h1>
+
+    <input type="text" id="searchBox" placeholder="Cari tautan..." />
+
+    <div id="results"></div>
+
+    <a href="index.html" style="display:block;margin-top:20px;text-decoration:none;color:#0077cc;">← Kembali ke Kategori</a>
+
+    <footer>
+      &copy; <span id="year"></span> Laksana Link · Yogyakarta, Indonesia
+    </footer>
+  </div>
+
+  <script>
+    // Tahun otomatis
+    const startYear = 2020;
+    const currentYear = new Date().getFullYear();
+    document.getElementById("year").textContent =
+      currentYear > startYear ? startYear + "–" + currentYear : startYear;
+
+    // Ambil parameter kategori dari URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const category = urlParams.get("cat");
+    const titleEl = document.getElementById("categoryTitle");
+    const resultsEl = document.getElementById("results");
+    const searchBox = document.getElementById("searchBox");
+
+    // Tampilkan judul kategori
+    titleEl.textContent = category ? category : "Semua Link";
+
+    // Ambil data dan tampilkan hasil
+    let allLinks = [];
+    fetch("data.json")
+      .then(response => response.json())
+      .then(data => {
+        allLinks = data;
+        showResults(data);
+      })
+      .catch(err => {
+        resultsEl.innerHTML = "<p>Gagal memuat data link.</p>";
+        console.error(err);
+      });
+
+    // Fungsi menampilkan hasil
+    function showResults(data) {
+      const filtered = data.filter(item =>
+        (!category || item.category === category)
+      );
+      renderList(filtered);
+    }
+
+    // Fungsi render daftar link
+    function renderList(list) {
+      resultsEl.innerHTML = "";
+      if (list.length === 0) {
+        resultsEl.innerHTML = "<p>Tidak ada hasil.</p>";
+        return;
+      }
+      list.forEach(link => {
+        const a = document.createElement("a");
+        a.href = link.url;
+        a.className = "btn";
+        a.textContent = `${link.icon} ${link.title}`;
+        a.target = "_blank";
+        resultsEl.appendChild(a);
+      });
+    }
+
+    // Fitur pencarian
+    searchBox.addEventListener("input", e => {
+      const keyword = e.target.value.toLowerCase();
+      const filtered = allLinks.filter(item =>
+        (!category || item.category === category) &&
+        (item.title.toLowerCase().includes(keyword))
+      );
+      renderList(filtered);
+    });
+  </script>
+</body>
+</html>
