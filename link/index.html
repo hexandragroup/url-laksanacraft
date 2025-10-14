@@ -13,7 +13,13 @@
       background: linear-gradient(to bottom, #eeeeee, #cccccc);
       padding: 30px;
       margin: 0;
+      opacity: 0;
+      transition: opacity 0.6s ease;
     }
+    body.loaded {
+      opacity: 1;
+    }
+
     .container {
       max-width: 500px;
       margin: auto;
@@ -88,7 +94,7 @@
       animation: fadeInUp 0.4s ease forwards;
     }
 
-    /* ✨ Animasi muncul */
+    /* ✨ Animasi muncul hasil pencarian */
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -98,6 +104,12 @@
         opacity: 1;
         transform: translateY(0);
       }
+    }
+
+    /* 🔄 Transisi antarhalaman */
+    .fade-out {
+      opacity: 0;
+      transition: opacity 0.5s ease;
     }
 
     footer {
@@ -128,6 +140,7 @@
   </div>
 
   <script>
+    // Tahun otomatis
     const startYear = 2020;
     const currentYear = new Date().getFullYear();
     document.getElementById("year").textContent =
@@ -137,6 +150,11 @@
     const resultsEl = document.getElementById("results");
     const searchBox = document.getElementById("searchBox");
     let allLinks = [];
+
+    // Efek fade-in saat halaman dimuat
+    window.addEventListener("load", () => {
+      document.body.classList.add("loaded");
+    });
 
     // Ambil data dari JSON
     fetch("data.json")
@@ -151,6 +169,16 @@
           btn.className = "btn category-btn";
           btn.textContent = cat;
           btn.href = `search.html?cat=${encodeURIComponent(cat)}`;
+
+          // Tambahkan efek transisi sebelum berpindah halaman
+          btn.addEventListener("click", e => {
+            e.preventDefault();
+            document.body.classList.add("fade-out");
+            setTimeout(() => {
+              window.location.href = btn.href;
+            }, 500);
+          });
+
           categoriesEl.appendChild(btn);
         });
       });
