@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Hasil pencarian tautan di Laksana Link — akses cepat ke berbagai kategori dan sumber daya.">
   <title>Hasil – Laksana Link</title>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hexandragroup/laksanacraft-assets/main/Favicon_Laksana_Handicraft.webp">
 
@@ -12,7 +13,13 @@
       background: linear-gradient(to bottom, #eeeeee, #cccccc);
       padding: 30px;
       margin: 0;
+      opacity: 0;
+      transition: opacity 0.6s ease;
     }
+    body.loaded {
+      opacity: 1;
+    }
+
     .container {
       max-width: 500px;
       margin: auto;
@@ -22,6 +29,12 @@
       box-shadow: 0 8px 16px rgba(0,0,0,0.1);
       text-align: center;
     }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
     input {
       width: 90%;
       padding: 10px;
@@ -29,6 +42,8 @@
       border-radius: 8px;
       border: 1px solid #aaa;
     }
+
+    /* 🔘 Tombol umum */
     .btn {
       display: block;
       margin: 8px auto;
@@ -50,28 +65,18 @@
       transform: scale(1.03);
     }
 
+    /* ✨ Animasi hasil */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    h1 {
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-
-    footer {
-      margin-top: 30px;
-      font-size: 12px;
-      color: #666;
-    }
-
-    /* Navigasi Pagination */
+    /* 📜 Pagination */
     .pagination {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       margin-top: 20px;
       flex-wrap: wrap;
     }
@@ -82,6 +87,7 @@
       background: #fff;
       cursor: pointer;
       transition: all 0.3s ease;
+      font-size: 14px;
     }
     .page-btn:hover {
       background: #ddd;
@@ -93,13 +99,30 @@
       font-weight: bold;
       cursor: default;
     }
+
+    /* 🔄 Transisi antarhalaman */
+    .fade-out {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    /* 🩶 Footer */
+    footer {
+      margin-top: 30px;
+      font-size: 12px;
+      color: #666;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1 id="categoryTitle">Kategori</h1>
     <input type="text" id="searchBox" placeholder="Cari tautan di semua kategori..." />
+
+    <!-- 🔎 Hasil Pencarian -->
     <div id="results"></div>
+
+    <!-- 📄 Navigasi Pagination -->
     <div id="pagination" class="pagination"></div>
 
     <a href="index.html" style="display:block;margin-top:20px;text-decoration:none;color:#0077cc;">← Kembali ke Kategori</a>
@@ -110,11 +133,13 @@
   </div>
 
   <script>
+    // Tahun otomatis
     const startYear = 2020;
     const currentYear = new Date().getFullYear();
     document.getElementById("year").textContent =
       currentYear > startYear ? startYear + "–" + currentYear : startYear;
 
+    // Elemen utama
     const params = new URLSearchParams(window.location.search);
     const category = params.get("cat");
     const titleEl = document.getElementById("categoryTitle");
@@ -127,8 +152,14 @@
     let currentPage = 1;
     const perPage = 10;
 
+    // Efek fade-in saat halaman selesai dimuat
+    window.addEventListener("load", () => {
+      document.body.classList.add("loaded");
+    });
+
     titleEl.textContent = category ? category : "Semua Kategori";
 
+    // Ambil data tautan
     fetch("data.json")
       .then(res => res.json())
       .then(data => {
@@ -137,6 +168,7 @@
         renderPage();
       });
 
+    // 🔧 Fungsi utama render halaman
     function renderPage() {
       resultsEl.innerHTML = "";
       paginationEl.innerHTML = "";
@@ -151,6 +183,7 @@
         return;
       }
 
+      // Tampilkan hasil
       visible.forEach((link, i) => {
         const a = document.createElement("a");
         a.href = link.url;
@@ -161,7 +194,7 @@
         resultsEl.appendChild(a);
       });
 
-      // Pagination buttons
+      // Pagination
       if (totalPages > 1) {
         const prevBtn = document.createElement("button");
         prevBtn.textContent = "« Sebelumnya";
@@ -189,20 +222,23 @@
       }
     }
 
+    // Ganti halaman
     function changePage(page) {
       currentPage = page;
       window.scrollTo({ top: 0, behavior: "smooth" });
       renderPage();
     }
 
-    // 🔎 Pencarian global
+    // 🔎 Pencarian global real-time
     searchBox.addEventListener("input", e => {
       const keyword = e.target.value.toLowerCase();
       currentPage = 1;
+
       filteredLinks = allLinks.filter(link =>
         link.title.toLowerCase().includes(keyword) ||
         link.category.toLowerCase().includes(keyword)
       );
+
       renderPage();
     });
   </script>
