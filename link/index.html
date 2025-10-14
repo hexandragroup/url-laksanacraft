@@ -59,52 +59,6 @@
       border: 1px solid #aaa;
     }
 
-    /* Tombol umum */
-    .btn {
-      display: block;
-      margin: 8px auto;
-      padding: 12px 20px;
-      background: #fff;
-      color: #222;
-      text-decoration: none;
-      border-radius: 8px;
-      border: 1px solid #bbb;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      max-width: 420px;
-    }
-
-    .btn:hover {
-      background: #e6e6e6;
-      transform: scale(1.03);
-    }
-
-    /* 🔹 Tombol kategori (senada dengan search) */
-    .category-btn {
-      background: #e8e8e8;
-      border: 1px solid #bfbfbf;
-      font-weight: bold;
-    }
-
-    .category-btn:hover {
-      background: #d9d9d9;
-      transform: scale(1.05);
-    }
-
-    /* 🔗 Tombol hasil pencarian */
-    .result-btn {
-      background: #fff;
-      border: 1px solid #ddd;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeInUp 0.4s ease forwards;
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     /* ✨ Transisi antarhalaman */
     .fade-out {
       opacity: 0;
@@ -120,11 +74,73 @@
       color: #555;
     }
 
+    /* 🔎 Tombol hasil pencarian */
+    .result-btn {
+      display: block;
+      margin: 8px auto;
+      padding: 12px 20px;
+      background: #fff;
+      color: #222;
+      text-decoration: none;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      max-width: 420px;
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeInUp 0.4s ease forwards;
+    }
+    .result-btn:hover {
+      background: #e6e6e6;
+      transform: scale(1.03);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 🔹 Tombol kategori senada seperti di search */
+    .category-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .category-btn {
+      background: #e0e0e0;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      text-decoration: none;
+      color: #222;
+      display: inline-block;
+    }
+
+    .category-btn:hover {
+      background: #d0d0d0;
+      transform: scale(1.05);
+    }
+
     /* 📎 Tombol tambahan (bantuan, kontak, dsb) */
     .extra-btn {
+      display: block;
+      margin: 8px auto;
+      padding: 12px 20px;
       background: #fafafa;
       border: 1px solid #ccc;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #222;
       font-weight: 600;
+      max-width: 420px;
+      transition: all 0.3s ease;
     }
 
     .extra-btn:hover {
@@ -153,7 +169,7 @@
 
     <!-- 🏷️ Judul kategori -->
     <div class="section-title">Kategori</div>
-    <div id="categories"></div>
+    <div id="categories" class="category-container"></div>
 
     <!-- 🧭 Tautan Tambahan -->
     <div class="section-title">Tautan Tambahan</div>
@@ -192,7 +208,7 @@
         const categories = [...new Set(data.map(item => item.category))];
         categories.forEach(cat => {
           const btn = document.createElement("a");
-          btn.className = "btn category-btn";
+          btn.className = "category-btn";
           btn.textContent = cat;
           btn.href = `search.html?cat=${encodeURIComponent(cat)}`;
 
@@ -219,7 +235,7 @@
         extraLinks.forEach(link => {
           const a = document.createElement("a");
           a.href = link.url;
-          a.className = "btn extra-btn";
+          a.className = "extra-btn";
           a.textContent = link.title;
           if (link.url.startsWith("http")) a.target = "_blank";
           extraLinksEl.appendChild(a);
@@ -246,7 +262,7 @@
       filtered.forEach((link, index) => {
         const a = document.createElement("a");
         a.href = link.url;
-        a.className = "btn result-btn";
+        a.className = "result-btn";
         a.textContent = `${link.icon} ${link.title}`;
         a.target = "_blank";
         a.style.animationDelay = `${index * 0.05}s`;
