@@ -29,23 +29,28 @@
       box-shadow: 0 8px 16px rgba(0,0,0,0.1);
       text-align: center;
     }
+
     img.logo {
       width: 100px;
       border-radius: 50%;
       margin-bottom: 15px;
     }
+
     h1 {
       font-size: 20px;
       margin-bottom: 10px;
     }
+
     h1 a {
       text-decoration: none;
       color: #222;
     }
+
     p {
       color: #444;
       margin-bottom: 20px;
     }
+
     input {
       width: 90%;
       padding: 10px;
@@ -74,12 +79,13 @@
       transform: scale(1.03);
     }
 
-    /* 🔹 Tombol kategori (abu senada) */
+    /* 🔹 Tombol kategori (senada dengan search) */
     .category-btn {
       background: #e8e8e8;
       border: 1px solid #bfbfbf;
       font-weight: bold;
     }
+
     .category-btn:hover {
       background: #d9d9d9;
       transform: scale(1.05);
@@ -94,31 +100,36 @@
       animation: fadeInUp 0.4s ease forwards;
     }
 
-    /* ✨ Animasi muncul hasil pencarian */
     @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    /* 🔄 Transisi antarhalaman */
+    /* ✨ Transisi antarhalaman */
     .fade-out {
       opacity: 0;
       transition: opacity 0.5s ease;
     }
 
-    /* Judul kategori */
+    /* 🏷️ Judul bagian */
     .section-title {
       margin-top: 25px;
       margin-bottom: 10px;
       font-weight: bold;
       font-size: 14px;
       color: #555;
+    }
+
+    /* 📎 Tombol tambahan (bantuan, kontak, dsb) */
+    .extra-btn {
+      background: #fafafa;
+      border: 1px solid #ccc;
+      font-weight: 600;
+    }
+
+    .extra-btn:hover {
+      background: #eaeaea;
+      transform: scale(1.04);
     }
 
     footer {
@@ -142,9 +153,11 @@
 
     <!-- 🏷️ Judul kategori -->
     <div class="section-title">Kategori</div>
-
-    <!-- 📂 Daftar kategori -->
     <div id="categories"></div>
+
+    <!-- 🧭 Tautan Tambahan -->
+    <div class="section-title">Tautan Tambahan</div>
+    <div id="extraLinks"></div>
 
     <footer>
       &copy; <span id="year"></span> Laksana Link · Yogyakarta, Indonesia
@@ -161,6 +174,7 @@
     const categoriesEl = document.getElementById("categories");
     const resultsEl = document.getElementById("results");
     const searchBox = document.getElementById("searchBox");
+    const extraLinksEl = document.getElementById("extraLinks");
     let allLinks = [];
 
     // Efek fade-in saat halaman dimuat
@@ -192,6 +206,23 @@
           });
 
           categoriesEl.appendChild(btn);
+        });
+
+        // Tautan tambahan statis (bisa diubah sesuai kebutuhan)
+        const extraLinks = [
+          { title: "📘 Panduan Pengguna", url: "help.html" },
+          { title: "📞 Hubungi Kami", url: "https://wa.me/6281234567890" },
+          { title: "🌐 Kunjungi Situs Utama", url: "https://laksanacraft.my.id" },
+          { title: "📄 Tentang Laksana Link", url: "about.html" }
+        ];
+
+        extraLinks.forEach(link => {
+          const a = document.createElement("a");
+          a.href = link.url;
+          a.className = "btn extra-btn";
+          a.textContent = link.title;
+          if (link.url.startsWith("http")) a.target = "_blank";
+          extraLinksEl.appendChild(a);
         });
       });
 
