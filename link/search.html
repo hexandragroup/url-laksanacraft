@@ -55,7 +55,7 @@
       transform: scale(1.03);
     }
 
-    /* ✨ Animasi hasil pencarian */
+    /* ✨ Animasi muncul */
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -75,7 +75,38 @@
 
     h1 {
       font-size: 20px;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
+    }
+
+    .result-count {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 15px;
+    }
+
+    .filter-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 15px;
+    }
+
+    .filter-btn {
+      background: #ddd;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.2s ease;
+    }
+    .filter-btn:hover {
+      background: #ccc;
+    }
+    .filter-btn.active {
+      background: #bbb;
+      font-weight: bold;
     }
 
     a.back-link {
@@ -100,8 +131,14 @@
 <body>
   <div class="container">
     <h1 id="categoryTitle">Kategori</h1>
+    <div class="result-count" id="resultCount"></div>
+
     <input type="text" id="searchBox" placeholder="Cari tautan di semua kategori..." />
+
+    <div class="filter-container" id="filterContainer"></div>
+
     <div id="results"></div>
+
     <a href="index.html" class="back-link">← Kembali ke Kategori</a>
 
     <footer>
@@ -117,18 +154,21 @@
       currentYear > startYear ? startYear + "–" + currentYear : startYear;
 
     const params = new URLSearchParams(window.location.search);
-    const category = params.get("cat");
+    const selectedCategory = params.get("cat");
     const titleEl = document.getElementById("categoryTitle");
+    const countEl = document.getElementById("resultCount");
     const resultsEl = document.getElementById("results");
     const searchBox = document.getElementById("searchBox");
+    const filterContainer = document.getElementById("filterContainer");
     let allLinks = [];
+    let currentFilter = selectedCategory || "Semua";
 
     // Efek fade-in saat halaman dimuat
     window.addEventListener("load", () => {
       document.body.classList.add("loaded");
     });
 
-    // Efek fade-out saat kembali ke index
+    // Efek fade-out saat kembali
     const backLink = document.querySelector(".back-link");
     backLink.addEventListener("click", e => {
       e.preventDefault();
@@ -138,27 +178,61 @@
       }, 500);
     });
 
-    titleEl.textContent = category ? category : "Semua Kategori";
-
-    // Ambil data dari JSON
+    // Ambil data
     fetch("data.json")
       .then(res => res.json())
       .then(data => {
         allLinks = data;
-        renderCategory(category);
+        setupFilters(data);
+        renderList(getFilteredList());
       });
 
-    function renderCategory(cat) {
-      const list = cat ? allLinks.filter(l => l.category === cat) : allLinks;
-      renderList(list);
+    // 🔹 Buat tombol filter kategori
+    function setupFilters(data) {
+      const categories = ["Semua", ...new Set(data.map(l => l.category))];
+      categories.forEach(cat => {
+        const btn = document.createElement("button");
+        btn.textContent = cat;
+        btn.className = "filter-btn";
+        if (cat === currentFilter) btn.classList.add("active");
+        btn.addEventListener("click", () => {
+          currentFilter = cat;
+          document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          renderList(getFilteredList());
+        });
+        filterContainer.appendChild(btn);
+      });
+
+      titleEl.textContent = selectedCategory ? selectedCategory : "Semua Kategori";
     }
 
+    // 🔍 Dapatkan daftar sesuai filter atau pencarian
+    function getFilteredList() {
+      let list = allLinks;
+      if (currentFilter !== "Semua") {
+        list = list.filter(l => l.category === currentFilter);
+      }
+      const keyword = searchBox.value.toLowerCase();
+      if (keyword) {
+        list = list.filter(link =>
+          link.title.toLowerCase().includes(keyword) ||
+          link.category.toLowerCase().includes(keyword)
+        );
+      }
+      return list;
+    }
+
+    // 🔹 Render hasil pencarian
     function renderList(data) {
       resultsEl.innerHTML = "";
       if (data.length === 0) {
         resultsEl.innerHTML = "<p>Tidak ada hasil.</p>";
+        countEl.textContent = "";
         return;
       }
+
+      countEl.textContent = `${currentFilter === "Semua" ? "Semua kategori" : "Kategori: " + currentFilter} — ${data.length} tautan ditemukan`;
 
       data.forEach((link, index) => {
         const a = document.createElement("a");
@@ -166,20 +240,14 @@
         a.className = "btn";
         a.textContent = `${link.icon} ${link.title}`;
         a.target = "_blank";
-        // Animasi muncul bertahap
         a.style.animationDelay = `${index * 0.05}s`;
         resultsEl.appendChild(a);
       });
     }
 
-    // 🔎 Pencarian global (tidak dibatasi kategori)
-    searchBox.addEventListener("input", e => {
-      const keyword = e.target.value.toLowerCase();
-      const filtered = allLinks.filter(link =>
-        link.title.toLowerCase().includes(keyword) ||
-        link.category.toLowerCase().includes(keyword)
-      );
-      renderList(filtered);
+    // 🔎 Pencarian real-time
+    searchBox.addEventListener("input", () => {
+      renderList(getFilteredList());
     });
   </script>
 </body>
