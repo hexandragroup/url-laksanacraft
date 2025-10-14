@@ -47,6 +47,8 @@
       border-radius: 8px;
       border: 1px solid #aaa;
     }
+
+    /* Tombol umum */
     .btn {
       display: block;
       margin: 8px auto;
@@ -60,13 +62,44 @@
       cursor: pointer;
       max-width: 420px;
     }
+
     .btn:hover {
       background: #e6e6e6;
       transform: scale(1.03);
     }
+
+    /* 🔹 Tombol kategori */
     .category-btn {
+      background: #e0f0ff;
+      border: 1px solid #99c9ff;
       font-weight: bold;
     }
+    .category-btn:hover {
+      background: #cce5ff;
+      transform: scale(1.05);
+    }
+
+    /* 🔗 Tombol hasil pencarian */
+    .result-btn {
+      background: #fff;
+      border: 1px solid #ddd;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeInUp 0.4s ease forwards;
+    }
+
+    /* ✨ Animasi muncul */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     footer {
       margin-top: 30px;
       font-size: 12px;
@@ -105,6 +138,7 @@
     const searchBox = document.getElementById("searchBox");
     let allLinks = [];
 
+    // Ambil data dari JSON
     fetch("data.json")
       .then(res => res.json())
       .then(data => {
@@ -121,7 +155,7 @@
         });
       });
 
-    // pencarian global
+    // 🔎 Pencarian global
     searchBox.addEventListener("input", e => {
       const keyword = e.target.value.toLowerCase();
       resultsEl.innerHTML = "";
@@ -138,12 +172,14 @@
         return;
       }
 
-      filtered.forEach(link => {
+      filtered.forEach((link, index) => {
         const a = document.createElement("a");
         a.href = link.url;
-        a.className = "btn";
+        a.className = "btn result-btn";
         a.textContent = `${link.icon} ${link.title}`;
         a.target = "_blank";
+        // Tambahkan delay agar muncul bergantian
+        a.style.animationDelay = `${index * 0.05}s`;
         resultsEl.appendChild(a);
       });
     });
