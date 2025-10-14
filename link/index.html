@@ -74,14 +74,14 @@
       transform: scale(1.03);
     }
 
-    /* 🔹 Tombol kategori */
+    /* 🔹 Tombol kategori (abu senada) */
     .category-btn {
-      background: #e0f0ff;
-      border: 1px solid #99c9ff;
+      background: #e8e8e8;
+      border: 1px solid #bfbfbf;
       font-weight: bold;
     }
     .category-btn:hover {
-      background: #cce5ff;
+      background: #d9d9d9;
       transform: scale(1.05);
     }
 
@@ -112,6 +112,15 @@
       transition: opacity 0.5s ease;
     }
 
+    /* Judul kategori */
+    .section-title {
+      margin-top: 25px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      font-size: 14px;
+      color: #555;
+    }
+
     footer {
       margin-top: 30px;
       font-size: 12px;
@@ -130,6 +139,9 @@
 
     <!-- 🔎 Hasil pencarian -->
     <div id="results"></div>
+
+    <!-- 🏷️ Judul kategori -->
+    <div class="section-title">Kategori</div>
 
     <!-- 📂 Daftar kategori -->
     <div id="categories"></div>
@@ -170,7 +182,7 @@
           btn.textContent = cat;
           btn.href = `search.html?cat=${encodeURIComponent(cat)}`;
 
-          // Tambahkan efek transisi sebelum berpindah halaman
+          // Efek transisi sebelum pindah halaman
           btn.addEventListener("click", e => {
             e.preventDefault();
             document.body.classList.add("fade-out");
@@ -206,7 +218,6 @@
         a.className = "btn result-btn";
         a.textContent = `${link.icon} ${link.title}`;
         a.target = "_blank";
-        // Tambahkan delay agar muncul bergantian
         a.style.animationDelay = `${index * 0.05}s`;
         resultsEl.appendChild(a);
       });
