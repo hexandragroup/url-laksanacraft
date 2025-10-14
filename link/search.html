@@ -12,6 +12,11 @@
       background: linear-gradient(to bottom, #eeeeee, #cccccc);
       padding: 30px;
       margin: 0;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    body.loaded {
+      opacity: 1;
     }
     .container {
       max-width: 500px;
@@ -41,15 +46,50 @@
       transition: all 0.3s ease;
       cursor: pointer;
       max-width: 420px;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeInUp 0.4s ease forwards;
     }
     .btn:hover {
       background: #e6e6e6;
       transform: scale(1.03);
     }
+
+    /* ✨ Animasi hasil pencarian */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* 🔄 Transisi antarhalaman */
+    .fade-out {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
     h1 {
       font-size: 20px;
       margin-bottom: 10px;
     }
+
+    a.back-link {
+      display: block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #0077cc;
+      transition: color 0.3s ease;
+    }
+    a.back-link:hover {
+      color: #004c99;
+      text-decoration: underline;
+    }
+
     footer {
       margin-top: 30px;
       font-size: 12px;
@@ -62,7 +102,7 @@
     <h1 id="categoryTitle">Kategori</h1>
     <input type="text" id="searchBox" placeholder="Cari tautan di semua kategori..." />
     <div id="results"></div>
-    <a href="index.html" style="display:block;margin-top:20px;text-decoration:none;color:#0077cc;">← Kembali ke Kategori</a>
+    <a href="index.html" class="back-link">← Kembali ke Kategori</a>
 
     <footer>
       &copy; <span id="year"></span> Laksana Link · Yogyakarta, Indonesia
@@ -70,6 +110,7 @@
   </div>
 
   <script>
+    // Tahun otomatis
     const startYear = 2020;
     const currentYear = new Date().getFullYear();
     document.getElementById("year").textContent =
@@ -82,8 +123,24 @@
     const searchBox = document.getElementById("searchBox");
     let allLinks = [];
 
+    // Efek fade-in saat halaman dimuat
+    window.addEventListener("load", () => {
+      document.body.classList.add("loaded");
+    });
+
+    // Efek fade-out saat kembali ke index
+    const backLink = document.querySelector(".back-link");
+    backLink.addEventListener("click", e => {
+      e.preventDefault();
+      document.body.classList.add("fade-out");
+      setTimeout(() => {
+        window.location.href = backLink.href;
+      }, 500);
+    });
+
     titleEl.textContent = category ? category : "Semua Kategori";
 
+    // Ambil data dari JSON
     fetch("data.json")
       .then(res => res.json())
       .then(data => {
@@ -92,7 +149,7 @@
       });
 
     function renderCategory(cat) {
-      const list = allLinks.filter(l => l.category === cat);
+      const list = cat ? allLinks.filter(l => l.category === cat) : allLinks;
       renderList(list);
     }
 
@@ -103,17 +160,19 @@
         return;
       }
 
-      data.forEach(link => {
+      data.forEach((link, index) => {
         const a = document.createElement("a");
         a.href = link.url;
         a.className = "btn";
         a.textContent = `${link.icon} ${link.title}`;
         a.target = "_blank";
+        // Animasi muncul bertahap
+        a.style.animationDelay = `${index * 0.05}s`;
         resultsEl.appendChild(a);
       });
     }
 
-    // pencarian global (tidak dibatasi kategori)
+    // 🔎 Pencarian global (tidak dibatasi kategori)
     searchBox.addEventListener("input", e => {
       const keyword = e.target.value.toLowerCase();
       const filtered = allLinks.filter(link =>
