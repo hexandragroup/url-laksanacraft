@@ -27,6 +27,7 @@
       box-shadow: 0 8px 16px rgba(0,0,0,0.1);
       text-align: center;
     }
+
     input {
       width: 90%;
       padding: 10px;
@@ -34,6 +35,7 @@
       border-radius: 8px;
       border: 1px solid #aaa;
     }
+
     .btn {
       display: block;
       margin: 8px auto;
@@ -55,7 +57,7 @@
       transform: scale(1.03);
     }
 
-    /* ✨ Animasi muncul */
+    /* ✨ Animasi hasil muncul */
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -67,7 +69,7 @@
       }
     }
 
-    /* 🔄 Transisi antarhalaman */
+    /* 🔄 Transisi halaman */
     .fade-out {
       opacity: 0;
       transition: opacity 0.5s ease;
@@ -126,6 +128,28 @@
       font-size: 12px;
       color: #666;
     }
+
+    /* 🔄 Spinner loading */
+    .spinner {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      border: 3px solid #bbb;
+      border-top-color: #0077cc;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      font-size: 13px;
+      color: #777;
+      margin-top: 8px;
+    }
   </style>
 </head>
 <body>
@@ -137,7 +161,13 @@
 
     <div class="filter-container" id="filterContainer"></div>
 
-    <div id="results"></div>
+    <!-- Spinner saat loading -->
+    <div id="loading">
+      <div class="spinner"></div>
+      <div class="loading-text">Memuat data...</div>
+    </div>
+
+    <div id="results" style="display:none;"></div>
 
     <a href="index.html" class="back-link">← Kembali ke Kategori</a>
 
@@ -160,6 +190,8 @@
     const resultsEl = document.getElementById("results");
     const searchBox = document.getElementById("searchBox");
     const filterContainer = document.getElementById("filterContainer");
+    const loadingEl = document.getElementById("loading");
+
     let allLinks = [];
     let currentFilter = selectedCategory || "Semua";
 
@@ -185,6 +217,12 @@
         allLinks = data;
         setupFilters(data);
         renderList(getFilteredList());
+        // Sembunyikan spinner
+        loadingEl.style.display = "none";
+        resultsEl.style.display = "block";
+      })
+      .catch(() => {
+        loadingEl.innerHTML = "<p>Gagal memuat data. Coba lagi nanti.</p>";
       });
 
     // 🔹 Buat tombol filter kategori
@@ -223,7 +261,7 @@
       return list;
     }
 
-    // 🔹 Render hasil pencarian
+    // 🔹 Render hasil
     function renderList(data) {
       resultsEl.innerHTML = "";
       if (data.length === 0) {
