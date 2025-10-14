@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Kumpulan tautan resmi dan penting dari Laksana Link — akses mudah ke layanan, informasi, dan sumber daya kami.">
-  <title>Laksana Link</title>
+  <title>Hasil – Laksana Link</title>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hexandragroup/laksanacraft-assets/main/Favicon_Laksana_Handicraft.webp">
 
   <style>
@@ -28,36 +27,14 @@
       text-align: center;
     }
 
-    img.logo {
-      width: 100px;
-      border-radius: 50%;
-      margin-bottom: 15px;
-    }
-
-    h1 {
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-
-    h1 a {
-      text-decoration: none;
-      color: #222;
-    }
-
-    p {
-      color: #444;
-      margin-bottom: 20px;
-    }
-
     input {
       width: 90%;
       padding: 10px;
-      margin-bottom: 10px;
+      margin: 15px 0;
       border-radius: 8px;
       border: 1px solid #aaa;
     }
 
-    /* Tombol umum */
     .btn {
       display: block;
       margin: 8px auto;
@@ -70,94 +47,81 @@
       transition: all 0.3s ease;
       cursor: pointer;
       max-width: 420px;
-    }
-    .btn:hover { background: #e6e6e6; transform: scale(1.03); }
-
-    /* Kategori: senada dengan halaman hasil */
-    #categories {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 8px;
-      margin-bottom: 20px;
-    }
-    .category-btn {
-      background: #e8e8e8;
-      border: 1px solid #bfbfbf;
-      border-radius: 8px;
-      padding: 10px 18px;
-      font-size: 14px;
-      font-weight: 600;
-      color: #222;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-    .category-btn:hover {
-      background: #d9d9d9;
-      transform: scale(1.05);
-    }
-
-    /* Tombol tambahan (warna beda) */
-    .extra-link {
-      background: #fff5cc;
-      border: 1px solid #e6c200;
-      color: #333;
-      font-weight: 600;
-    }
-    .extra-link:hover {
-      background: #ffed99;
-      transform: scale(1.05);
-    }
-
-    /* Hasil pencarian */
-    .result-btn {
-      background: #fff;
-      border: 1px solid #ddd;
       opacity: 0;
       transform: translateY(10px);
       animation: fadeInUp 0.4s ease forwards;
     }
+    .btn:hover { background: #e6e6e6; transform: scale(1.03); }
 
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Pagination kecil senada */
-    .pagination {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 6px;
-      margin-top: 15px;
-      flex-wrap: wrap;
-    }
-    .page-btn {
-      padding: 6px 12px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      background: #f8f8f8;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 14px;
-    }
-    .page-btn:hover { background: #ddd; }
-    .page-btn.active {
-      background: #bbb;
-      color: #fff;
-      border-color: #999;
-      font-weight: bold;
-      cursor: default;
+    .fade-out { opacity: 0; transition: opacity 0.5s ease; }
+
+    h1 { font-size: 20px; margin-bottom: 5px; }
+
+    .result-count {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 15px;
     }
 
-    .section-title {
-      margin-top: 25px;
-      margin-bottom: 10px;
-      font-weight: bold;
-      font-size: 14px;
-      color: #555;
+    .filter-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 15px;
     }
+
+    .filter-btn {
+      background: #ddd;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.2s ease;
+    }
+    .filter-btn:hover { background: #ccc; }
+    .filter-btn.active {
+      background: #bbb;
+      font-weight: bold;
+    }
+
+    /* 🔢 Pagination */
+    .pagination {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .page-btn {
+      background: #ddd;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.2s ease;
+    }
+    .page-btn:hover { background: #ccc; }
+    .page-btn.active {
+      background: #bbb;
+      font-weight: bold;
+    }
+
+    a.back-link {
+      display: block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #0077cc;
+      transition: color 0.3s ease;
+    }
+    a.back-link:hover { color: #004c99; text-decoration: underline; }
 
     footer {
       margin-top: 30px;
@@ -165,29 +129,44 @@
       color: #666;
     }
 
-    .fade-out { opacity: 0; transition: opacity 0.5s ease; }
+    /* Spinner loading */
+    .spinner {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      border: 3px solid #bbb;
+      border-top-color: #0077cc;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    .loading-text {
+      font-size: 13px;
+      color: #777;
+      margin-top: 8px;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <img src="https://raw.githubusercontent.com/hexandragroup/laksanacraft-assets/main/Logo_Laksana_Handicraft.png" alt="Logo" class="logo" />
-    <h1><a href="https://link.laksanacraft.my.id/">Laksana Link</a></h1>
-    <p><em>"Satu Tempat untuk Banyak Manfaat"</em></p>
+    <h1 id="categoryTitle">Kategori</h1>
+    <div class="result-count" id="resultCount"></div>
 
-    <!-- 🔍 Pencarian Global -->
     <input type="text" id="searchBox" placeholder="Cari tautan di semua kategori..." />
+    <div class="filter-container" id="filterContainer"></div>
 
-    <div id="results"></div>
-    <div id="pagination" class="pagination"></div>
+    <!-- Spinner -->
+    <div id="loading">
+      <div class="spinner"></div>
+      <div class="loading-text">Memuat data...</div>
+    </div>
 
-    <!-- 🏷️ Kategori -->
-    <div class="section-title">Kategori</div>
-    <div id="categories"></div>
+    <div id="results" style="display:none;"></div>
+    <div class="pagination" id="pagination"></div>
 
-    <!-- 🔗 Tautan Tambahan -->
-    <div class="section-title">Tautan Tambahan</div>
-    <a href="https://wa.me/628123456789" class="btn extra-link" target="_blank">📞 Bantuan / Kontak</a>
-    <a href="https://laksanacraft.my.id/" class="btn extra-link" target="_blank">🌐 Website Resmi</a>
+    <a href="index.html" class="back-link">← Kembali ke Kategori</a>
 
     <footer>
       &copy; <span id="year"></span> Laksana Link · Yogyakarta, Indonesia
@@ -200,101 +179,140 @@
     document.getElementById("year").textContent =
       currentYear > startYear ? startYear + "–" + currentYear : startYear;
 
-    const categoriesEl = document.getElementById("categories");
+    const params = new URLSearchParams(window.location.search);
+    const selectedCategory = params.get("cat");
+    const titleEl = document.getElementById("categoryTitle");
+    const countEl = document.getElementById("resultCount");
     const resultsEl = document.getElementById("results");
     const paginationEl = document.getElementById("pagination");
     const searchBox = document.getElementById("searchBox");
+    const filterContainer = document.getElementById("filterContainer");
+    const loadingEl = document.getElementById("loading");
 
     let allLinks = [];
-    let filteredLinks = [];
+    let currentFilter = selectedCategory || "Semua";
     let currentPage = 1;
-    const perPage = 10;
+    const itemsPerPage = 10;
 
+    // Animasi masuk
     window.addEventListener("load", () => { document.body.classList.add("loaded"); });
 
+    // Fade out saat kembali
+    const backLink = document.querySelector(".back-link");
+    backLink.addEventListener("click", e => {
+      e.preventDefault();
+      document.body.classList.add("fade-out");
+      setTimeout(() => { window.location.href = backLink.href; }, 500);
+    });
+
+    // Ambil data
     fetch("data.json")
       .then(res => res.json())
       .then(data => {
         allLinks = data;
-
-        // tampilkan kategori unik
-        const categories = [...new Set(data.map(item => item.category))];
-        categories.forEach(cat => {
-          const btn = document.createElement("a");
-          btn.className = "category-btn";
-          btn.textContent = cat;
-          btn.href = `search.html?cat=${encodeURIComponent(cat)}`;
-
-          btn.addEventListener("click", e => {
-            e.preventDefault();
-            document.body.classList.add("fade-out");
-            setTimeout(() => { window.location.href = btn.href; }, 500);
-          });
-
-          categoriesEl.appendChild(btn);
-        });
+        setupFilters(data);
+        renderPage();
+        loadingEl.style.display = "none";
+        resultsEl.style.display = "block";
+      })
+      .catch(() => {
+        loadingEl.innerHTML = "<p>Gagal memuat data. Coba lagi nanti.</p>";
       });
 
-    // Pencarian global
-    searchBox.addEventListener("input", e => {
-      const keyword = e.target.value.toLowerCase();
-      currentPage = 1;
-      if (keyword.trim() === "") {
-        resultsEl.innerHTML = "";
+    function setupFilters(data) {
+      const categories = ["Semua", ...new Set(data.map(l => l.category))];
+      categories.forEach(cat => {
+        const btn = document.createElement("button");
+        btn.textContent = cat;
+        btn.className = "filter-btn";
+        if (cat === currentFilter) btn.classList.add("active");
+        btn.addEventListener("click", () => {
+          currentFilter = cat;
+          currentPage = 1;
+          document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          renderPage();
+        });
+        filterContainer.appendChild(btn);
+      });
+
+      titleEl.textContent = selectedCategory ? selectedCategory : "Semua Kategori";
+    }
+
+    // Ambil data terfilter + pencarian
+    function getFilteredList() {
+      let list = allLinks;
+      if (currentFilter !== "Semua") {
+        list = list.filter(l => l.category === currentFilter);
+      }
+      const keyword = searchBox.value.toLowerCase();
+      if (keyword) {
+        list = list.filter(link =>
+          link.title.toLowerCase().includes(keyword) ||
+          link.category.toLowerCase().includes(keyword)
+        );
+      }
+      return list;
+    }
+
+    // Render halaman sesuai pagination
+    function renderPage() {
+      const filtered = getFilteredList();
+      const totalItems = filtered.length;
+      const totalPages = Math.ceil(totalItems / itemsPerPage);
+      const start = (currentPage - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      const currentItems = filtered.slice(start, end);
+
+      renderList(currentItems);
+      renderPagination(totalPages);
+      countEl.textContent = `${currentFilter === "Semua" ? "Semua kategori" : "Kategori: " + currentFilter} — ${totalItems} tautan ditemukan`;
+    }
+
+    // Tampilkan daftar link
+    function renderList(data) {
+      resultsEl.innerHTML = "";
+      if (data.length === 0) {
+        resultsEl.innerHTML = "<p>Tidak ada hasil.</p>";
         paginationEl.innerHTML = "";
         return;
       }
 
-      filteredLinks = allLinks.filter(link =>
-        link.title.toLowerCase().includes(keyword) ||
-        link.category.toLowerCase().includes(keyword)
-      );
-
-      renderPage();
-    });
-
-    // Render hasil pencarian per halaman
-    function renderPage() {
-      resultsEl.innerHTML = "";
-      paginationEl.innerHTML = "";
-
-      const totalPages = Math.ceil(filteredLinks.length / perPage);
-      const start = (currentPage - 1) * perPage;
-      const end = start + perPage;
-      const visible = filteredLinks.slice(start, end);
-
-      if (visible.length === 0) {
-        resultsEl.innerHTML = "<p>Tidak ada hasil.</p>";
-        return;
-      }
-
-      visible.forEach((link, i) => {
+      data.forEach((link, index) => {
         const a = document.createElement("a");
         a.href = link.url;
-        a.className = "btn result-btn";
+        a.className = "btn";
         a.textContent = `${link.icon} ${link.title}`;
         a.target = "_blank";
-        a.style.animationDelay = `${i * 0.05}s`;
+        a.style.animationDelay = `${index * 0.05}s`;
         resultsEl.appendChild(a);
       });
+    }
 
-      // Pagination: angka saja
-      if (totalPages > 1) {
-        for (let i = 1; i <= totalPages; i++) {
-          const btn = document.createElement("button");
-          btn.textContent = i;
-          btn.className = "page-btn" + (i === currentPage ? " active" : "");
-          btn.onclick = () => changePage(i);
-          paginationEl.appendChild(btn);
-        }
+    // Tampilkan pagination
+    function renderPagination(totalPages) {
+      paginationEl.innerHTML = "";
+      if (totalPages <= 1) return;
+
+      for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement("button");
+        btn.textContent = i;
+        btn.className = "page-btn";
+        if (i === currentPage) btn.classList.add("active");
+        btn.addEventListener("click", () => {
+          currentPage = i;
+          renderPage();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+        paginationEl.appendChild(btn);
       }
     }
 
-    function changePage(page) {
-      currentPage = page;
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    // Pencarian real-time
+    searchBox.addEventListener("input", () => {
+      currentPage = 1;
       renderPage();
-    }
+    });
   </script>
 </body>
 </html>
