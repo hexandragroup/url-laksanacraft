@@ -15,9 +15,8 @@
       opacity: 0;
       transition: opacity 0.6s ease;
     }
-    body.loaded {
-      opacity: 1;
-    }
+    body.loaded { opacity: 1; }
+
     .container {
       max-width: 500px;
       margin: auto;
@@ -52,33 +51,16 @@
       transform: translateY(10px);
       animation: fadeInUp 0.4s ease forwards;
     }
-    .btn:hover {
-      background: #e6e6e6;
-      transform: scale(1.03);
-    }
+    .btn:hover { background: #e6e6e6; transform: scale(1.03); }
 
-    /* ✨ Animasi hasil muncul */
     @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    /* 🔄 Transisi halaman */
-    .fade-out {
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
+    .fade-out { opacity: 0; transition: opacity 0.5s ease; }
 
-    h1 {
-      font-size: 20px;
-      margin-bottom: 5px;
-    }
+    h1 { font-size: 20px; margin-bottom: 5px; }
 
     .result-count {
       font-size: 13px;
@@ -103,10 +85,31 @@
       font-size: 13px;
       transition: all 0.2s ease;
     }
-    .filter-btn:hover {
-      background: #ccc;
-    }
+    .filter-btn:hover { background: #ccc; }
     .filter-btn.active {
+      background: #bbb;
+      font-weight: bold;
+    }
+
+    /* 🔢 Pagination */
+    .pagination {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .page-btn {
+      background: #ddd;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.2s ease;
+    }
+    .page-btn:hover { background: #ccc; }
+    .page-btn.active {
       background: #bbb;
       font-weight: bold;
     }
@@ -118,10 +121,7 @@
       color: #0077cc;
       transition: color 0.3s ease;
     }
-    a.back-link:hover {
-      color: #004c99;
-      text-decoration: underline;
-    }
+    a.back-link:hover { color: #004c99; text-decoration: underline; }
 
     footer {
       margin-top: 30px;
@@ -129,7 +129,7 @@
       color: #666;
     }
 
-    /* 🔄 Spinner loading */
+    /* Spinner loading */
     .spinner {
       display: inline-block;
       width: 28px;
@@ -140,10 +140,7 @@
       animation: spin 1s linear infinite;
       margin: 20px auto;
     }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
     .loading-text {
       font-size: 13px;
@@ -158,16 +155,16 @@
     <div class="result-count" id="resultCount"></div>
 
     <input type="text" id="searchBox" placeholder="Cari tautan di semua kategori..." />
-
     <div class="filter-container" id="filterContainer"></div>
 
-    <!-- Spinner saat loading -->
+    <!-- Spinner -->
     <div id="loading">
       <div class="spinner"></div>
       <div class="loading-text">Memuat data...</div>
     </div>
 
     <div id="results" style="display:none;"></div>
+    <div class="pagination" id="pagination"></div>
 
     <a href="index.html" class="back-link">← Kembali ke Kategori</a>
 
@@ -177,7 +174,6 @@
   </div>
 
   <script>
-    // Tahun otomatis
     const startYear = 2020;
     const currentYear = new Date().getFullYear();
     document.getElementById("year").textContent =
@@ -188,26 +184,25 @@
     const titleEl = document.getElementById("categoryTitle");
     const countEl = document.getElementById("resultCount");
     const resultsEl = document.getElementById("results");
+    const paginationEl = document.getElementById("pagination");
     const searchBox = document.getElementById("searchBox");
     const filterContainer = document.getElementById("filterContainer");
     const loadingEl = document.getElementById("loading");
 
     let allLinks = [];
     let currentFilter = selectedCategory || "Semua";
+    let currentPage = 1;
+    const itemsPerPage = 10;
 
-    // Efek fade-in saat halaman dimuat
-    window.addEventListener("load", () => {
-      document.body.classList.add("loaded");
-    });
+    // Animasi masuk
+    window.addEventListener("load", () => { document.body.classList.add("loaded"); });
 
-    // Efek fade-out saat kembali
+    // Fade out saat kembali
     const backLink = document.querySelector(".back-link");
     backLink.addEventListener("click", e => {
       e.preventDefault();
       document.body.classList.add("fade-out");
-      setTimeout(() => {
-        window.location.href = backLink.href;
-      }, 500);
+      setTimeout(() => { window.location.href = backLink.href; }, 500);
     });
 
     // Ambil data
@@ -216,8 +211,7 @@
       .then(data => {
         allLinks = data;
         setupFilters(data);
-        renderList(getFilteredList());
-        // Sembunyikan spinner
+        renderPage();
         loadingEl.style.display = "none";
         resultsEl.style.display = "block";
       })
@@ -225,7 +219,6 @@
         loadingEl.innerHTML = "<p>Gagal memuat data. Coba lagi nanti.</p>";
       });
 
-    // 🔹 Buat tombol filter kategori
     function setupFilters(data) {
       const categories = ["Semua", ...new Set(data.map(l => l.category))];
       categories.forEach(cat => {
@@ -235,9 +228,10 @@
         if (cat === currentFilter) btn.classList.add("active");
         btn.addEventListener("click", () => {
           currentFilter = cat;
+          currentPage = 1;
           document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
           btn.classList.add("active");
-          renderList(getFilteredList());
+          renderPage();
         });
         filterContainer.appendChild(btn);
       });
@@ -245,7 +239,7 @@
       titleEl.textContent = selectedCategory ? selectedCategory : "Semua Kategori";
     }
 
-    // 🔍 Dapatkan daftar sesuai filter atau pencarian
+    // Ambil data terfilter + pencarian
     function getFilteredList() {
       let list = allLinks;
       if (currentFilter !== "Semua") {
@@ -261,16 +255,28 @@
       return list;
     }
 
-    // 🔹 Render hasil
+    // Render halaman sesuai pagination
+    function renderPage() {
+      const filtered = getFilteredList();
+      const totalItems = filtered.length;
+      const totalPages = Math.ceil(totalItems / itemsPerPage);
+      const start = (currentPage - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      const currentItems = filtered.slice(start, end);
+
+      renderList(currentItems);
+      renderPagination(totalPages);
+      countEl.textContent = `${currentFilter === "Semua" ? "Semua kategori" : "Kategori: " + currentFilter} — ${totalItems} tautan ditemukan`;
+    }
+
+    // Tampilkan daftar link
     function renderList(data) {
       resultsEl.innerHTML = "";
       if (data.length === 0) {
         resultsEl.innerHTML = "<p>Tidak ada hasil.</p>";
-        countEl.textContent = "";
+        paginationEl.innerHTML = "";
         return;
       }
-
-      countEl.textContent = `${currentFilter === "Semua" ? "Semua kategori" : "Kategori: " + currentFilter} — ${data.length} tautan ditemukan`;
 
       data.forEach((link, index) => {
         const a = document.createElement("a");
@@ -283,9 +289,29 @@
       });
     }
 
-    // 🔎 Pencarian real-time
+    // Tampilkan pagination
+    function renderPagination(totalPages) {
+      paginationEl.innerHTML = "";
+      if (totalPages <= 1) return;
+
+      for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement("button");
+        btn.textContent = i;
+        btn.className = "page-btn";
+        if (i === currentPage) btn.classList.add("active");
+        btn.addEventListener("click", () => {
+          currentPage = i;
+          renderPage();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+        paginationEl.appendChild(btn);
+      }
+    }
+
+    // Pencarian real-time
     searchBox.addEventListener("input", () => {
-      renderList(getFilteredList());
+      currentPage = 1;
+      renderPage();
     });
   </script>
 </body>
