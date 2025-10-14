@@ -73,44 +73,41 @@
     }
     .btn:hover { background: #e6e6e6; transform: scale(1.03); }
 
-    /* Kategori: senada dengan halaman hasil */
-    #categories {
+    /* Kategori dan pagination senada */
+    #categories,
+    .pagination {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       margin-top: 8px;
       margin-bottom: 20px;
     }
-    .category-btn {
-      background: #e8e8e8;
-      border: 1px solid #bfbfbf;
-      border-radius: 8px;
-      padding: 10px 18px;
-      font-size: 14px;
-      font-weight: 600;
+
+    .category-btn,
+    .page-btn {
+      background: #ddd;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.2s ease;
       color: #222;
       text-decoration: none;
-      transition: all 0.3s ease;
-    }
-    .category-btn:hover {
-      background: #d9d9d9;
-      transform: scale(1.05);
     }
 
-    /* Tombol tambahan (warna beda) */
-    .extra-link {
-      background: #fff5cc;
-      border: 1px solid #e6c200;
-      color: #333;
-      font-weight: 600;
-    }
-    .extra-link:hover {
-      background: #ffed99;
-      transform: scale(1.05);
+    .category-btn:hover,
+    .page-btn:hover {
+      background: #ccc;
     }
 
-    /* Hasil pencarian */
+    .page-btn.active {
+      background: #bbb;
+      font-weight: bold;
+    }
+
+    /* Tombol hasil pencarian */
     .result-btn {
       background: #fff;
       border: 1px solid #ddd;
@@ -122,33 +119,6 @@
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Pagination kecil senada */
-    .pagination {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 6px;
-      margin-top: 15px;
-      flex-wrap: wrap;
-    }
-    .page-btn {
-      padding: 6px 12px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      background: #f8f8f8;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 14px;
-    }
-    .page-btn:hover { background: #ddd; }
-    .page-btn.active {
-      background: #bbb;
-      color: #fff;
-      border-color: #999;
-      font-weight: bold;
-      cursor: default;
     }
 
     .section-title {
@@ -186,8 +156,8 @@
 
     <!-- 🔗 Tautan Tambahan -->
     <div class="section-title">Tautan Tambahan</div>
-    <a href="https://wa.me/628123456789" class="btn extra-link" target="_blank">📞 Bantuan / Kontak</a>
-    <a href="https://laksanacraft.my.id/" class="btn extra-link" target="_blank">🌐 Website Resmi</a>
+    <a href="https://wa.me/628123456789" class="btn" target="_blank">📞 Bantuan / Kontak</a>
+    <a href="https://laksanacraft.my.id/" class="btn" target="_blank">🌐 Website Resmi</a>
 
     <footer>
       &copy; <span id="year"></span> Laksana Link · Yogyakarta, Indonesia
