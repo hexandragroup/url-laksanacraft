@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Hasil pencarian tautan di Laksana Link — akses cepat ke berbagai kategori dan sumber daya.">
-  <title>Hasil – Laksana Link</title>
+  <meta name="description" content="Kumpulan tautan resmi dan penting dari Laksana Link — akses mudah ke layanan, informasi, dan sumber daya kami.">
+  <title>Laksana Link</title>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hexandragroup/laksanacraft-assets/main/Favicon_Laksana_Handicraft.webp">
 
   <style>
@@ -29,21 +29,32 @@
       box-shadow: 0 8px 16px rgba(0,0,0,0.1);
       text-align: center;
     }
-
+    img.logo {
+      width: 100px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
     h1 {
       font-size: 20px;
       margin-bottom: 10px;
     }
-
+    h1 a {
+      text-decoration: none;
+      color: #222;
+    }
+    p {
+      color: #444;
+      margin-bottom: 20px;
+    }
     input {
       width: 90%;
       padding: 10px;
-      margin: 15px 0;
+      margin-bottom: 10px;
       border-radius: 8px;
       border: 1px solid #aaa;
     }
 
-    /* 🔘 Tombol umum */
+    /* Tombol umum */
     .btn {
       display: block;
       margin: 8px auto;
@@ -56,28 +67,60 @@
       transition: all 0.3s ease;
       cursor: pointer;
       max-width: 420px;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeInUp 0.4s ease forwards;
     }
+
     .btn:hover {
       background: #e6e6e6;
       transform: scale(1.03);
     }
 
-    /* ✨ Animasi hasil */
+    /* Tombol kategori abu senada */
+    .category-btn {
+      background: #e8e8e8;
+      border: 1px solid #bfbfbf;
+      font-weight: bold;
+    }
+    .category-btn:hover {
+      background: #d9d9d9;
+      transform: scale(1.05);
+    }
+
+    /* Tombol hasil pencarian */
+    .result-btn {
+      background: #fff;
+      border: 1px solid #ddd;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeInUp 0.4s ease forwards;
+    }
+
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* 📜 Pagination */
+    /* Transisi antarhalaman */
+    .fade-out {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    /* Judul kategori */
+    .section-title {
+      margin-top: 25px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      font-size: 14px;
+      color: #555;
+    }
+
+    /* Pagination */
     .pagination {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 6px;
-      margin-top: 20px;
+      margin-top: 15px;
       flex-wrap: wrap;
     }
     .page-btn {
@@ -100,13 +143,6 @@
       cursor: default;
     }
 
-    /* 🔄 Transisi antarhalaman */
-    .fade-out {
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    /* 🩶 Footer */
     footer {
       margin-top: 30px;
       font-size: 12px;
@@ -116,16 +152,27 @@
 </head>
 <body>
   <div class="container">
-    <h1 id="categoryTitle">Kategori</h1>
+    <img src="https://raw.githubusercontent.com/hexandragroup/laksanacraft-assets/main/Logo_Laksana_Handicraft.png" alt="Logo" class="logo" />
+    <h1><a href="https://link.laksanacraft.my.id/">Laksana Link</a></h1>
+    <p><em>"Satu Tempat untuk Banyak Manfaat"</em></p>
+
+    <!-- 🔍 Pencarian Global -->
     <input type="text" id="searchBox" placeholder="Cari tautan di semua kategori..." />
 
-    <!-- 🔎 Hasil Pencarian -->
+    <!-- 🔎 Hasil pencarian -->
     <div id="results"></div>
-
-    <!-- 📄 Navigasi Pagination -->
     <div id="pagination" class="pagination"></div>
 
-    <a href="index.html" style="display:block;margin-top:20px;text-decoration:none;color:#0077cc;">← Kembali ke Kategori</a>
+    <!-- 🏷️ Judul kategori -->
+    <div class="section-title">Kategori</div>
+
+    <!-- 📂 Daftar kategori -->
+    <div id="categories"></div>
+
+    <!-- 🔗 Tautan tambahan -->
+    <div class="section-title">Tautan Tambahan</div>
+    <a href="https://wa.me/628123456789" class="btn category-btn" target="_blank">📞 Bantuan / Kontak</a>
+    <a href="https://laksanacraft.my.id/" class="btn category-btn" target="_blank">🌐 Website Resmi</a>
 
     <footer>
       &copy; <span id="year"></span> Laksana Link · Yogyakarta, Indonesia
@@ -139,10 +186,7 @@
     document.getElementById("year").textContent =
       currentYear > startYear ? startYear + "–" + currentYear : startYear;
 
-    // Elemen utama
-    const params = new URLSearchParams(window.location.search);
-    const category = params.get("cat");
-    const titleEl = document.getElementById("categoryTitle");
+    const categoriesEl = document.getElementById("categories");
     const resultsEl = document.getElementById("results");
     const paginationEl = document.getElementById("pagination");
     const searchBox = document.getElementById("searchBox");
@@ -152,23 +196,57 @@
     let currentPage = 1;
     const perPage = 10;
 
-    // Efek fade-in saat halaman selesai dimuat
+    // Efek fade-in saat halaman dimuat
     window.addEventListener("load", () => {
       document.body.classList.add("loaded");
     });
 
-    titleEl.textContent = category ? category : "Semua Kategori";
-
-    // Ambil data tautan
+    // Ambil data dari JSON
     fetch("data.json")
       .then(res => res.json())
       .then(data => {
         allLinks = data;
-        filteredLinks = category ? data.filter(l => l.category === category) : data;
-        renderPage();
+
+        // tampilkan kategori unik
+        const categories = [...new Set(data.map(item => item.category))];
+        categories.forEach(cat => {
+          const btn = document.createElement("a");
+          btn.className = "btn category-btn";
+          btn.textContent = cat;
+          btn.href = `search.html?cat=${encodeURIComponent(cat)}`;
+
+          btn.addEventListener("click", e => {
+            e.preventDefault();
+            document.body.classList.add("fade-out");
+            setTimeout(() => {
+              window.location.href = btn.href;
+            }, 500);
+          });
+
+          categoriesEl.appendChild(btn);
+        });
       });
 
-    // 🔧 Fungsi utama render halaman
+    // 🔎 Pencarian global
+    searchBox.addEventListener("input", e => {
+      const keyword = e.target.value.toLowerCase();
+      currentPage = 1;
+
+      if (keyword.trim() === "") {
+        resultsEl.innerHTML = "";
+        paginationEl.innerHTML = "";
+        return;
+      }
+
+      filteredLinks = allLinks.filter(link =>
+        link.title.toLowerCase().includes(keyword) ||
+        link.category.toLowerCase().includes(keyword)
+      );
+
+      renderPage();
+    });
+
+    // 🔧 Render hasil dengan pagination
     function renderPage() {
       resultsEl.innerHTML = "";
       paginationEl.innerHTML = "";
@@ -183,11 +261,10 @@
         return;
       }
 
-      // Tampilkan hasil
       visible.forEach((link, i) => {
         const a = document.createElement("a");
         a.href = link.url;
-        a.className = "btn";
+        a.className = "btn result-btn";
         a.textContent = `${link.icon} ${link.title}`;
         a.target = "_blank";
         a.style.animationDelay = `${i * 0.05}s`;
@@ -228,19 +305,6 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
       renderPage();
     }
-
-    // 🔎 Pencarian global real-time
-    searchBox.addEventListener("input", e => {
-      const keyword = e.target.value.toLowerCase();
-      currentPage = 1;
-
-      filteredLinks = allLinks.filter(link =>
-        link.title.toLowerCase().includes(keyword) ||
-        link.category.toLowerCase().includes(keyword)
-      );
-
-      renderPage();
-    });
   </script>
 </body>
 </html>
