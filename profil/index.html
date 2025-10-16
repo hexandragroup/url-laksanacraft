@@ -26,6 +26,7 @@
       border-radius: 16px;
       box-shadow: 0 8px 16px rgba(0,0,0,0.1);
       text-align: center;
+      position: relative;
     }
 
     img.logo {
@@ -34,16 +35,9 @@
       margin-bottom: 15px;
     }
 
-    h1 {
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
+    h1 { font-size: 20px; margin-bottom: 10px; }
 
-    p {
-      color: #444;
-      margin-bottom: 20px;
-      font-style: italic;
-    }
+    p { color: #444; margin-bottom: 20px; font-style: italic; }
 
     /* Tombol umum */
     .btn {
@@ -58,58 +52,46 @@
       transition: all 0.3s ease;
       cursor: pointer;
       max-width: 420px;
+      position: relative;
+      z-index: 1;
     }
     .btn:hover { background: #e6e6e6; transform: scale(1.03); }
 
-    footer {
-      margin-top: 30px;
-      font-size: 12px;
-      color: #666;
+    footer { margin-top: 30px; font-size: 12px; color: #666; }
+
+    /* Dropdown */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      border: 1px solid #bbb;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      z-index: 100;
+      flex-direction: column;
     }
 
-    .fade-out { opacity: 0; transition: opacity 0.5s ease; }
-/* Dropdown */
-.dropdown {
-  position: relative;
-  cursor: pointer;
-}
+    .dropdown-content a {
+      padding: 12px 20px;
+      display: block;
+      color: #222;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%; /* sama dengan tombol */
-  background: #fff;
-  border: 1px solid #bbb;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  z-index: 10;
-  flex-direction: column;
-}
+    .dropdown-content a:hover {
+      background: #e6e6e6;
+    }
 
-.dropdown-content a {
-  padding: 12px 20px;
-  display: block;
-  color: #222;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-
-.dropdown-content a:hover {
-  background: #e6e6e6;
-}
-
-/* Tampilkan dropdown saat hover */
-.dropdown:hover .dropdown-content {
-  display: flex;
-}
-/* Disable Link */
-.dropdown-content a.disabled {
-  color: #aaa;
-  cursor: default;
-  pointer-events: none;
-}
+    /* Disabled link */
+    .dropdown-content a.disabled {
+      color: #aaa;
+      cursor: default;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
@@ -118,30 +100,26 @@
     <h1>Hendras Laksono</h1>
     <p>“Dengan Seni untuk hidup lebih Indah, dengan Ilmu untuk hidup lebih Mudah, dengan Agama untuk hidup lebih terarah.”</p>
 
-    <!-- 🔗 Tombol Profil -->
+    <!-- Tombol Profil -->
     <a href="https://url.laksanacraft.my.id/wa" class="btn" target="_blank">💬 WhatsApp</a>
     <a href="mailto:hendraslaksono@gmail.com" class="btn" target="_blank">✉️ Email Pribadi</a>
     <a href="https://url.laksanacraft.my.id/linkedin" class="btn" target="_blank">🔗 LinkedIn</a>
     <a href="https://www.facebook.com/hendras.laksono.113" class="btn" target="_blank">📘 Facebook</a>
     <a href="https://www.instagram.com/leeliez_hendras" class="btn" target="_blank">📸 Instagram</a>
 
-<!-- Tombol Dropdown Usaha -->
-<div class="btn dropdown">
- 👥 Tentang Kami ▾
-  <div class="dropdown-content">
-    <a href="https://blog.laksanacraft.my.id/2015/01/sejarah-ikm-wayang-kulit-bima-sakti.html?m=1" target="_blank">Kerajinan Wayang Kulit</a>
-    <a href="#" class="disabled" title="Segera Hadir">Persewaan Alat Camping</a>
-  </div>
-</div>
-<div class="btn dropdown">
- 🏢 Bisnis Kami ▾
-  <div class="dropdown-content">
-    <a href="https://link.laksanacraft.my.id/">Wayang Kulit Bantul - Laksana Handicraft</a>
-    <a href="https://linktr.ee/hexaleathercraft/">Wayang Kulit Rembang - Kalimasada Handicraft</a>
-    <a
-href="https://linktr.ee/horizoncamp/">Persewaan Alat Camping Bantul - Horizon Camp</a>
-  </div>
-</div>
+    <!-- Tombol Dropdown Klik -->
+    <div class="btn dropdown-btn" id="tentangBtn">👥 Tentang Kami ▾</div>
+    <div class="dropdown-content" id="tentangMenu">
+      <a href="https://blog.laksanacraft.my.id/2015/01/sejarah-ikm-wayang-kulit-bima-sakti.html?m=1" target="_blank">Kerajinan Wayang Kulit</a>
+      <a href="#" class="disabled" title="Segera Hadir">Persewaan Alat Camping</a>
+    </div>
+
+    <div class="btn dropdown-btn" id="bisnisBtn">🏢 Bisnis Kami ▾</div>
+    <div class="dropdown-content" id="bisnisMenu">
+      <a href="https://link.laksanacraft.my.id/">Wayang Kulit Bantul - Laksana Handicraft</a>
+      <a href="https://linktr.ee/hexaleathercraft/">Wayang Kulit Rembang - Kalimasada Handicraft</a>
+      <a href="https://linktr.ee/horizoncamp/">Persewaan Alat Camping Bantul - Horizon Camp</a>
+    </div>
 
     <footer>
       &copy; <span id="year"></span> Hendras Laksono · Yogyakarta, Indonesia
@@ -149,12 +127,50 @@ href="https://linktr.ee/horizoncamp/">Persewaan Alat Camping Bantul - Horizon Ca
   </div>
 
   <script>
+    // Tahun dinamis
     const startYear = 1994;
     const currentYear = new Date().getFullYear();
     document.getElementById("year").textContent =
       currentYear > startYear ? startYear + "–" + currentYear : startYear;
 
     window.addEventListener("load", () => { document.body.classList.add("loaded"); });
+
+    // Dropdown klik
+    const tentangBtn = document.getElementById("tentangBtn");
+    const tentangMenu = document.getElementById("tentangMenu");
+    const bisnisBtn = document.getElementById("bisnisBtn");
+    const bisnisMenu = document.getElementById("bisnisMenu");
+
+    function closeMenus() {
+      tentangMenu.style.display = "none";
+      bisnisMenu.style.display = "none";
+    }
+
+    function openMenu(btn, menu) {
+      const isOpen = menu.style.display === "flex";
+      closeMenus();
+      if (!isOpen) {
+        const rect = btn.getBoundingClientRect();
+        menu.style.top = rect.bottom + "px";
+        menu.style.left = rect.left + "px";
+        menu.style.display = "flex";
+        menu.style.flexDirection = "column";
+      }
+    }
+
+    tentangBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      openMenu(tentangBtn, tentangMenu);
+    });
+
+    bisnisBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      openMenu(bisnisBtn, bisnisMenu);
+    });
+
+    document.addEventListener("click", () => { closeMenus(); });
+    window.addEventListener("scroll", () => { closeMenus(); });
+    window.addEventListener("resize", () => { closeMenus(); });
   </script>
 </body>
 </html>
