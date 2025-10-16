@@ -68,6 +68,42 @@
     }
 
     .fade-out { opacity: 0; transition: opacity 0.5s ease; }
+/* Dropdown */
+.dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%; /* sama dengan tombol */
+  background: #fff;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+  flex-direction: column;
+}
+
+.dropdown-content a {
+  padding: 12px 20px;
+  display: block;
+  color: #222;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.dropdown-content a:hover {
+  background: #e6e6e6;
+}
+
+/* Tampilkan dropdown saat hover */
+.dropdown:hover .dropdown-content {
+  display: flex;
+}
   </style>
 </head>
 <body>
@@ -83,6 +119,14 @@
     <a href="https://www.facebook.com/hendras.laksono.113" class="btn" target="_blank">📘 Facebook</a>
     <a href="https://www.instagram.com/leeliez_hendras" class="btn" target="_blank">📸 Instagram</a>
     <a href="https://linktr.ee/hexandra" class="btn">🏢 Bisnis Saya</a>
+<!-- Tombol Dropdown Usaha -->
+<div class="btn dropdown">
+  Tentang Usaha ⬇
+  <div class="dropdown-content">
+    <a href="https://url.laksanacraft.my.id/wayang" target="_blank">Tentang Usaha Wayang</a>
+    <a href="https://url.laksanacraft.my.id/camp" target="_blank">Tentang Usaha Camp</a>
+  </div>
+</div>
 
     <footer>
       &copy; <span id="year"></span> Hendras Laksono · Yogyakarta, Indonesia
