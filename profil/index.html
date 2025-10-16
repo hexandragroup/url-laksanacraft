@@ -45,8 +45,8 @@
       font-style: italic;
     }
 
-    /* Tombol umum */
-    .btn {
+    /* Tombol umum + dropdown disatukan */
+    .btn, .dropdown-btn {
       display: block;
       margin: 8px auto;
       padding: 12px 20px;
@@ -60,8 +60,10 @@
       max-width: 420px;
       width: 100%;
       box-sizing: border-box;
+      text-align: center;
+      font-size: 16px;
     }
-    .btn:hover { background: #e6e6e6; transform: scale(1.03); }
+    .btn:hover, .dropdown-btn:hover { background: #e6e6e6; transform: scale(1.03); }
 
     footer {
       margin-top: 30px;
@@ -69,32 +71,13 @@
       color: #666;
     }
 
-    .fade-out { opacity: 0; transition: opacity 0.5s ease; }
-
     /* Dropdown */
     .dropdown-wrapper {
-      position: relative;
-      width: 100%;
       max-width: 420px;
       margin: 8px auto;
-      text-align: center; /* pastikan center */
+      position: relative;
+      text-align: center;
     }
-
-    .dropdown-btn {
-      width: 100%;
-      padding: 12px 20px;
-      background: #fff;
-      border-radius: 8px;
-      border: 1px solid #bbb;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between; /* teks kiri, panah kanan */
-      align-items: center;
-      font-size: 16px;
-      transition: all 0.3s ease;
-      box-sizing: border-box;
-    }
-    .dropdown-btn:hover { background: #e6e6e6; transform: scale(1.03); }
 
     .dropdown-content {
       display: none;
@@ -102,13 +85,13 @@
       top: 100%;
       left: 50%;
       transform: translateX(-50%);
-      width: 100%; /* sama lebar tombol */
+      width: 100%;
       background: #fff;
       border: 1px solid #bbb;
       border-radius: 8px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       flex-direction: column;
-      z-index: 1000;
+      z-index: 100;
     }
 
     .dropdown-content a {
@@ -117,7 +100,6 @@
       color: #222;
       text-decoration: none;
       transition: background 0.2s;
-      text-align: left;
     }
     .dropdown-content a:hover { background: #e6e6e6; }
     .dropdown-content a.disabled {
@@ -126,6 +108,7 @@
       pointer-events: none;
     }
 
+    /* Tampilkan dropdown saat tombol aktif */
     .dropdown-wrapper.show .dropdown-content { display: flex; }
   </style>
 </head>
@@ -167,6 +150,7 @@
   </div>
 
   <script>
+    // Tahun dinamis
     const startYear = 1994;
     const currentYear = new Date().getFullYear();
     document.getElementById("year").textContent =
@@ -174,22 +158,22 @@
 
     window.addEventListener("load", () => { document.body.classList.add("loaded"); });
 
-    // Dropdown toggle klik
-    const dropdowns = document.querySelectorAll('.dropdown-wrapper');
-    dropdowns.forEach(wrapper => {
+    // Toggle dropdown klik
+    document.querySelectorAll('.dropdown-wrapper').forEach(wrapper => {
       const btn = wrapper.querySelector('.dropdown-btn');
-      btn.addEventListener('click', (e) => {
+      btn.addEventListener('click', e => {
         e.stopPropagation();
-        // tutup semua dropdown lain
-        dropdowns.forEach(w => { if(w !== wrapper) w.classList.remove('show'); });
-        // toggle yang diklik
+        // tutup dropdown lain
+        document.querySelectorAll('.dropdown-wrapper').forEach(w => {
+          if(w !== wrapper) w.classList.remove('show');
+        });
         wrapper.classList.toggle('show');
       });
     });
 
     // Klik di luar dropdown untuk menutup semua
     document.addEventListener('click', () => {
-      dropdowns.forEach(wrapper => wrapper.classList.remove('show'));
+      document.querySelectorAll('.dropdown-wrapper').forEach(wrapper => wrapper.classList.remove('show'));
     });
   </script>
 </body>
