@@ -91,7 +91,6 @@
       align-items: center;
       font-size: 16px;
       transition: all 0.3s ease;
-      transform: translateX(-50%);
     }
     .dropdown-btn:hover { background: #e6e6e6; transform: scale(1.03); }
 
@@ -99,8 +98,10 @@
       display: none;
       position: absolute;
       top: 100%;
-      left: 50%;
+      left: 50%;                 /* center relatif ke wrapper */
+      transform: translateX(-50%);/* geser setengah lebar dropdown */
       width: 100%;
+      max-width: 420px;
       background: #fff;
       border: 1px solid #bbb;
       border-radius: 8px;
@@ -123,7 +124,7 @@
       pointer-events: none;
     }
 
-    /* Tampilkan dropdown saat hover atau klik */
+    /* Tampilkan dropdown saat klik */
     .dropdown-wrapper.show .dropdown-content { display: flex; }
   </style>
 </head>
@@ -177,11 +178,15 @@
       const btn = wrapper.querySelector('.dropdown-btn');
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
+        // tutup dropdown lain
+        document.querySelectorAll('.dropdown-wrapper').forEach(w => {
+          if (w !== wrapper) w.classList.remove('show');
+        });
         wrapper.classList.toggle('show');
       });
     });
 
-    // Klik di luar dropdown untuk menutup
+    // Klik di luar dropdown untuk menutup semua
     document.addEventListener('click', () => {
       document.querySelectorAll('.dropdown-wrapper').forEach(wrapper => wrapper.classList.remove('show'));
     });
