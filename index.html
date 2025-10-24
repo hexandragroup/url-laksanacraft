@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-  <meta http-equiv="refresh" content="0; url=https://link.laksanacraft.my.id">
-  <title>Redirecting...</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirect......</title>
+  <script>
+    const links = {
+      wa1: "https://wa.me/6285608564084",
+      shopee1: "https://shopee.co.id/wayangkulitsewon",
+      facebook1: "https://facebook.com/wayangkulitsewon",
+      padi1: "https://padiumkm.id/store/68fb24ef35d64d875aa0549f"
+    };
+
+    // Folder yang punya konten asli (tidak di-redirect)
+    const reservedPaths = ["store", "blog", "assets"];
+
+    const path = window.location.pathname.replace(/^\/|\/$/g, "");
+
+    if (path === "") {
+      window.location.href = "https://link.laksanacraft.my.id";
+    } 
+    else if (links[path]) {
+      window.location.href = links[path];
+    } 
+    else if (reservedPaths.includes(path)) {
+      // Biarkan GitHub Pages menampilkan folder asli
+    } 
+    else {
+      document.title = "Link tidak ditemukan";
+      document.write("<h3>❌ Link tidak ditemukan</h3>");
+      document.write("<p>Periksa kembali URL Anda.</p>");
+    }
+  </script>
 </head>
-<body>
-  <p>Redirecting to <a href="https://link.laksanacraft.my.id">link.laksanacraft.my.id</a></p>
-</body>
+<body></body>
 </html>
