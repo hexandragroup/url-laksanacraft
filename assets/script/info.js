@@ -22,6 +22,7 @@ const infoLinks = {
 
   // 🛍️ Produk
   produk: "https://laksanacraft.my.id/link/contoh",
+  "produk-drive": "https://drive.google.com/drive/folders/12-r1ohZwagxnVdV1yU3DUTXhtsvA1nxS",
 
   // 📝 Formulir
   form: "https://link.laksanacraft.my.id/page/form",
