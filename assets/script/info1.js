@@ -1,7 +1,7 @@
 // assets/script/info.js  
 // 🔹 Informasi umum, kontak formal, profil, dan formulir  
   
-const infoLinks = {  
+const info1Links = {  
   // 📍 Lokasi  
   map: "https://maps.app.goo.gl/VwAHQdT2PSM8rMJo6",  
   
