@@ -17,7 +17,7 @@ const infoLinks = {
     "mailto:info@laksanacraft.my.id?subject=Pemesanan%20Produk&body=Nama%20Lengkap%3A%0ANomor%20Telepon%3A%0AAlamat%20Lengkap%3A%0ANama%20Produk%3A%0AUkuran%3A%0AJumlah%20Barang%3A",
 
   // 🔗 Link
-  link: "https://link.laksanacraft.my.id/links",
+  link: "https://link.laksanacraft.my.id/page/links",
 
   // 👤 Profil
   profil: "https://link.laksanacraft.my.id/page/profile",
