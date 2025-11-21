@@ -2,9 +2,12 @@
 // 🔹 Informasi umum, kontak formal, profil, dan formulir  
   
 const infoLinks = {  
-  // 📍 Lokasi
-  map: "https://maps.app.goo.gl/VwAHQdT2PSM8rMJo6",  
-  
-  // 📞 Kontak
-  email: "mailto:info@laksanacraft.my.id"
+  // 🔗 Media Sosial (A–Z)
+  map: "https://facebook.com/wayangkulitsewon",
+  map1: "https://instagram.com/wayangkulitsewon",
+  linkedin1: "https://www.linkedin.com/in/hendraslaksono",
+  threads1: "https://www.threads.net/@wayangkulitsewon",
+  tiktok1: "https://tiktok.com/@wayangkulitsewon",
+  twitter1: "https://twitter.com/laksanacraft",
+  youtube1: "https://youtube.com/@wayangkulitsewon"
 };
