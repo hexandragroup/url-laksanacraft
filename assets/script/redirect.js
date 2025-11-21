@@ -5,7 +5,7 @@
 const links = {
   ...(typeof tokoLinks !== "undefined" ? tokoLinks : {}),
   ...(typeof mediaLinks !== "undefined" ? mediaLinks : {}),
-  ...(typeof infoLinks !== "undefined" ? infoLinks : {})
+  ...(typeof infoLinks !== "undefined" ? infoLinks : {}),
 };
 
 // Folder yang berisi konten asli (tidak di-redirect)
