@@ -22,9 +22,11 @@ const infoLinks = {
 
   // 🛍️ Produk
   produk: "https://laksanacraft.my.id/link/contoh",
+
   "produk-drive": "https://drive.google.com/drive/folders/12-r1ohZwagxnVdV1yU3DUTXhtsvA1nxS",
 
   // 📝 Formulir
   form: "https://link.laksanacraft.my.id/page/form",
-  "form-google": "https://docs.google.com/forms/d/e/1FAIpQLSfi8KVMGvkUovxsRPFChsfqW6nr083t58VhexU6mCCKZL2-BA/viewform",
+
+  "form-google": "https://docs.google.com/forms/d/e/1FAIpQLSfi8KVMGvkUovxsRPFChsfqW6nr083t58VhexU6mCCKZL2-BA/viewform"
 };
